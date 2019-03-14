@@ -8,6 +8,7 @@ import { LoginComponent } from './account/login/login.component';
 import { ResetpasswordComponent } from './account/resetpassword/resetpassword.component';
 import { HomeComponent } from './home/home.component';
 import { TestroutesComponent } from './testroutes/testroutes.component';
+import { TestroutesDetailComponent } from './testroutes-detail/testroutes-detail.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { TestroutesComponent } from './testroutes/testroutes.component';
     RegisterComponent,
     LoginComponent,
     ResetpasswordComponent,
-    TestroutesComponent
+    TestroutesComponent,
+    TestroutesDetailComponent
   ],
   imports: [
     BrowserModule,
