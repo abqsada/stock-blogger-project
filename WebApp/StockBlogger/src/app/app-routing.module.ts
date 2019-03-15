@@ -8,6 +8,10 @@ import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
 import { ResetpasswordComponent } from './account/resetpassword/resetpassword.component';
 import { ErrorComponent } from './error/error.component';
+import { AdminGuard } from './admin.guard';
+import { AdminComponent } from './admin/admin.component';
+import { CanActivate } from '@angular/router/src/utils/preactivation';
+import { SecretComponent } from './secret/secret.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent} ,
@@ -34,6 +38,15 @@ const routes: Routes = [
   {
     path: 'reset',
     component: ResetpasswordComponent
+  },
+  {
+    path: 'secret',
+    component: SecretComponent
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AdminGuard]
   },
   {
     path: '**',

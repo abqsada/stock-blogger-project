@@ -11,6 +11,8 @@ import { TestroutesComponent } from './testroutes/testroutes.component';
 import { TestroutesDetailComponent } from './testroutes-detail/testroutes-detail.component';
 import { AccountComponent } from './account/account.component';
 import { ErrorComponent } from './error/error.component';
+import { AdminComponent } from './admin/admin.component';
+import { SecretComponent } from './secret/secret.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { ErrorComponent } from './error/error.component';
     LoginComponent,
     ResetpasswordComponent,
     AccountComponent,
-    ErrorComponent
+    ErrorComponent,
+    AdminComponent,
+    SecretComponent
   ],
   imports: [
     BrowserModule,

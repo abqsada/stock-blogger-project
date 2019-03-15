@@ -1,11 +1,22 @@
-<h1>Home Page</h1>
-<h2>Welcome! This is the default landing page!</h2>
+<div align=middle>
+<h1 >Home Page</h1>
+<h2 routerLink="/secret">Welcome!</h2> <h2> This is the default landing page!</h2>
 
 <!-- we can bind this attribute data by wrapping it 
-  in square brackets (this button disables after a click) -->
-  <button [disabled]="clicked">Click Me!</button>
+  in square brackets (this button disables after 10 clicks) -->
+  <p>Total Clicks: {{count}}</p>
+<button class="clicked" [disabled]="clicked" (click)="onClick()">
+  Click Me 10 Times!
+</button>
 
 <p></p>
 
 <a routerLink="/testroutes">Test Routes!</a> 
+<p></p>
+<a routerLink="/admin">Admins ONLY!</a> 
+</div>
+
+
+
+
 
