@@ -7,15 +7,11 @@ import { AngularFirestore } from 'angularfire2/firestore';
   styleUrls: ['./testroutes.component.css']
 })
 export class TestroutesComponent implements OnInit {
-  testroutes$;
-  // Inject firestore into the constructor
-  constructor(private afs: AngularFirestore) { }
+
+  constructor() { }
 
   ngOnInit() {
-    // Reference test documents
-    // Call value changes to listen to them as a real time
-    // OBSERVABLE
-    this.testroutes$ = this.afs.collection('testroutes').valueChanges();
+    console.log('Entered testroutes.component.ts ngOnInit method!');
   }
 
 }

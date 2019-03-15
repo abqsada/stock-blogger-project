@@ -1,13 +1,19 @@
 <h1>
   Test Routes List:
 </h1>
+<h2>This is the landing page for the routes we are TESTING!</h2>
 
-<ul>
-  <li *ngFor="let animal of animals$ | async">
-    <!-- each item in the array represents a URL segment -->
-      <a [routerLink]="['/testroutes', testroutes.name]">{{ testroutes.name }}</a>
-  </li>
-</ul>
+<a routerLink="/">Home</a> 
+<p></p>
+<a routerLink="/account">My Account</a>
+<p></p>
+<a routerLink="/register">Register</a>
+<p></p>
+<a routerLink="/login">Login</a>
+<p></p>
+<a routerLink="/reset">Forgot Password?</a>
+
+
 <!-- Because this is a parent component, we will need to tell
      tell the router where to render the child components-->
-<<router-outlet></router-outlet>
+<router-outlet></router-outlet>

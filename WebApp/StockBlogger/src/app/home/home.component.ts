@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit{
+
   clicked = false;
+
+  ngOnInit(): void {
+    console.log('Entered home.component.ts ngOnInit method!');
+  }
 }

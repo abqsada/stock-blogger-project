@@ -9,19 +9,24 @@ import { ResetpasswordComponent } from './account/resetpassword/resetpassword.co
 import { HomeComponent } from './home/home.component';
 import { TestroutesComponent } from './testroutes/testroutes.component';
 import { TestroutesDetailComponent } from './testroutes-detail/testroutes-detail.component';
+import { AccountComponent } from './account/account.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
+    TestroutesComponent,
+    TestroutesDetailComponent,
     RegisterComponent,
     LoginComponent,
     ResetpasswordComponent,
-    TestroutesComponent,
-    TestroutesDetailComponent
+    AccountComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     AppRoutingModule
   ],
   providers: [],
