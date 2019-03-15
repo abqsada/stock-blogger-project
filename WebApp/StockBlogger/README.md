@@ -2,6 +2,18 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
 
+## Get STARTED!
+npm install -g @angular/cli
+npm install -g @latest
+# ONLY USE THESE IF THE COMMAND LINE THROWS ERRORS AFTER INSTALLING THE FIRST TWO
+npm install @angular/common
+npm install @angular/core
+npm install @angular/compiler
+npm install @angular/platform-browser
+npm install @angular/platform-browser-dynamic
+npm install @angular/router
+npm install --save-dev @angular-devkit/build-angular
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
