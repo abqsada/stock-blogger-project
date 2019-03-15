@@ -17,7 +17,7 @@ export class ResetpasswordComponent implements OnInit {
   clickHandler() {
     const confirm = prompt('Are you sure you want to go here?');
 
-    if(confirm === 'yes' || 'Yes' || 'YES') {
+    if(confirm === 'yes' || 'Yes' || 'YES' || 'y' || 'Y') {
       this.router.navigate(['']);
     }
   }
