@@ -44,7 +44,7 @@ const routes: Routes = [
     component: SecretComponent
   },
   {
-    path: 'admin',
+    path: 'adminsonly',
     component: AdminComponent,
     canActivate: [AdminGuard]
   },
