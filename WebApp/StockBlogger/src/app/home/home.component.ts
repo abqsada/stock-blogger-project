@@ -21,21 +21,27 @@ export class HomeComponent implements OnInit{
   // Handles Clicking Admin Button
   clickHandler() {
     const confirm = prompt('What is your favorite color?');
-
     if (confirm === 'Black' || 'black') {
+      // routes to Admin page if Black/black is entered
       this.router.navigate(['adminsonly']);
     }
   }
 
-  // Handles navigation to the next page
+  // Handles the next button
   nextHandler() {
+    // Navigates to the right
     this.router.navigate(['testroutes']);
   }
-  // // Handles navigation to the previous page
-  // prevHandler() {
-  //   this.router.navigate(['account']);
-  // }
-
+  // Handles the previous button
+  prevHandler() {
+    // Navigates to the left
+    const confirm = prompt('What is your favorite color?');
+    if (confirm === 'Black' || 'black') {
+      // routes to Admin page if Black/black is entered
+      this.router.navigate(['adminsonly']);
+    }
+  }
+  // Handles the Click Me button
   onClick() {
     this.count++;
     console.log(this.count);
