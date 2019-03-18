@@ -35,6 +35,21 @@ export class HomeComponent implements OnInit{
   // prevHandler() {
   //   this.router.navigate(['account']);
   // }
+  prevHandler() {
+    const confirm = prompt('NONE SHALL PASS!');
+    if (confirm === '') {
+      this.router.navigate(['/']);
+    }
+    if (confirm === 'password') {
+      this.router.navigate(['adminsonly']);
+    } else {
+      this.router.navigate(['/']);
+    }  }
+
+  promptHandler() {
+    
+  }
+
 
   onClick() {
     this.count++;

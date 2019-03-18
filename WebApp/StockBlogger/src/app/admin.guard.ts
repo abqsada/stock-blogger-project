@@ -10,7 +10,6 @@ export class AdminGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    alert('Welcome to the ADMIN page!');
 
 
     // Returns false to demonstrate rejecting a user for permissions

@@ -1,0 +1,33 @@
+
+div:hover[id=nav] { 
+  color:#FFF;
+}
+button[type=submit] {
+    background-color: rgb(33, 150, 243);
+    border: 1px solid rgb(33, 150, 243);
+    border-radius: 4px;
+    color: white;
+    padding: 6px 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  input[type=submit]:hover {
+    background-color: rgb(18, 70, 112);
+  }
+  input[type=text], select {
+    padding: 6px 14px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  input[type=password], select {
+    padding: 6px 14px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+ 
