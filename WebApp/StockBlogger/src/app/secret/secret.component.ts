@@ -73,6 +73,7 @@ export class SecretComponent implements OnInit {
       this.endGame = 'Click the button to get a game going!'
       // tslint:disable-next-line:quotemark
       console.log("That isn't allowed");
+      break;
     }
   }
 
