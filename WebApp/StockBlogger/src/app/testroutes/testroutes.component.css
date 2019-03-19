@@ -5,6 +5,9 @@ iframe {
     border: 0;
     align-content: middle;
 }
+#navfix {
+  align-content: middle;
+}
 .clicked{
     height:50px;
     width:200px;

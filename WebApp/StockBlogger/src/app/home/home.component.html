@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -35,13 +32,12 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <!-- Header -->
 <header class="w3-container w3-blue w3-center" style="padding:128px 16px">
-  <h1 class="w3-margin w3-jumbo">Welcome!</h1>
+  <h1 class="w3-margin w3-jumbo" type="nocursor">Welcome!</h1>
   <div align=center>
       <img src="https://user-images.githubusercontent.com/10379994/31985754-c56b8dba-b998-11e7-9705-a7f984433049.png" width="160" height="120" alt="vscode">
   </div>
- <a (click)="prevHandler()" class="previous" style="position: relative; left: -15px; top: -95px;">&laquo; Previous</a>
- <a (click)="nextHandler()" class="next" style="position: relative; left: 160px; top: -95px;">Next &raquo;</a>
-  <button (click)="clickHandler()" class="w3-button w3-black w3-padding-large w3-large w3-margin-top" style="position: relative; left: -90px; top: 20px;">Don't click me!</button>
+ <a (click)="prevHandler()" class="previous" style="position: relative; left: -110px; top: -80px;">&laquo; Previous Page </a>
+ <a (click)="nextHandler()" class="next" style="position: relative; left: 80px; top: -80px;">Next Page &raquo;</a>
 </header>
 
 
@@ -84,23 +80,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
   <div align=middle>
-  
-    <h1 >Home Page</h1>
-    <h2 routerLink="/secret">Welcome!</h2> <h2> This is the default landing page!</h2>
-  
     <!-- we can bind this attribute data by wrapping it 
     in square brackets (this button disables after 10 clicks) -->
     <p>Total Clicks: {{count}}</p>
     <button class="clicked" [disabled]="clicked" (click)="onClick()">
-      Click Me 10 Times!
+      Click Me!
     </button>
   
     <p></p>
   
     <a routerLink="/testroutes">Test Routes!</a> 
     <p></p>
-    <a routerLink="/adminsonly">Admins ONLY!</a> 
-    
+
     <p></p><p></p><p></p><p></p>
     
   
@@ -110,17 +101,16 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <!-- Footer -->
 <footer class="w3-container w3-padding-64 w3-center w3-opacity">  
   <div class="w3-xlarge w3-padding-32">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
+    <!-- <i class="fa fa-facebook-official w3-hover-opacity"></i>
     <i class="fa fa-instagram w3-hover-opacity"></i>
     <i class="fa fa-snapchat w3-hover-opacity"></i>
     <i class="fa fa-pinterest-p w3-hover-opacity"></i>
     <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <i class="fa fa-linkedin w3-hover-opacity"></i> -->
  </div>
 </footer>
 
 </body>
-</html>
 
 
 

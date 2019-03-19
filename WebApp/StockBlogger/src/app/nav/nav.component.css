@@ -1,7 +1,4 @@
 
-div:hover[id=nav] { 
-  color:#FFF;
-}
 button[type=submit] {
     background-color: rgb(33, 150, 243);
     border: 1px solid rgb(33, 150, 243);
@@ -10,9 +7,6 @@ button[type=submit] {
     padding: 6px 14px;
     margin: 4px 2px;
     cursor: pointer;
-  }
-  input[type=submit]:hover {
-    background-color: rgb(18, 70, 112);
   }
   input[type=text], select {
     padding: 6px 14px;
@@ -29,5 +23,14 @@ button[type=submit] {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+  }
+  
+  [type=nocursor] {
+    cursor: default;
+    font-size: 5vw;
+  }
+  #nav {
+    text-align: center;
+    cursor: default;
   }
  

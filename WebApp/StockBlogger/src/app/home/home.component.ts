@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit{
   count = 0;
   clicked = false;
-
+  // create private Router variable 'router' to use the Router in this component
   constructor(private router: Router) { }
 
   // @Output() messageEvent = new EventEmitter<boolean>();
@@ -22,8 +22,21 @@ export class HomeComponent implements OnInit{
   clickHandler() {
     const confirm = prompt('What is your favorite color?');
 
-    if (confirm === 'Black' || 'black') {
+    switch (confirm) {
+      case 'secret':
+      this.router.navigate(['secret']);
+      break;
+      case '':
+      break;
+      case 'blue':
+      this.router.navigate(['']); // go home
+      break;
+      case 'Black':
       this.router.navigate(['adminsonly']);
+      break;
+      case 'black':
+      this.router.navigate(['adminsonly']);
+      break;
     }
   }
 
@@ -32,9 +45,6 @@ export class HomeComponent implements OnInit{
     this.router.navigate(['testroutes']);
   }
   // // Handles navigation to the previous page
-  // prevHandler() {
-  //   this.router.navigate(['account']);
-  // }
   prevHandler() {
     const confirm = prompt('NONE SHALL PASS!');
     if (confirm === '') {
@@ -47,18 +57,20 @@ export class HomeComponent implements OnInit{
     }  }
 
   promptHandler() {
-    
+
   }
-
-
+  // Handles the 'Click me 10 times' button
   onClick() {
+    // Increment 'count' each click
     this.count++;
     console.log(this.count);
+    // After 10  clicks...
     if (this.count === 10) {
-      this.clicked = true;
+      this.clicked = true; // Disable button
+      this.router.navigate(['secret']); // Route to secret navigation page
     }
     // this.messageEvent.emit(this.clicked);
-    console.log(this.clicked);
-    console.log('Entered home.component.ts onClick method!');
+    console.log(this.clicked); // Log each click to the console
+    console.log('Entered home.component.ts onClick method!'); // For testing
   }
 }

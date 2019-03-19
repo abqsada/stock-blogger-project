@@ -16,9 +16,9 @@ clickHandler() {
 }
 
 // Handles navigation to the next page
-// nextHandler() {
-//   this.router.navigate(['adminsonly']);
-//   }
+nextHandler() {
+  this.router.navigate(['/']);
+  }
 // Handles navigation to the previous page
 prevHandler() {
   this.router.navigate(['details']);
