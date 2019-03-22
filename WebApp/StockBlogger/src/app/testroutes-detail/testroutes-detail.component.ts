@@ -21,7 +21,24 @@ clickHandler() {
 
 // Handles navigation to the next page
 nextHandler() {
-  this.router.navigate(['adminsonly']);
+  const confirm = prompt('What is your favorite color?');
+
+  switch (confirm) {
+      case 'secret':
+      this.router.navigate(['secret']);
+      break;
+      case '':
+      break;
+      case 'blue':
+      this.router.navigate(['']); // go home
+      break;
+      case 'Black':
+      this.router.navigate(['adminsonly']);
+      break;
+      case 'black':
+      this.router.navigate(['adminsonly']);
+      break;
+    }
 }
 // Handles navigation to the previous page
 prevHandler() {

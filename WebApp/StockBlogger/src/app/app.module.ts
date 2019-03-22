@@ -13,6 +13,8 @@ import { AccountComponent } from './account/account.component';
 import { ErrorComponent } from './error/error.component';
 import { AdminComponent } from './admin/admin.component';
 import { SecretComponent } from './secret/secret.component';
+import { NavComponent } from './nav/nav.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { SecretComponent } from './secret/secret.component';
     AccountComponent,
     ErrorComponent,
     AdminComponent,
-    SecretComponent
+    SecretComponent,
+    NavComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,

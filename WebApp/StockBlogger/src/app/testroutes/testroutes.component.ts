@@ -7,15 +7,29 @@ import { Router } from '@angular/router';
   styleUrls: ['./testroutes.component.css']
 })
 export class TestroutesComponent implements OnInit {
-
+  // create private Router variable 'router' to use the Router in this component
   constructor(private router: Router) { }
 
   // Handles Clicking Admin Button
   clickHandler() {
+    var ans;
     const confirm = prompt('What is your favorite color?');
 
-    if (confirm === 'Black' || 'black') {
+    switch (confirm) {
+      case 'secret':
+      this.router.navigate(['secret']);
+      break;
+      case '':
+      break;
+      case 'blue':
+      this.router.navigate(['']); // go home
+      break;
+      case 'Black':
       this.router.navigate(['adminsonly']);
+      break;
+      case 'black':
+      this.router.navigate(['adminsonly']);
+      break;
     }
   }
 
@@ -27,7 +41,7 @@ export class TestroutesComponent implements OnInit {
   prevHandler() {
     this.router.navigate(['']);
   }
-
+  // Runs on init
   ngOnInit() {
     console.log('Entered testroutes.component.ts ngOnInit method!');
   }
