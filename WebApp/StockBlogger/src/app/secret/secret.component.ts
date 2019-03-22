@@ -20,11 +20,17 @@ export class SecretComponent implements OnInit {
   onClick() {
     console.log('Rock Paper Scissors Started!');
     this.prompt = 'Rock, Paper, or Scissors?';
+    this.endGame = 'Click the PLAY! button to get a game going!';
     this.compAnswer = this.answers[Math.floor(Math.random() * 3)];
     console.log('Computer: ' + this.compAnswer);
 
     this.getUserAnswer();
-    switch (this.compAnswer) {
+    console.log('User Answer: ' + this.userAnswer);
+    if (!(this.userAnswer === 'Rock' || this.userAnswer === 'Paper' || this.userAnswer === 'Scissors')) {
+// tslint:disable-next-line: quotemark
+      alert("I don't quite understand... Please try again!");
+    } else {
+      switch (this.compAnswer) {
       case 'Rock':
       if (this.userAnswer === 'Paper') {
         this.endGame = 'Paper beats Rock! You WIN!!';
@@ -70,17 +76,17 @@ export class SecretComponent implements OnInit {
       default:
       this.compAnswer = '';
       this.userAnswer = '';
-      this.endGame = 'Click the button to get a game going!'
+      this.endGame = 'Click the button to get a game going!';
       // tslint:disable-next-line:quotemark
       console.log("That isn't allowed");
       break;
     }
   }
+}
 
-  getUserAnswer() {
-    const confirm = prompt('ROCK, PAPER, OR SCISSORS???!!??');
-
-    switch (confirm) {
+getUserAnswer() {
+  const confirm = prompt('ROCK, PAPER, OR SCISSORS???!!??');
+  switch (confirm) {
       case 'rock':
       this.userAnswer = 'Rock';
       break;

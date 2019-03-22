@@ -14,6 +14,7 @@ import { ErrorComponent } from './error/error.component';
 import { AdminComponent } from './admin/admin.component';
 import { SecretComponent } from './secret/secret.component';
 import { NavComponent } from './nav/nav.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { NavComponent } from './nav/nav.component';
     ErrorComponent,
     AdminComponent,
     SecretComponent,
-    NavComponent
+    NavComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule,

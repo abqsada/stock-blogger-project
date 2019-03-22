@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class NavComponent implements OnInit {
 
   constructor(private router: Router) { }
-  account = 'DEV'; // DEV ACCOUNT FOR TESTING
+  account = ['DEV', 'GUEST', 'USER']; // DEV ACCOUNT FOR TESTING
   route;
 
   ngOnInit() {

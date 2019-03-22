@@ -7,6 +7,8 @@ button[type=submit] {
     padding: 6px 14px;
     margin: 4px 2px;
     cursor: pointer;
+    height: 40px;
+
   }
   input[type=text], select {
     padding: 6px 14px;
@@ -15,6 +17,7 @@ button[type=submit] {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    height: 35px;
   }
   input[type=password], select {
     padding: 6px 14px;
@@ -23,6 +26,8 @@ button[type=submit] {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    height: 35px;
+  
   }
   
   [type=nocursor] {
