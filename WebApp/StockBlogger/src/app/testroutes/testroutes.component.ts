@@ -12,12 +12,11 @@ export class TestroutesComponent implements OnInit {
 
   // Handles Clicking Admin Button
   clickHandler() {
-    var ans;
     const confirm = prompt('What is your favorite color?');
-
+    // Checks user input
     switch (confirm) {
       case 'secret':
-      this.router.navigate(['secret']);
+      this.router.navigate(['secret']); // secret page(duh)
       break;
       case '':
       break;
@@ -25,10 +24,10 @@ export class TestroutesComponent implements OnInit {
       this.router.navigate(['']); // go home
       break;
       case 'Black':
-      this.router.navigate(['adminsonly']);
+      this.router.navigate(['adminsonly']); // admin page
       break;
       case 'black':
-      this.router.navigate(['adminsonly']);
+      this.router.navigate(['adminsonly']); // admin page
       break;
     }
   }

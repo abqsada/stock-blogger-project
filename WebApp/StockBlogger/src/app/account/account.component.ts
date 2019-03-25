@@ -14,8 +14,7 @@ export class AccountComponent implements OnInit {
   clickHandler() {
     this.router.navigate(['login']);
   }
-
-    // Handles navigation to the next page
+  // Handles navigation to the next page
   nextHandler() {
     this.router.navigate(['details']);
   }
@@ -23,7 +22,7 @@ export class AccountComponent implements OnInit {
   prevHandler() {
     this.router.navigate(['testroutes']);
   }
-
+  // Program Entry Point
   ngOnInit() {
     console.log('Entered account.component.ts ngOnInit method!');
   }

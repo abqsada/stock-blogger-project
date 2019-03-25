@@ -10,22 +10,13 @@ export class TestroutesDetailComponent implements OnInit {
 
   constructor(private router: Router) { }
 
-// Handles Clicking Admin Button
-clickHandler() {
-  const confirm = prompt('What is your favorite color?');
-
-  if (confirm === 'Black' || 'black') {
-    this.router.navigate(['adminsonly']);
-  }
-}
-
 // Handles navigation to the next page
 nextHandler() {
   const confirm = prompt('What is your favorite color?');
-
+    // Checks user input
   switch (confirm) {
       case 'secret':
-      this.router.navigate(['secret']);
+      this.router.navigate(['secret']); // secret page(duh)
       break;
       case '':
       break;
@@ -33,10 +24,10 @@ nextHandler() {
       this.router.navigate(['']); // go home
       break;
       case 'Black':
-      this.router.navigate(['adminsonly']);
+      this.router.navigate(['adminsonly']); // admin page
       break;
       case 'black':
-      this.router.navigate(['adminsonly']);
+      this.router.navigate(['adminsonly']); // admin page
       break;
     }
 }

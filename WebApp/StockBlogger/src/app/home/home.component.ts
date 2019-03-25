@@ -9,8 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit{
-  count = 0;
-  clicked = false;
+  count = 0; // For onClick
+  clicked = false; // For onClick
   // create private Router variable 'router' to use the Router in this component
   constructor(private router: Router) { }
 
@@ -21,10 +21,10 @@ export class HomeComponent implements OnInit{
   // Handles Clicking Admin Button
   clickHandler() {
     const confirm = prompt('What is your favorite color?');
-
+    // Checks user input
     switch (confirm) {
       case 'secret':
-      this.router.navigate(['secret']);
+      this.router.navigate(['secret']); // secret page(duh)
       break;
       case '':
       break;
@@ -32,14 +32,13 @@ export class HomeComponent implements OnInit{
       this.router.navigate(['']); // go home
       break;
       case 'Black':
-      this.router.navigate(['adminsonly']);
+      this.router.navigate(['adminsonly']); // admin page
       break;
       case 'black':
-      this.router.navigate(['adminsonly']);
+      this.router.navigate(['adminsonly']); // admin page
       break;
     }
   }
-
   // Handles the next button
   nextHandler() {
     // Navigates to the right

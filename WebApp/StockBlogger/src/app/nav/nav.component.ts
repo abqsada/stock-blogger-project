@@ -12,7 +12,7 @@ export class NavComponent implements OnInit {
 
   constructor(private router: Router) { }
   account = ['DEV', 'GUEST', 'USER']; // DEV ACCOUNT FOR TESTING
-  route;
+  route; // Stores current URL Route
 
   ngOnInit() {
     console.log('Entering nav.component.ts ngOnInit method!')
@@ -21,7 +21,6 @@ export class NavComponent implements OnInit {
   handleRoute() {
     this.route = this.router.url;
     console.log(this.route);
-
     if (this.route === '/') {
       this.route = '';
     }
