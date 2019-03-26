@@ -16,11 +16,11 @@ export class AccountComponent implements OnInit {
   }
   // Handles navigation to the next page
   nextHandler() {
-    this.router.navigate(['details']);
+    this.router.navigate(['about']);
   }
   // Handles navigation to the previous page
   prevHandler() {
-    this.router.navigate(['testroutes']);
+    this.router.navigate(['feed']);
   }
   // Program Entry Point
   ngOnInit() {

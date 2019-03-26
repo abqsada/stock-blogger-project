@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { TestroutesComponent } from './testroutes/testroutes.component';
-import { TestroutesDetailComponent } from './testroutes-detail/testroutes-detail.component';
 import { AccountComponent } from './account/account.component';
 import { LoginComponent } from './account/login/login.component';
 import { RegisterComponent } from './account/register/register.component';
@@ -12,16 +10,23 @@ import { AdminGuard } from './admin.guard';
 import { AdminComponent } from './admin/admin.component';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
 import { SecretComponent } from './secret/secret.component';
+import { AboutComponent } from './about/about.component';
+import { FeedComponent } from './feed/feed.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent} ,
   {
-    path: 'testroutes',
-    component: TestroutesComponent,
+    path: 'about',
+    component: AboutComponent,
   },
   {
-    path: 'details',
-    component: TestroutesDetailComponent
+    path: 'feed',
+    component: FeedComponent
+  },
+  {
+    path: 'contact',
+    component: ContactComponent
   },
   {
     path: 'account',

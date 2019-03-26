@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit{
   // Handles the next button
   nextHandler() {
     // Navigates to the right
-    this.router.navigate(['testroutes']);
+    this.router.navigate(['feed']);
   }
   // Handles the previous button
   prevHandler() {
