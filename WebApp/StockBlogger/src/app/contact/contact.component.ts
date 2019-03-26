@@ -39,12 +39,12 @@ prevHandler() {
 promptHandler() {
   const confirm = prompt('NONE SHALL PASS!');
 
-  if(confirm === 'fleshwound' || 'password' || '1234567890') {
+  if (confirm === 'fleshwound' || 'password' || '1234567890') {
     this.router.navigate(['admin']);
   }
 }
 
   ngOnInit() {
-    console.log('Entered contact.component.ts ngOnInit method!')
+    console.log('Entered contact.component.ts ngOnInit method!');
   }
 }

@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent implements OnInit {
   count = 0; // For onClick
   clicked = false; // For onClick
   // create private Router variable 'router' to use the Router in this component
