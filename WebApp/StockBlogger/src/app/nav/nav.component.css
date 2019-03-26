@@ -1,0 +1,41 @@
+
+button[type=submit] {
+    background-color: rgb(33, 150, 243);
+    border: 1px solid rgb(33, 150, 243);
+    border-radius: 4px;
+    color: white;
+    padding: 6px 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+    height: 40px;
+
+  }
+  input[type=text], select {
+    padding: 6px 14px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 35px;
+  }
+  input[type=password], select {
+    padding: 6px 14px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 35px;
+  
+  }
+  
+  [type=nocursor] {
+    cursor: default;
+    font-size: 5vw;
+  }
+  #nav {
+    text-align: center;
+    cursor: default;
+  }
+ 

@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
-  count = 0;
-  clicked = false;
-
+export class HomeComponent implements OnInit {
+  count = 0; // For onClick
+  clicked = false; // For onClick
+  // create private Router variable 'router' to use the Router in this component
   constructor(private router: Router) { }
 
   // @Output() messageEvent = new EventEmitter<boolean>();
@@ -21,35 +21,62 @@ export class HomeComponent implements OnInit{
   // Handles Clicking Admin Button
   clickHandler() {
     const confirm = prompt('What is your favorite color?');
-    if (confirm === 'Black' || 'black') {
-      // routes to Admin page if Black/black is entered
-      this.router.navigate(['adminsonly']);
+    // Checks user input
+    switch (confirm) {
+      case 'secret':
+      this.router.navigate(['secret']); // secret page(duh)
+      break;
+      case '':
+      break;
+      case 'blue':
+      this.router.navigate(['']); // go home
+      break;
+      case 'Black':
+      this.router.navigate(['adminsonly']); // admin page
+      break;
+      case 'black':
+      this.router.navigate(['adminsonly']); // admin page
+      break;
     }
   }
-
   // Handles the next button
   nextHandler() {
     // Navigates to the right
-    this.router.navigate(['testroutes']);
+    this.router.navigate(['feed']);
   }
   // Handles the previous button
   prevHandler() {
     // Navigates to the left
     const confirm = prompt('What is your favorite color?');
-    if (confirm === 'Black' || 'black') {
-      // routes to Admin page if Black/black is entered
+    switch (confirm) {
+      case 'secret':
+      this.router.navigate(['secret']);
+      break;
+      case '':
+      break;
+      case 'blue':
+      this.router.navigate(['']); // go home
+      break;
+      case 'Black':
       this.router.navigate(['adminsonly']);
+      break;
+      case 'black':
+      this.router.navigate(['adminsonly']);
+      break;
     }
   }
   // Handles the Click Me button
   onClick() {
+    // Increment 'count' each click
     this.count++;
     console.log(this.count);
+    // After 10  clicks...
     if (this.count === 10) {
-      this.clicked = true;
+      this.clicked = true; // Disable button
+      this.router.navigate(['secret']); // Route to secret navigation page
     }
     // this.messageEvent.emit(this.clicked);
-    console.log(this.clicked);
-    console.log('Entered home.component.ts onClick method!');
+    console.log(this.clicked); // Log each click to the console
+    console.log('Entered home.component.ts onClick method!'); // For testing
   }
 }

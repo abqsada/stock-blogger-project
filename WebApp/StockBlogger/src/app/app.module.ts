@@ -7,26 +7,32 @@ import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/login/login.component';
 import { ResetpasswordComponent } from './account/resetpassword/resetpassword.component';
 import { HomeComponent } from './home/home.component';
-import { TestroutesComponent } from './testroutes/testroutes.component';
-import { TestroutesDetailComponent } from './testroutes-detail/testroutes-detail.component';
 import { AccountComponent } from './account/account.component';
 import { ErrorComponent } from './error/error.component';
 import { AdminComponent } from './admin/admin.component';
 import { SecretComponent } from './secret/secret.component';
+import { NavComponent } from './nav/nav.component';
+import { ChartComponent } from './chart/chart.component';
+import { AboutComponent } from './about/about.component';
+import { FeedComponent } from './feed/feed.component';
+import { ContactComponent } from './contact/contact.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    TestroutesComponent,
-    TestroutesDetailComponent,
     RegisterComponent,
     LoginComponent,
     ResetpasswordComponent,
     AccountComponent,
     ErrorComponent,
     AdminComponent,
-    SecretComponent
+    SecretComponent,
+    NavComponent,
+    ChartComponent,
+    AboutComponent,
+    FeedComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
