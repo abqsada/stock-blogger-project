@@ -3,9 +3,28 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.5.
 
 ## Get STARTED!
+BEFORE YOU DO ANYTHING!!!!!! YOU MUST NAVIGATE TO THE CORRECT DIRECTORY!!!!
+
+cd WebApp/StockBlogger
+
+THEN PROCEED WITH REMAINING COMMANDS TO INSTALL REQUIRED ANGULAR LIBRARIES
+
 npm install -g @angular/cli
 
-npm install -g @latest
+THEN
+
+npm install
+
+ONCE BOTH OF THOSE INSTALLS ARE DONE IN THAT EXACT ORDER,
+
+ng serve (or ng s)
+
+IF THAT COMMAND DOES NOT WORK( not recognized)
+
+npm start
+
+IF ERRORS CONTINUE...
+
 # ONLY USE THESE IF THE COMMAND LINE THROWS ERRORS AFTER INSTALLING THE FIRST TWO
 npm install @angular/common
 
