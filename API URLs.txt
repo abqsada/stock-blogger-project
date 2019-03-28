@@ -1,0 +1,5 @@
+CURRENT STOCKS: https://www.worldtradingdata.com/api/v1/stock?symbol=AAPL,MSFT,HSBA.L&api_token=ljkHFuF0MiRoGZtWL8Y0BmaMNQvdcQPtfjL3Yid5rjPLOEA4cmr3OvT3NL1F
+REAL TIME MUTUAL FUNDs: https://www.worldtradingdata.com/api/v1/mutualfund?symbol=AAAAX,AAADX,AAAGX&api_token=ljkHFuF0MiRoGZtWL8Y0BmaMNQvdcQPtfjL3Yid5rjPLOEA4cmr3OvT3NL1F
+INTRADAY STOCK: https://www.worldtradingdata.com/api/v1/intraday?symbol=AAPL&range=1&interval=1&api_token=ljkHFuF0MiRoGZtWL8Y0BmaMNQvdcQPtfjL3Yid5rjPLOEA4cmr3OvT3NL1F
+HISTORICAL DATA: https://www.worldtradingdata.com/api/v1/history?symbol=AAPL&sort=newest&api_token=ljkHFuF0MiRoGZtWL8Y0BmaMNQvdcQPtfjL3Yid5rjPLOEA4cmr3OvT3NL1F
+HISTORICAL MULTI-DAY API: https://www.worldtradingdata.com/api/v1/history_multi_single_day?symbol=AAPL,MSFT&date=2018-01-02&api_token=ljkHFuF0MiRoGZtWL8Y0BmaMNQvdcQPtfjL3Yid5rjPLOEA4cmr3OvT3NL1F
