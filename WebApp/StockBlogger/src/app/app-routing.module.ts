@@ -13,6 +13,7 @@ import { SecretComponent } from './secret/secret.component';
 import { AboutComponent } from './about/about.component';
 import { FeedComponent } from './feed/feed.component';
 import { ContactComponent } from './contact/contact.component';
+import { RegisterpageComponent } from './registerpage/registerpage.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent} ,
@@ -35,6 +36,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'registerpage',
+    component: RegisterpageComponent
   },
   {
     path: 'register',

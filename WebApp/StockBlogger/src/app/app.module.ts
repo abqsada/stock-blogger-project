@@ -16,6 +16,7 @@ import { ChartComponent } from './chart/chart.component';
 import { AboutComponent } from './about/about.component';
 import { FeedComponent } from './feed/feed.component';
 import { ContactComponent } from './contact/contact.component';
+import { RegisterpageComponent } from './registerpage/registerpage.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { ContactComponent } from './contact/contact.component';
     ChartComponent,
     AboutComponent,
     FeedComponent,
-    ContactComponent
+    ContactComponent,
+    RegisterpageComponent
   ],
   imports: [
     BrowserModule,
