@@ -321,6 +321,23 @@ END$$
 
 DELIMITER ;
 
+USE `stockblogger`;
+DROP procedure IF EXISTS `select_posts_from_user`;
+
+DELIMITER $$
+USE `stockblogger`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `select_posts_from_user`(IN USER_ID_INPUT INT)
+BEGIN
+
+SELECT *
+FROM posts
+WHERE user_id = USER_ID_INPUT;
+
+END$$
+
+DELIMITER ;
+
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
