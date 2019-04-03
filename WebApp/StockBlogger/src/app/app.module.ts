@@ -17,6 +17,8 @@ import { AboutComponent } from './about/about.component';
 import { FeedComponent } from './feed/feed.component';
 import { ContactComponent } from './contact/contact.component';
 import { RegisterpageComponent } from './registerpage/registerpage.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ContributeComponent } from './contribute/contribute.component';
 
 @NgModule({
   declarations: [
@@ -34,12 +36,14 @@ import { RegisterpageComponent } from './registerpage/registerpage.component';
     AboutComponent,
     FeedComponent,
     ContactComponent,
-    RegisterpageComponent
+    RegisterpageComponent,
+    ContributeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppRoutingModule
+    AppRoutingModule,
+    CKEditorModule
   ],
   providers: [],
   bootstrap: [AppComponent]

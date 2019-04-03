@@ -14,6 +14,7 @@ import { AboutComponent } from './about/about.component';
 import { FeedComponent } from './feed/feed.component';
 import { ContactComponent } from './contact/contact.component';
 import { RegisterpageComponent } from './registerpage/registerpage.component';
+import { ContributeComponent } from './contribute/contribute.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent} ,
@@ -24,6 +25,10 @@ const routes: Routes = [
   {
     path: 'feed',
     component: FeedComponent
+  },
+  {
+    path: 'contribute',
+    component: ContributeComponent
   },
   {
     path: 'contact',
