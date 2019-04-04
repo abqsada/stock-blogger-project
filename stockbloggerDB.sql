@@ -337,6 +337,13 @@ END$$
 
 DELIMITER ;
 
+# change title and body in posts to fulltext
+# So I can use fulltext functions to query posts for content
+# see stored procedure search_comments
+ALTER TABLE posts
+ADD FULLTEXT (title, body);
+
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
