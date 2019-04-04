@@ -19,6 +19,7 @@ import { ContactComponent } from './contact/contact.component';
 import { RegisterpageComponent } from './registerpage/registerpage.component';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ContributeComponent } from './contribute/contribute.component';
+import { TickerSearchComponent } from './ticker-search/ticker-search.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ContributeComponent } from './contribute/contribute.component';
     FeedComponent,
     ContactComponent,
     RegisterpageComponent,
-    ContributeComponent
+    ContributeComponent,
+    TickerSearchComponent
   ],
   imports: [
     BrowserModule,

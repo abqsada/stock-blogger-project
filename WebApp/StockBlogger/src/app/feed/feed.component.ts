@@ -35,7 +35,7 @@ export class FeedComponent implements OnInit {
 
   // Handles navigation to the next page
   nextHandler() {
-    this.router.navigate(['account']);
+    this.router.navigate(['contribute']);
   }
   // Handles navigation to the previous page
   prevHandler() {
