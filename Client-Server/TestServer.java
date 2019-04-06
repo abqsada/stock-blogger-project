@@ -9,7 +9,7 @@ public class TestServer {
         String hostName = "localhost";
         // This try-with-resources statement is critical!
         try (
-            // Create new server socket object with hostname 'localcost'
+            // Create new server socket object with hostname 'localhost'
             ServerSocket serverSocket =
                 new ServerSocket(portNumber);
             // Accepts the new socket as clientSocket
