@@ -60,4 +60,31 @@ public class UserJsonFile {
         return usersJson;    	
     }
     
+    public static JSONArray addUsers(JSONObject joUser) {
+    	
+    	
+        //  write the data into a Json object 
+        if (Files.exists(customersJPath)) { // prevent the FileNotFoundException
+        	System.out.println(("write: "+ customersJFile.getName()));
+           // try (BufferedWriter out = new BufferedWriter(
+             //                        new FileWriter(customersJFile))) {
+            	// write to file the additional users
+            	// Is this needed?  JSONObject joUser = new JSONObject()
+            	
+            	// usersJson.append(joUser)
+            	
+            	//call the 'saveUsers' method to write to the file
+            	// saveUsers is probably the method that will need write resources
+            	
+                
+            //} catch (IOException e) {
+            //	System.out.println(e);
+            //	return null;
+            //}
+        }
+        return usersJson;    	
+          	
+    	
+    }
+    
 }
