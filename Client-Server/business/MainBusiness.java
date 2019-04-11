@@ -30,8 +30,13 @@ public class MainBusiness {
 
             if (action.equalsIgnoreCase("list")) {
                 displayAllUsers();
-            } else if (action.equalsIgnoreCase("listjson")) {
+            } else if (action.equalsIgnoreCase("listjv")) {
                 System.out.println("Action Not implemented yet.\n");
+                System.out.println("debug Action reading a non-Json text file.\n");
+            	//displayOneUser();
+            } else if (action.equalsIgnoreCase("ident")) {
+                System.out.println("Action Not implemented yet.\n");
+                System.out.println("Will be listing a specific user.\n");
             	//displayOneUser();
             } else if (action.equalsIgnoreCase("add")) {
                 System.out.println("Action Not implemented yet.\n");
@@ -58,6 +63,7 @@ public class MainBusiness {
 
     public static void displayMenu() {
         System.out.println("COMMAND MENU");
+        System.out.println("listjv list all users from a POJO file");
         System.out.println("list   all users info");
         System.out.println("ident  a specific users info");
         System.out.println("add    a customer");

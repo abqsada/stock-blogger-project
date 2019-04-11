@@ -3,7 +3,10 @@
  */
 package business;
 
-import java.time.LocalDateTime;
+//import java.time.LocalDateTime;
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
+//import com.google.gson.JsonObject;
 
 /**
  * @author Ruth
@@ -12,34 +15,32 @@ import java.time.LocalDateTime;
  *   of the JSON object 'User'
  */
 public class UserFields {
-    private String userName;
+    private String user_name;
     private String password;
-    private String email;
     private int userId;
     //private LocalDateTime dateUserJoined;
+	//Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public UserFields() {
-		this.userName = "";
+		this.user_name = "";
 		this.password = "";
-		this.email = "";
 		this.userId = 0;
 		//this.dateUserJoined = LocalDateTime.of(2019, 03, 30, 14, 32);
 	}
 
-	public UserFields(String userName, String password, String email, int userId) {
-		this.userName = userName;
+	public UserFields(String userName, String password, int userId) {
+		this.user_name = userName;
 		this.password = password;
-		this.password = email;
 		this.userId = userId;
 		//this.dateUserJoined = dateUserJoined;
 	}
 
 	public String getUserName() {
-		return userName;
+		return user_name;
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.user_name = userName;
 	}
 
 	public String getPassword() {
@@ -48,14 +49,6 @@ public class UserFields {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public int getUserId() {
@@ -74,6 +67,30 @@ public class UserFields {
 	public void setDateUserJoined(LocalDateTime dateUserJoined) {
 		this.dateUserJoined = dateUserJoined;
 	}
+	 */
+
+	/**
+    public JsonObject toJsonObj() {
+    	//String str = new String(("firstName:"+firstName+", lastname:"+lastName+", email:"+email));
+    	//Object obj = gson.toJson(str);
+    	//String str = "";
+    	//str += "{\"firstName\":" + this.firstName;
+    	//str += ", \"lastname\":" + this.lastName;
+    	//str += ", \"email\":"    + this.email + "}";
+    	//Object obj = (Object) str;
+    	JsonObject job = new JsonObject();
+    	job.addProperty("firstName", this.firstName);
+    	job.addProperty("lastName",  this.lastName);
+    	job.addProperty("email", this.email);
+    	
+        return job;
+    }
+
+    public String fromJsonObj(JsonObject jobj) {
+    	String str = gson.fromJson(jobj, String.class);
+    	
+        return str;
+    }
 	 */
 
 

@@ -1,16 +1,14 @@
 { 
  [
    {
-     "id": 912345678901,
-     "userName": "Ima Json_newb"
+     "user_id": 912345678901,
+     "user_name": "ImaJson_newb"
      "password": "what4next",
-     "email": "json_newb@gmail.com",
    },
    {
      "id": 912345678902,
-     "usesrName": "Jesse James"
+     "usesrName": "JesseJames"
      "password": "Let00MeIn",
-     "email":"first@student.cccs.edu",
    }
  ]
 }

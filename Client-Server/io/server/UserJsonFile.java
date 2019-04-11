@@ -12,7 +12,11 @@ import java.util.List;
 import business.UserFields;
 
 import org.json.JSONTokener;
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+//import com.google.gson.JsonElement;
+//import com.google.gson.JsonParser;
+
 
 /**
  * 
@@ -41,16 +45,26 @@ public class UserJsonFile {
         // This code is modified to open the Json file. 
         //  read the data into a Json object 
         if (Files.exists(customersJPath)) { // prevent the FileNotFoundException
-        	System.out.println(customersJFile.getName());
+        	System.out.println(("found file named: "+customersJFile.getName()));
               try (BufferedReader in = new BufferedReader(
                                        new FileReader(customersJFile))) {
             	
-              	System.out.println("The try for BufferedReader in is not working");
+              	System.out.println("reading from BufferedReader \"in\" into an object");
+              	// example using Gson reader
+            	//Object Obj = gson.fromJson(in, Object.class);
+            	//String jsonObj = gson.toJson(Obj);
+                //System.out.println(("JSON object from file"+"\n"+jsonObj+"\n"+"\n"));
+                //JsonParser jp = new JsonParser();
+                //JsonElement jele = jp.parse(jsonObj);  // throws JsonIException & JsonSyntaxException
+                //System.out.println(("JSON tree Using parser into JsonElement"+"\n"+ jele +"\n"));
+
+              	
+              	//The following 5 lines were from Java-Json experiments
             	//JSONTokener tempInput = new JSONTokener(in);
             	//System.out.println("Got the Tokener tempInput");
             	//System.out.println(tempInput.toString());
             	//JSONArray usersJson = new JSONArray(tempInput);
-            	JSONArray usersJson = new JSONArray("tempInput working soon");
+            	//JSONArray usersJson = new JSONArray("line compile,tempInput working soon");
         
             } catch (IOException e) {
             	System.out.println(e);
@@ -65,7 +79,8 @@ public class UserJsonFile {
     	
         //  write the data into a Json object 
         if (Files.exists(customersJPath)) { // prevent the FileNotFoundException
-        	System.out.println(("write: "+ customersJFile.getName()));
+        	// for debug write out the 
+        	System.out.println(("will be writing and adding to this file: "+ customersJFile.getName()));
            // try (BufferedWriter out = new BufferedWriter(
              //                        new FileWriter(customersJFile))) {
             	// write to file the additional users
@@ -81,6 +96,8 @@ public class UserJsonFile {
             //	System.out.println(e);
             //	return null;
             //}
+        } else {
+        	System.out.println("Could not find file user_account.json");        	
         }
         return usersJson;    	
           	
