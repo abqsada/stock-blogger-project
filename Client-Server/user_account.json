@@ -1,14 +1,14 @@
 { 
  [
    {
-     "user_id": 912345678901,
-     "user_name": "ImaJson_newb"
+     "user_name": "ImaJson_newb",
      "password": "what4next",
+     "user_id": 912345678901
    },
    {
-     "id": 912345678902,
-     "usesrName": "JesseJames"
+     "usesrName": "JesseJames",
      "password": "Let00MeIn",
+     "id": 912345678902
    }
  ]
 }

@@ -41,7 +41,7 @@ public class UserJsonFile {
         if (usersJson != null) {
             return usersJson;
         }
-
+        
         // This code is modified to open the Json file. 
         //  read the data into a Json object 
         if (Files.exists(customersJPath)) { // prevent the FileNotFoundException
@@ -58,13 +58,16 @@ public class UserJsonFile {
                 //JsonElement jele = jp.parse(jsonObj);  // throws JsonIException & JsonSyntaxException
                 //System.out.println(("JSON tree Using parser into JsonElement"+"\n"+ jele +"\n"));
 
-              	
-              	//The following 5 lines were from Java-Json experiments
-            	//JSONTokener tempInput = new JSONTokener(in);
-            	//System.out.println("Got the Tokener tempInput");
-            	//System.out.println(tempInput.toString());
-            	//JSONArray usersJson = new JSONArray(tempInput);
-            	//JSONArray usersJson = new JSONArray("line compile,tempInput working soon");
+				String line = "";
+				String rows ="";
+				while ((line = in.readLine()) != null) {
+					rows += line;
+				}
+                System.out.println(("rows of Strings : \n"+rows));
+            	//JSONObject jobj = new JSONObject(rows);
+                //System.out.println(("JSONObject from string : \n"+jobj));
+
+            	JSONArray usersJson = new JSONArray(rows);
         
             } catch (IOException e) {
             	System.out.println(e);

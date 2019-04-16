@@ -7,6 +7,7 @@ package serverMain;
 //import com.google.gson.Gson;
 //import com.google.gson.GsonBuilder;
 //import com.google.gson.JsonObject;
+import org.json.*;
 
 /**
  * @author Ruth
@@ -69,23 +70,19 @@ public class UserFields {
 	}
 	 */
 
-	/**
-    public JsonObject toJsonObj() {
-    	//String str = new String(("firstName:"+firstName+", lastname:"+lastName+", email:"+email));
-    	//Object obj = gson.toJson(str);
-    	//String str = "";
-    	//str += "{\"firstName\":" + this.firstName;
-    	//str += ", \"lastname\":" + this.lastName;
-    	//str += ", \"email\":"    + this.email + "}";
-    	//Object obj = (Object) str;
-    	JsonObject job = new JsonObject();
-    	job.addProperty("firstName", this.firstName);
-    	job.addProperty("lastName",  this.lastName);
-    	job.addProperty("email", this.email);
+    public JSONObject toJsonObj() {
+    	JSONObject job = new JSONObject();
+    	job.put("user_name", this.user_name);
+    	job.put("password",  this.password);
+    	job.put("userId", this.userId);
+    	//job.addProperty("firstName", this.firstName);
+    	//job.addProperty("lastName",  this.lastName);
+    	//job.addProperty("email", this.email);
     	
         return job;
     }
 
+	/**
     public String fromJsonObj(JsonObject jobj) {
     	String str = gson.fromJson(jobj, String.class);
     	

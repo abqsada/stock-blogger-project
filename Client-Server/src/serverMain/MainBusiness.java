@@ -10,27 +10,23 @@ public class MainBusiness {
 
 	public static void main(String[] args) throws IOException {
         // display a welcome message
-        System.out.println("Start server business.\n");
-        System.out.println("Start will be replaced with the webpage running actions.\n");
+        System.out.println("Start server interface with console.\n");
+        System.out.println("this will be run from the webpage eventually.\n");
 
         // display the command menu
         displayMenu();
 
-        // Open simple console for action commands
-		//Scanner sc = new Scanner(System.in);
-		
         // perform 1 or more actions ( Default in case of no input)
         String action = "exit";
         while (true) {
             // get the input from the user
-			System.out.print("Please enter the the desired action on console for now: ");
-            action = Console.getString("Enter a command: ");
+            action = Console.getString("Please enter the the desired action on console: ");
 			//action = sc.nextLine();
             System.out.println();
 
             if (action.equalsIgnoreCase("list")) {
                 displayAllUsers();
-            } else if (action.equalsIgnoreCase("listjv")) {
+            } else if (action.equalsIgnoreCase("listjava")) {
                 System.out.println("Action Not implemented yet.\n");
                 System.out.println("debug Action reading a non-Json text file.\n");
             	//displayOneUser();
@@ -63,7 +59,7 @@ public class MainBusiness {
 
     public static void displayMenu() {
         System.out.println("COMMAND MENU");
-        System.out.println("listjv list all users from a POJO file");
+        System.out.println("listjava list all users from a text file");
         System.out.println("list   all users info");
         System.out.println("ident  a specific users info");
         System.out.println("add    a customer");
@@ -76,8 +72,12 @@ public class MainBusiness {
     public static void displayAllUsers() {
         System.out.println("User Account List from a file");
     	JSONArray usersJson = UserJsonFile.getUsers();
+        if (usersJson == null) {
+        	System.out.println("usersJson was null");
+        }
+
         System.out.println(usersJson);
-        //System.out.println("The JSON Array is not being read correctly yet.\n");
+        System.out.println("JSON Array of all user accounts.\n");
     }
     
     public static void quit() {
