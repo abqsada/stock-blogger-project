@@ -1,7 +1,7 @@
-package business;
+package serverMain;
 
 import java.io.IOException;
-import io.server.UserJsonFile;
+import ioFormat.UserJsonFile;
 import org.json.*;
 
 //import java.util.Scanner;

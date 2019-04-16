@@ -1,4 +1,4 @@
-package business;
+package serverMain;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package io.server;
+package ioFormat;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import business.UserFields;
+import serverMain.UserFields;
 
 import org.json.JSONTokener;
 import org.json.JSONArray;

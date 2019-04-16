@@ -1,4 +1,4 @@
-package testClientServer;
+package exampleClientServer;
 
 import java.net.*;
 import java.io.*;

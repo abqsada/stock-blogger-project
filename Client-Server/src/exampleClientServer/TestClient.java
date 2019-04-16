@@ -1,4 +1,4 @@
-package testClientServer;
+package exampleClientServer;
 
 /*This client program is straightforward and simple because the echo server implements a simple
  protocol. The client sends text to the server, and the server echoes it back. When your client 
