@@ -29,7 +29,7 @@ public class DataConnection {
 	
 	// method called to execute the stored proc for adding a comment. returns the auto generated PK for comment id
 	public static int addComment(int post_id, int user_id, String body, String date) throws SQLException {
-		stmt = connection.prepareCall("{ call add_comment(?,?,?,?)");
+		stmt = connection.prepareCall("{ call add_comment(?,?,?,?) }");
 		stmt.setInt(1, post_id);
 		stmt.setInt(2, user_id);
 		stmt.setString(3, body);
@@ -40,7 +40,7 @@ public class DataConnection {
 	}
 	
 	public static int addPost(int user_id, String title, String body, Date date) throws SQLException {
-		stmt = connection.prepareCall("{ call add_comment(?,?,?,?)");
+		stmt = connection.prepareCall("{ call add_post(?,?,?,?) }");
 		stmt.setInt(1, user_id);
 		stmt.setString(2, title);
 		stmt.setString(3, body);
@@ -51,6 +51,7 @@ public class DataConnection {
 	}
 	
 	public static int addUser(String name, Date date, String password) throws SQLException {
+		stmt = connection.prepareCall("{ call add_user(?,?,?) }");
 		stmt.setString(1, name);
 		stmt.setDate(2, date);
 		stmt.setString(3, password);
