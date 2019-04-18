@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class test {
@@ -18,6 +19,7 @@ public class test {
 		int ic = DataConnection.addComment(1, 1, "some text", Date.valueOf("2002-12-01"));
 		
 		System.out.println(ic);
+		
 
 	}
 

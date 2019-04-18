@@ -87,6 +87,30 @@ public class DataConnection {
 		stmt.executeUpdate();
 	}
 	
+	public static void editPost(int post_id, int user_id, String title, String body, Date date) throws SQLException {
+		stmt = connection.prepareCall("{ call edit_post(?,?,?,?,?) }");
+		stmt.setInt(1,post_id);
+		stmt.setInt(2,user_id);
+		stmt.setString(3, title);
+		stmt.setString(4, body);
+		stmt.setDate(5, date);
+		stmt.executeUpdate();
+	}
 	
+	public static void editComment(int comment_id, int post_id, int user_id, String body, Date date) throws SQLException {
+		stmt = connection.prepareCall("{ call edit_post(?,?,?,?,?) }");
+		stmt.setInt(1,comment_id);
+		stmt.setInt(2,post_id);
+		stmt.setInt(3,user_id);
+		stmt.setString(4, body);
+		stmt.setDate(5, date);
+		stmt.executeUpdate();
+	}
+	
+	public static ResultSet searchPosts(String keywords) throws SQLException {
+		stmt = connection.prepareCall("{?= call select_posts_from_user(?)");
+		stmt.setString(1, keywords);
+		return rs = stmt.executeQuery();
+	}
 
 }
