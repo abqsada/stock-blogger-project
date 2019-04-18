@@ -11,11 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 import serverMain.UserFields;
 
-import org.json.JSONTokener;
-import org.json.JSONArray;
-import org.json.JSONObject;
-//import com.google.gson.JsonElement;
-//import com.google.gson.JsonParser;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonElement;
 
 
 /**
@@ -30,54 +31,52 @@ public class UserJsonFile {
 
     private static final Path customersJPath = Paths.get("user_account.json");
     private static final File customersJFile = customersJPath.toFile();
-    //private static List<UserFields> usersJava = getUsers();
-    private static JSONArray usersJson = getUsers();
+    private static JsonArray usersJson = getUsers();
 
     // prevent instantiation of the class
     //private UserJsonFile () {}
     
-    public static JSONArray getUsers() {
+    public static JsonArray getUsers() {
         // if the customers file has already been read, don't read it again
         if (usersJson != null) {
             return usersJson;
         }
         
-        // This code is modified to open the Json file. 
+  		// create an instance of a Gson JSON object for JSON manipulation
+  		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
+  		// This code is modified to open the Json file. 
         //  read the data into a Json object 
         if (Files.exists(customersJPath)) { // prevent the FileNotFoundException
-        	System.out.println(("found file named: "+customersJFile.getName()));
               try (BufferedReader in = new BufferedReader(
                                        new FileReader(customersJFile))) {
             	
+
+            	  
               	System.out.println("reading from BufferedReader \"in\" into an object");
               	// example using Gson reader
-            	//Object Obj = gson.fromJson(in, Object.class);
-            	//String jsonObj = gson.toJson(Obj);
-                //System.out.println(("JSON object from file"+"\n"+jsonObj+"\n"+"\n"));
-                //JsonParser jp = new JsonParser();
-                //JsonElement jele = jp.parse(jsonObj);  // throws JsonIException & JsonSyntaxException
+            	Object Obj = gson.fromJson(in, Object.class);
+            	String jsonObj = gson.toJson(Obj);
+                System.out.println(("JSON object from file"+"\n"+jsonObj+"\n"+"\n"));
+                JsonParser jp = new JsonParser();
+                JsonElement jele = jp.parse(jsonObj);
                 //System.out.println(("JSON tree Using parser into JsonElement"+"\n"+ jele +"\n"));
-
-				String line = "";
-				String rows ="";
-				while ((line = in.readLine()) != null) {
-					rows += line;
-				}
-                System.out.println(("rows of Strings : \n"+rows));
-            	//JSONObject jobj = new JSONObject(rows);
-                //System.out.println(("JSONObject from string : \n"+jobj));
-
-            	JSONArray usersJson = new JSONArray(rows);
+                JsonArray usersJson = new JsonArray();
+                usersJson.add(jele.getAsJsonArray());
+                //System.out.println(("JSONArray from JsonElement"+"\n"+ usersJson +"\n"));
+                System.out.println(("JsonElementneeds to be parsed into objects>JSONArray"+"\n"));
+                System.out.println(("JsonElement>JSONArray, Throwing exception printing"+"\n"));
         
             } catch (IOException e) {
             	System.out.println(e);
+            	e.printStackTrace();
             	return null;
             }
         }
         return usersJson;    	
     }
     
-    public static JSONArray addUsers(JSONObject joUser) {
+    public static JsonArray addUsers(JsonObject joUser) {
     	
     	
         //  write the data into a Json object 
@@ -108,3 +107,21 @@ public class UserJsonFile {
     }
     
 }
+
+/*
+ * This is the imorts and code I tried using org.json:
+ *
+import org.json.JSONTokener;
+import org.json.JSONArray;
+import org.json.JSONObject;
+    private static JSONArray usersJson = getUsers();
+				String line = "";
+				String rows ="";
+				while ((line = in.readLine()) != null) {
+					rows += line;
+				}
+                System.out.println(("rows of Strings : \n"+rows));
+					//output exception printing rows in the previous line
+            	JSONArray usersJson = new JSONArray(rows);
+ 
+ * */

@@ -2,7 +2,8 @@ package serverMain;
 
 import java.io.IOException;
 import ioFormat.UserJsonFile;
-import org.json.*;
+import com.google.gson.JsonArray;
+//import org.json.*;
 
 //import java.util.Scanner;
 
@@ -71,13 +72,18 @@ public class MainBusiness {
     
     public static void displayAllUsers() {
         System.out.println("User Account List from a file");
-    	JSONArray usersJson = UserJsonFile.getUsers();
+        //try (){
+    	JsonArray usersJson = UserJsonFile.getUsers();
+        System.out.println("return from getUsers");
         if (usersJson == null) {
         	System.out.println("usersJson was null");
         }
 
-        System.out.println(usersJson);
         System.out.println("JSON Array of all user accounts.\n");
+        System.out.println(usersJson);
+		//} catch (IOException e) {
+		//	System.out.println(e);
+        //}
     }
     
     public static void quit() {
