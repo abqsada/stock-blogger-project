@@ -24,8 +24,8 @@ public class User {
 	}
 	
 	public ResultSet getPostsForUser() throws SQLException {
-		ResultSet rs;
-		return rs = DataConnection.getPostsForUser(userId);
+		ResultSet rs = DataConnection.getPostsForUser(userId);
+		return rs ;
 	}
 	
 	
