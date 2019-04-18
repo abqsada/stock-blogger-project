@@ -17,7 +17,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema stockblogger
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `stockblogger` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci ;
+CREATE SCHEMA IF NOT EXISTS `stockblogger` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
 USE `stockblogger` ;
 
 -- -----------------------------------------------------
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `stockblogger`.`users` (
   PRIMARY KEY (`user_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
 
 
 -- -----------------------------------------------------
@@ -48,14 +48,13 @@ CREATE TABLE IF NOT EXISTS `stockblogger`.`posts` (
   `body` VARCHAR(5000) NOT NULL,
   `post_date` DATE NOT NULL,
   PRIMARY KEY (`post_id`),
-  INDEX `post to user_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `post to user`
     FOREIGN KEY (`user_id`)
     REFERENCES `stockblogger`.`users` (`user_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
-
+COLLATE = utf8mb4_general_ci;
+CREATE INDEX `idx_post_to_user` ON `stockblogger`.`posts`(`user_id` ASC);
 
 -- -----------------------------------------------------
 -- Table `stockblogger`.`comment`
@@ -69,8 +68,6 @@ CREATE TABLE IF NOT EXISTS `stockblogger`.`comments` (
   `body` VARCHAR(1000) NOT NULL,
   `comment_date` DATE NOT NULL,
   PRIMARY KEY (`comment_id`),
-  INDEX `comment to post_idx` (`post_id` ASC) VISIBLE,
-  INDEX `comment to user_idx` (`user_id` ASC) VISIBLE,
   CONSTRAINT `comment to post`
     FOREIGN KEY (`post_id`)
     REFERENCES `stockblogger`.`posts` (`post_id`),
@@ -79,7 +76,9 @@ CREATE TABLE IF NOT EXISTS `stockblogger`.`comments` (
     REFERENCES `stockblogger`.`users` (`user_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4
-COLLATE = utf8mb4_0900_ai_ci;
+COLLATE = utf8mb4_general_ci;
+CREATE INDEX `idx_comment_to_post` ON `stockblogger`.`comments`(`post_id` ASC);
+CREATE INDEX `idx_comment_to_user` ON `stockblogger`.`comments`(`user_id` ASC);
 
 INSERT INTO `stockblogger`.`users`
 (`user_name`,
