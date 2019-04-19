@@ -1,7 +1,13 @@
 package serverMain;
 
 import java.io.IOException;
+import java.sql.Date;
+
 import ioFormat.UserJsonFile;
+import serverMain.UserFields;
+import dbConnect.DataConnection;
+
+import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 //import org.json.*;
 
@@ -41,8 +47,8 @@ public class MainBusiness {
                 System.out.println("Will be listing a specific user account.\n");
             	//displayOneUser();
             } else if (action.equalsIgnoreCase("add")) {
-                System.out.println("Action Not implemented yet.\n");
-                //addCustomer();
+                System.out.println("Action Not fully implemented yet.\n");
+                addUser();
             } else if (action.equalsIgnoreCase("del") || 
                        action.equalsIgnoreCase("delete")) {
                 System.out.println("Action Not implemented yet.\n");
@@ -138,7 +144,34 @@ public class MainBusiness {
         //}
     }
     
-    public static void quit() {
+	public static void addUser() {
+        //try (){
+		String userName = Console.getString("Enter userName ..as 1 word..: ");
+		String password = Console.getString("Enter password: ");
+		int userId = Console.getInt("Enter userId as int: ");
+		//Date addDate = Console.getDate("Enter Date added but not in console yet:");
+
+		UserFields userObj = new UserFields();
+		userObj.setUserName(userName);
+		userObj.setPassword(password);
+		userObj.setUserId(userId);
+    	JsonObject job = userObj.toJsonObj();
+		System.out.println();
+		System.out.println(("User Json object :\n"+job));
+		System.out.println("Should now be added to dataBase.\n");
+    	//Connection dbConnect = DataConnection.getConnection();
+		//dbConnect.addUser(userName, addDate, password)
+		//System.out.println(("User object added to database with userID= :\n"+job));
+
+		
+		System.out.println("And try to write JsonObject to the Json file.\n");
+
+		//} catch (IOException e) {
+		//	System.out.println(e);
+        //}
+	}
+
+	public static void quit() {
         System.out.println("Bye.\n");
         System.exit(0);
     }
