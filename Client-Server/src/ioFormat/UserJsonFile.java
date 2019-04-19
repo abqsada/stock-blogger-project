@@ -60,11 +60,11 @@ public class UserJsonFile {
                 System.out.println(("JSON object from file"+"\n"+jsonObj+"\n"+"\n"));
                 JsonParser jp = new JsonParser();
                 JsonElement jele = jp.parse(jsonObj);
-                //System.out.println(("JSON tree Using parser into JsonElement"+"\n"+ jele +"\n"));
+                System.out.println(("JSON tree Using parser into JsonElement"+"\n"+ jele +"\n"));
                 JsonArray usersJson = new JsonArray();
-                usersJson.add(jele.getAsJsonArray());
-                //System.out.println(("JSONArray from JsonElement"+"\n"+ usersJson +"\n"));
-                System.out.println(("JsonElementneeds to be parsed into objects>JSONArray"+"\n"));
+                //--usersJson.add(jele.getAsJsonArray());
+                //--System.out.println(("JSONArray from JsonElement"+"\n"+ usersJson +"\n"));
+                System.out.println(("JsonElement needs to be parsed into objects>JSONArray"+"\n"));
                 System.out.println(("JsonElement>JSONArray, Throwing exception printing"+"\n"));
         
             } catch (IOException e) {
