@@ -352,7 +352,7 @@ CREATE procedure search_posts (IN keywords VARCHAR(30) )
 BEGIN
 
 SELECT * FROM posts
-WHERE `body` LIKE CONCAT('%',_textInput,'%');
+WHERE MATCH(title, body) AGAINST(keywords);
 
 END $$
 
