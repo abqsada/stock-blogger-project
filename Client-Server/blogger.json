@@ -1,0 +1,27 @@
+ [
+   {
+     "id": 912345678901,
+     "email":"first@student.cccs.edu",
+     "firstName": "Ima"
+     "lastName": "json_newb",
+     "text": "How do I read a JSON stream in Java?",
+     "fundSearchString": ["FSPHX", "FSMEX", "VGHCX", "SWHFX", "PFHAX"],
+     "twitterSearchString": {
+       "hospital"
+       "healthcare",
+       "medical",       
+      }
+   },
+   {
+     "id": 912345678902,
+     "email":"first@student.cccs.edu",
+     "firstName": "Jesse"
+     "lastName": "James",
+     "text": "@json_newb just use JsonReader!",
+     "fundSearchString": null,
+     "twitterSearchString": {
+       "solar",
+       "wind power"
+     }
+   }
+ ]
