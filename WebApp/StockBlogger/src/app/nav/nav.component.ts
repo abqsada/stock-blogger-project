@@ -15,7 +15,7 @@ export class NavComponent implements OnInit {
   route; // Stores current URL Route
 
   ngOnInit() {
-    console.log('Entering nav.component.ts ngOnInit method!')
+    console.log('Entering nav.component.ts ngOnInit method!');
   }
   // Keeps user on same page if incorrect answer is made
   handleRoute() {

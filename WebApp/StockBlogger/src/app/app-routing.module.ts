@@ -13,6 +13,8 @@ import { SecretComponent } from './secret/secret.component';
 import { AboutComponent } from './about/about.component';
 import { FeedComponent } from './feed/feed.component';
 import { ContactComponent } from './contact/contact.component';
+import { RegisterpageComponent } from './registerpage/registerpage.component';
+import { ContributeComponent } from './contribute/contribute.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent} ,
@@ -25,6 +27,10 @@ const routes: Routes = [
     component: FeedComponent
   },
   {
+    path: 'contribute',
+    component: ContributeComponent
+  },
+  {
     path: 'contact',
     component: ContactComponent
   },
@@ -35,6 +41,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'registerpage',
+    component: RegisterpageComponent
   },
   {
     path: 'register',

@@ -1,25 +1,33 @@
-<div align=middle>
-<h1>Login Page: </h1>
+<<div align=middle>
+  <form action="action_page.php">
+    <div class="container">
+      
+      <hr>
+      <hr>
+      <h1>Login</h1>
+      <p>Please login to continue using our service.</p>
+      <hr>
+  
+      <label for="email"><b>Email or Username</b></label>
+      <p></p>
+      <input type="text" placeholder="Enter Username or Email" name="email" required>
+      <p></p>
+      <label for="psw"><b>Password</b></label>
+      <p></p>
+      <input type="password" placeholder="Enter Password" name="psw" required>
+      <p></p>
+      <hr>
+  
+      <button type="submit" class="loginbtn">Login</button>
+    </div>
+  
+    <div class="container signin">
+      <p>Want to be part of the family? <a href="registerpage">Register Here</a>.</p>
+      <p>Lost or Forgot Your Password? <a href="/">Go Home</a>.</p>
+    </div>
+  
+   
+  </form>
 
-
-<div class="container">
-    <label for="uname"><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="uname" required>
-    <p></p>
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" required>
-    <p></p>
-    <button class="w3-button w3-center" type="submit">Login</button>
-    <label>
-      <input type="checkbox" checked="checked" name="remember"> Remember me
-    </label>
-  </div>
-
-  <div class="container" style="background-color:#f1f1f1">
-    <button type="button" class="cancelbtn">Cancel</button>
-    <span class="psw">Forgot <a href="#">password?</a></span>
-  </div>
-
-
-<a routerLink="/">Home</a> 
+ 
 </div>
