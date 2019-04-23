@@ -20,7 +20,7 @@ export class AccountComponent implements OnInit {
   }
   // Handles navigation to the previous page
   prevHandler() {
-    this.router.navigate(['feed']);
+    this.router.navigate(['contribute']);
   }
   // Program Entry Point
   ngOnInit() {
