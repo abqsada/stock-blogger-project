@@ -11,18 +11,18 @@ public class Comment {
 
 
     public Comment(int postID, int userID, String body, Date commentDate) throws SQLException{
-        setPostID(postID);
-        setUserID(userID);
-        setBody(body);
-        setCommentDate(commentDate);
+        this.postId = postID;
+        this.userId = userID;
+        this.body = body;
+        this.commentDate = commentDate;
         this.commentId = DataConnection.addComment(postID, userID, body, commentDate);
     }
 
     public void editComment(int postID, int userID, String body, Date commentDate) throws SQLException{
-        setPostID(postID);
-        setUserID(userID);
-        setBody(body);
-        setCommentDate(commentDate);
+        this.postId = postID;
+        this.userId = userID;
+        this.body = body;
+        this.commentDate = commentDate;
         DataConnection.editComment(commentId, postID, userID, body, commentDate);
     }
 
@@ -30,17 +30,8 @@ public class Comment {
         return postId;
     }
 
-    public void setPostID(int postID) throws SQLException {
-        this.postId = postID;
-
-    }
-
     public int getUserID() {
         return userId;
-    }
-
-    public void setUserID(int userID) throws SQLException {
-        this.userId = userID;
     }
 
     public String getBody() {
@@ -49,6 +40,7 @@ public class Comment {
 
     public void setBody(String body) throws SQLException {
         this.body = body;
+        editComment(postId, userId, body, commentDate);
     }
 
     public Date getCommentDate() {
@@ -57,5 +49,6 @@ public class Comment {
 
     public void setCommentDate(Date commentDate) throws SQLException {
         this.commentDate = commentDate;
+        editComment(postId, userId, body, commentDate);
     }
 }

@@ -340,6 +340,23 @@ END$$
 
 DELIMITER ;
 
+USE `stockblogger`;
+DROP procedure IF EXISTS `select_comments_from_post`;
+
+DELIMITER $$
+USE `stockblogger`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `select_comments_from_post`(IN POST_ID_INPUT INT)
+BEGIN
+
+SELECT *
+FROM comments
+WHERE post_id = POST_ID_INPUT;
+
+END$$
+
+DELIMITER ;
+
+
 ALTER TABLE posts
 ADD FULLTEXT (title, body);
 

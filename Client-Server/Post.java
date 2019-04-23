@@ -27,7 +27,7 @@ public class Post {
 	}
 	
 	public ResultSet getCommentsForPost() throws SQLException {
-		ResultSet rs = ""; // we need a comments for post Stored procedure and dataconnection method
+		ResultSet rs = DataConnection.getCommentsForPost(postId); 
 		return rs ;
 	}
 	
