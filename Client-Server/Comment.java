@@ -3,8 +3,9 @@ import java.sql.SQLException;
 
 public class Comment {
 
-    private int postID;
-    private int userID; // Change to: String userName in DB
+	private int commentId;
+    private int postId;
+    private int userId; // Change to: String userName in DB
     private String body;
     private Date commentDate;
 
@@ -14,7 +15,7 @@ public class Comment {
         setUserID(userID);
         setBody(body);
         setCommentDate(commentDate);
-        DataConnection.addComment(postID, userID, body, commentDate);
+        this.commentId = DataConnection.addComment(postID, userID, body, commentDate);
     }
 
     public void editComment(int postID, int userID, String body, Date commentDate) throws SQLException{
@@ -22,24 +23,24 @@ public class Comment {
         setUserID(userID);
         setBody(body);
         setCommentDate(commentDate);
-        DataConnection.editUser(postID, userID, body, commentDate);
+        DataConnection.editComment(commentId, postID, userID, body, commentDate);
     }
 
     public int getPostID() {
-        return postID;
+        return postId;
     }
 
     public void setPostID(int postID) throws SQLException {
-        this.postID = postID;
+        this.postId = postID;
 
     }
 
     public int getUserID() {
-        return userID;
+        return userId;
     }
 
     public void setUserID(int userID) throws SQLException {
-        this.userID = userID;
+        this.userId = userID;
     }
 
     public String getBody() {
