@@ -30,6 +30,12 @@ public class DataConnection {
 		return rs = stmt.executeQuery();
 	}
 	
+	public static ResultSet getCommentsForPost(int post_id) throws SQLException {
+		stmt = connection.prepareCall("{?= call select_comments_from_post(?)");
+		stmt.setInt(1, post_id);
+		return rs = stmt.executeQuery();
+	}
+	
 	// method called to execute the stored proc for adding a comment. returns the auto generated PK for comment id
 	public static int addComment(int post_id, int user_id, String body, Date date) throws SQLException {
 		String query = "insert into comments (post_id, user_id, body, comment_date) values(?,?,?,?)";
