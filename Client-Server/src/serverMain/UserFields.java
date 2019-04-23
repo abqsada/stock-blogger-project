@@ -1,9 +1,12 @@
 /**
  * 
  */
-package business;
+package serverMain;
 
-import java.time.LocalDateTime;
+//import java.time.LocalDateTime;
+//import com.google.gson.Gson;
+//import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
 
 /**
  * @author Ruth
@@ -14,22 +17,20 @@ import java.time.LocalDateTime;
 public class UserFields {
     private String userName;
     private String password;
-    private String email;
     private int userId;
     //private LocalDateTime dateUserJoined;
+	//Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public UserFields() {
 		this.userName = "";
 		this.password = "";
-		this.email = "";
 		this.userId = 0;
 		//this.dateUserJoined = LocalDateTime.of(2019, 03, 30, 14, 32);
 	}
 
-	public UserFields(String userName, String password, String email, int userId) {
+	public UserFields(String userName, String password, int userId) {
 		this.userName = userName;
 		this.password = password;
-		this.password = email;
 		this.userId = userId;
 		//this.dateUserJoined = dateUserJoined;
 	}
@@ -50,14 +51,6 @@ public class UserFields {
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public int getUserId() {
 		return userId;
 	}
@@ -74,6 +67,23 @@ public class UserFields {
 	public void setDateUserJoined(LocalDateTime dateUserJoined) {
 		this.dateUserJoined = dateUserJoined;
 	}
+	 */
+
+    public JsonObject toJsonObj() {
+    	JsonObject job = new JsonObject();
+    	job.addProperty("userName", this.userName);
+    	job.addProperty("password",  this.password);
+    	job.addProperty("userId", this.userId);
+    	
+        return job;
+    }
+
+	/**
+    public String fromJsonObj(JsonObject jobj) {
+    	String str = gson.fromJson(jobj, String.class);
+    	
+        return str;
+    }
 	 */
 
 
