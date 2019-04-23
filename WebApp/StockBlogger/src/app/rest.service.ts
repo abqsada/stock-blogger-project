@@ -9,17 +9,21 @@ import { map, catchError, tap } from 'rxjs/operators';
 })
 export class RestService {
 
-  readonly endpoint = 'http://localhost:3000/api/v1/';
-  readonly httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json'
-  })
-};
+  // BASE URL *Does NOT include URL parameters
+  // such as /blogposts, or /accounts
+  readonly endpoint = 'http://localhost:3000/api';
 
+//   readonly httpOptions = {
+//   headers: new HttpHeaders({
+//     'Content-Type':  'application/json'
+//   })
+// };
+
+  // Inject the Http Client into the constructor
   constructor(private http: HttpClient) { }
 
-  private extractData(res: Response) {
-    let body = res;
-    return body || { };
-  }
+  // private extractData(res: Response) {
+  //   let body = res;
+  //   return body || { };
+  // }
 }

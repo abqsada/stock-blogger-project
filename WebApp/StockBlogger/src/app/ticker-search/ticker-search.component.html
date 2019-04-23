@@ -9,4 +9,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 </style>
 
-<input type="text" style="left: 400px; top: 8px;" placeholder="Here is some shit" name="uname" required>
+<form (submit)="onSubmit()" align="center">
+    <p class="w3-margin w3-jumbo">Enter a ticker symbol here! (Example: AAPL)</p>
+    <input [(ngModel)]="tickerSymbol" name="ticker" class="form-control mr-sm-2" style="position: relative;" type="ticker">
+</form>
