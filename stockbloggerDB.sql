@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `stockblogger`.`posts` (
   `post_id` INT(11) NOT NULL AUTO_INCREMENT,
   `user_id` INT(11) NOT NULL,
   `title` VARCHAR(75) NOT NULL,
-  `body` VARCHAR(5000) NOT NULL,
+  `body` TEXT NOT NULL,
   `post_date` DATE NOT NULL,
   PRIMARY KEY (`post_id`),
   CONSTRAINT `post to user`
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS `stockblogger`.`comments` (
   `comment_id` INT(11) NOT NULL AUTO_INCREMENT,
   `post_id` INT(11) NOT NULL,
   `user_id` INT(11) NOT NULL,
-  `body` VARCHAR(1000) NOT NULL,
+  `body` TEXT NOT NULL,
   `comment_date` DATE NOT NULL,
   PRIMARY KEY (`comment_id`),
   CONSTRAINT `comment to post`
@@ -202,7 +202,7 @@ DROP procedure IF EXISTS `add_user`;
 
 DELIMITER $$
 USE `stockblogger`$$
-CREATE PROCEDURE `add_user` (IN USER_NAME_INPUT VARCHAR(45),IN DATE_JOINED_INPUT DATE,IN PASSWORD_INPUT VARCHAR(45))
+CREATE PROCEDURE `add_user` (IN USER_NAME_INPUT VARCHAR(45),IN DATE_JOINED_INPUT DATE,IN PASSWORD_INPUT VARCHAR(45),OUT USER_ID INT)
 BEGIN
 
 INSERT INTO `stockblogger`.`users`
@@ -214,6 +214,9 @@ VALUES
 DATE_JOINED_INPUT,
 PASSWORD_INPUT);
 
+SET USER_ID = LAST_INSERT_ID();
+
+
 END$$
 
 DELIMITER ;
@@ -223,7 +226,7 @@ DROP procedure IF EXISTS `add_post`;
 
 DELIMITER $$
 USE `stockblogger`$$
-CREATE PROCEDURE `add_post` (IN USER_ID_INPUT INT,IN TITLE_INPUT VARCHAR(75),IN POST_BODY_INPUT VARCHAR(5000),IN POST_DATE_INPUT DATE)
+CREATE PROCEDURE `add_post` (IN USER_ID_INPUT INT,IN TITLE_INPUT VARCHAR(75),IN POST_BODY_INPUT TEXT,IN POST_DATE_INPUT DATE)
 BEGIN
 
 INSERT INTO `stockblogger`.`posts`
@@ -246,7 +249,7 @@ DROP procedure IF EXISTS `add_comment`;
 
 DELIMITER $$
 USE `stockblogger`$$
-CREATE PROCEDURE `add_comment`(IN POST_ID_INPUT INT,IN USER_ID_INPUT INT,IN COMMENT_BODT_INPUT VARCHAR(1000),IN COMMENT_DATE_INPUT DATE)
+CREATE PROCEDURE `add_comment`(IN POST_ID_INPUT INT,IN USER_ID_INPUT INT,IN COMMENT_BODY_INPUT TEXT,IN COMMENT_DATE_INPUT DATE)
 BEGIN
 
 INSERT INTO `stockblogger`.`comments`
@@ -281,6 +284,96 @@ WHERE user_id = USER_ID_INPUT;
 END$$
 
 DELIMITER ;
+
+USE `stockblogger`;
+DROP procedure IF EXISTS `edit_post`;
+
+DELIMITER $$
+USE `stockblogger`$$
+CREATE PROCEDURE `edit_post` (IN POST_ID_INPUT INT,IN USER_ID_INPUT INT,IN TITLE_INPUT VARCHAR(75),IN POST_BODY_INPUT TEXT,IN POST_DATE_INPUT DATE)
+BEGIN
+
+UPDATE `stockblogger`.`posts`
+SET user_id = USER_ID_INPUT,
+title = TITLE_INPUT,
+body = POST_BODY_INPUT,
+post_date = POST_DATE_INPUT
+WHERE post_id = POST_ID_INPUT;
+
+END$$
+
+DELIMITER ;
+
+USE `stockblogger`;
+DROP procedure IF EXISTS `edit_comment`;
+
+DELIMITER $$
+USE `stockblogger`$$
+CREATE PROCEDURE `edit_comment`(IN COMMENT_ID_INPUT INT,IN POST_ID_INPUT INT,IN USER_ID_INPUT INT,IN COMMENT_BODY_INPUT TEXT,IN COMMENT_DATE_INPUT DATE)
+BEGIN
+
+UPDATE `stockblogger`.`comments`
+SET post_id = POST_ID_INPUT,
+user_id = USER_ID_INPUT,
+body = COMMENT_BODY_INPUT,
+comment_date = COMMENT_DATE_INPUT
+WHERE comment_id = COMMENT_ID_INPUT ;
+
+END$$
+
+DELIMITER ;
+
+USE `stockblogger`;
+DROP procedure IF EXISTS `select_posts_from_user`;
+
+DELIMITER $$
+USE `stockblogger`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `select_posts_from_user`(IN USER_ID_INPUT INT)
+BEGIN
+
+SELECT *
+FROM posts
+WHERE user_id = USER_ID_INPUT;
+
+END$$
+
+DELIMITER ;
+
+USE `stockblogger`;
+DROP procedure IF EXISTS `select_comments_from_post`;
+
+DELIMITER $$
+USE `stockblogger`$$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `select_comments_from_post`(IN POST_ID_INPUT INT)
+BEGIN
+
+SELECT *
+FROM comments
+WHERE post_id = POST_ID_INPUT;
+
+END$$
+
+DELIMITER ;
+
+
+ALTER TABLE posts
+ADD FULLTEXT (title, body);
+
+USE `stockblogger`;
+DROP procedure IF EXISTS `search_posts`;
+
+DELIMITER $$
+USE `stockblogger`$$
+CREATE procedure search_posts (IN keywords VARCHAR(30) )
+BEGIN
+
+SELECT * FROM posts
+WHERE MATCH(title, body) AGAINST(keywords);
+
+END $$
+
+DELIMITER ;
+
 
 
 SET SQL_MODE=@OLD_SQL_MODE;

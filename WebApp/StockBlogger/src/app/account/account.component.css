@@ -28,8 +28,30 @@ a {
   .round {
     border-radius: 50%;
   }
-
-  #divfix {
-    
+  input[type=text], select {
+    padding: 6px 14px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 45px;
+  }
+  input[type=password], select {
+    padding: 6px 14px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 45px;
+  }
+  a[type=login] {
+    border: 1px solid rgb(33, 150, 243);
+    border-radius: 4px;
+    color: white;
+    padding: 6px 14px;
+    margin: 4px 2px;
+    cursor: pointer;
   }
   
