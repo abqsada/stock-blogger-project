@@ -26,6 +26,7 @@ public class APIExample {
 		con.setRequestProperty("User-Agent", USER);
 		
 		//Sending the GET Request signal
+		
 		int responseCode = con.getResponseCode();
 		System.out.println("\nSending 'GET' request to URL : " + ApiUrl);
 		System.out.println("Response Code : " + responseCode);
@@ -41,8 +42,8 @@ public class APIExample {
 			response.append(inputLine);
 		}
 		in.close();
-		//Printing the response to a json file
 		
+		//Printing the response to a json file
 		 try (FileWriter file = new FileWriter("C:\\Users\\Ken-Laptop\\Documents\\GitHub\\stock-blogger-project\\test.json")) 
 		 {
 
@@ -56,16 +57,16 @@ public class APIExample {
 	}
 	private void urlBuilder() 
 	{
+		String userInput = "";
 		String urlPart1 = "https://www.worldtradingdata.com/api/v1/stock?symbol=";
 		String urlPart2 = "&api_token=ljkHFuF0MiRoGZtWL8Y0BmaMNQvdcQPtfjL3Yid5rjPLOEA4cmr3OvT3NL1F";
 		String finalUrl = "";
-		
 	}
-	
+
 	private void sendPost() throws Exception 
 	{
 		//declaring our post URL 
-		String url = "";
+		String url = "http://localhost:3000";
 		URL obj = new URL(url);
 		//Setting our URL connection as an obj 
 		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
@@ -76,7 +77,7 @@ public class APIExample {
 		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		
 		//POST parameters
-		String urlParameters = "";
+		String urlParameters = "/api/v1/";
 		
 		// Send post request
 		con.setDoOutput(true);
@@ -117,8 +118,8 @@ public class APIExample {
 		System.out.println("Testing 1 - Send Http GET request");
 		http.sendGet();
 		
-		/*System.out.println("Testing 2 - Send Http POST request");
-		http.sendPost();*/
+		System.out.println("Testing 2 - Send Http POST request");
+		http.sendPost();
 
 	}
 
