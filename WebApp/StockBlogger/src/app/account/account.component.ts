@@ -7,8 +7,16 @@ import { Router } from '@angular/router';
   styleUrls: ['./account.component.css']
 })
 export class AccountComponent implements OnInit {
+  // Declare empty Object 'model' for storing user credentials
+  // {username: "username", password: "password"}
+  model: any = {};
 
   constructor(private router: Router) { }
+
+  // Handles Logging a user in
+  login() {
+    console.log(this.model);
+  }
 
   // Handles Clicking Admin Button
   clickHandler() {
