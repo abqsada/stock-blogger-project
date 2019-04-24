@@ -10,16 +10,38 @@ import { Component, OnInit } from '@angular/core';
 export class TickerSearchComponent implements OnInit {
   // Handles the ticker the user searches for
   tickerSymbol: string;
+  errorMessage: string;
 
   constructor() { }
-
+  // Runs on Initialization
   ngOnInit() {
     console.log('Entered ticker-search.component.ts');
   }
-
+  // Handles when a user enters a ticker symbol
   onSubmit() {
-    console.log('SENDING TICKER: ' + this.tickerSymbol);
-    return this.tickerSymbol;
+    // Acceptable characters for input
+    const letters = /^[A-Za-z]+$/;
+
+    if (this.tickerSymbol.valueOf().match(letters)) {
+      if (this.tickerSymbol.length < 6 && this.tickerSymbol.length > 2) {
+        // Log to Console for Testing
+        console.log('SENDING TICKER: ' + this.tickerSymbol);
+        this.errorMessage = '';
+        // Returns the users response as a ticker symbol
+        return this.tickerSymbol;
+      }
+
+    }
+    if (this.tickerSymbol.length > 6 || this.tickerSymbol.length < 2) {
+      // For Binding to the HTML
+      this.errorMessage = 'Something isn\'t right. Try again.';
+      console.log(this.errorMessage); // Log to Console for Testing
+    } else {
+      // For Binding to the HTML
+      this.errorMessage = 'Something isn\'t right. Try again.';
+      console.log(this.errorMessage); // Log to Console for Testing
+    }
+
   }
 
 }

@@ -12,4 +12,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <form (submit)="onSubmit()" align="center">
     <p class="w3-margin w3-jumbo">Enter a ticker symbol here! (Example: AAPL)</p>
     <input [(ngModel)]="tickerSymbol" name="ticker" class="form-control mr-sm-2" style="position: relative;" type="ticker">
+    <div *ngIf="errorMessage">
+            <a class="w3-margin" style="color:red">{{errorMessage}}</a>
+    </div> 
 </form>
