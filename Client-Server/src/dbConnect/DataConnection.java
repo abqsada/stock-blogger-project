@@ -22,13 +22,19 @@ public class DataConnection {
 	private static Connection connection = null;
 	
 	public static Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(CONN, USERNAME, PASSWORD);
+		return connection = DriverManager.getConnection(CONN, USERNAME, PASSWORD);
 	}
 	
 	// method called to execute stored proc for select post from user. returns the result set
 	public static ResultSet getPostsForUser(int user_id) throws SQLException {
 		stmt = connection.prepareCall("{?= call select_posts_from_user(?)");
 		stmt.setInt(1, user_id);
+		return rs = stmt.executeQuery();
+	}
+	
+	public static ResultSet getCommentsForPost(int post_id) throws SQLException {
+		stmt = connection.prepareCall("{?= call select_comments_from_post(?)");
+		stmt.setInt(1, post_id);
 		return rs = stmt.executeQuery();
 	}
 	
