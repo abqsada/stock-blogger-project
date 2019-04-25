@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-feed',
@@ -10,6 +10,12 @@ import { HttpClient } from '@angular/common/http';
 export class FeedComponent implements OnInit {
   // Handles incoming feed
   values: any;
+// Declare header
+  readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json'
+    })
+  };
 
   // create private Router variable 'router' to use the Router in this component
   constructor(private router: Router, private http: HttpClient) { }
