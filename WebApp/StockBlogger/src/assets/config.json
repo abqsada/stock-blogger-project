@@ -1,0 +1,4 @@
+{
+    "feedUrl": "api/ticker",
+    "textfile": "assets/textfile.txt"
+  }

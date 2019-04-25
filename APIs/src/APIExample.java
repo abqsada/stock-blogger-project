@@ -46,7 +46,7 @@ public class APIExample implements Runnable{
 		in.close();
 		
 		//Printing the response to a json file
-		 try (FileWriter file = new FileWriter("C:\\Users\\Ken-Laptop\\Documents\\GitHub\\stock-blogger-project\\test.json")) 
+		 try (FileWriter file = new FileWriter("C:\\Shit\\stock-blogger-project\\test.json")) 
 		 {
 	            file.write(response.toString());
 	            file.flush();
@@ -79,7 +79,7 @@ public class APIExample implements Runnable{
 		connection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		
 		//POST parameters
-		String urlParameters = "/api/v1/";
+		String urlParameters = "/api/ticker";
 		
 		// Send post request
 		connection.setDoOutput(true);
