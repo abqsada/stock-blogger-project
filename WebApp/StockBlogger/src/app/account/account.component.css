@@ -46,7 +46,16 @@ a {
     box-sizing: border-box;
     height: 45px;
   }
-  a[type=login] {
+  [type=register] {
+    border: 1px solid rgb(33, 150, 243);
+    border-radius: 4px;
+    color: white;
+    padding: 6px 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  [type=submit] {
     border: 1px solid rgb(33, 150, 243);
     border-radius: 4px;
     color: white;

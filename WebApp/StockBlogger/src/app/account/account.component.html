@@ -10,29 +10,6 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </style>
 <body>
 
-<!-- Navbar NO LONGER NEEDED, A SEPARATE COMPONENT HAS BEEN GENERATED TO HANDLE THE NAVBAR ON ANY PAGE-->
-<!-- <div class="w3-top">
-  <div class="w3-bar w3-light-grey w3-card w3-left-align w3-large">
-    <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-blue w3-large w3-red" href="javascript:void(0);" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a routerLink="/" href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-blue">Home</a>
-    <a routerLink="/testroutes" href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-blue">Test Routes</a>
-    <a routerLink="/account" href="#" class="w3-bar-item w3-button w3-padding-large w3-blue w3-hover-blue">My Account</a>
-    <a routerLink="/details" href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-blue">Details</a>
-    <a routerLink="/adminsonly" href="#" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-blue">Admin</a>
-    <form align=right class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div> -->
-
-  <!-- Navbar on small screens -->
-  <!-- <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a routerLink="/testroutes" href="#" class="w3-bar-item w3-button w3-padding-large">Test Routes</a>
-    <a routerLink="/account" href="#" class="w3-bar-item w3-button w3-padding-large">My Account</a>
-    <a routerLink="/details" href="#" class="w3-bar-item w3-button w3-padding-large">Details</a>
-    <a routerLink="/adminsonly" href="#" class="w3-bar-item w3-button w3-padding-large">Admin</a>
-  </div>
-</div> -->
 <!-- Header -->
 <header class="w3-container w3-blue w3-center" style="padding:128px 16px">
   <h1 class="w3-margin w3-jumbo">My Account</h1>
@@ -43,26 +20,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <a (click)="nextHandler()" class="next" style="position: relative; left: 80px; top: -80px;">Next Page &raquo;</a>
 </header>
 <div id=divfix class="w3-center">
-  <input class="form-control mr-sm-2" style="position: relative; top: -80px;" type="text" placeholder="Username">
-  <input class="form-control mr-sm-2" style="position: relative; top: -80px;" type="password" placeholder="Password">
-  <a (click)="clickHandler()" type="login" class="w3-button w3-white w3-hover-black w3-padding-large" style="position: relative; top: -82px;">Login</a>
-  <a routerLink="/registerpage"  type="login" class="w3-button w3-white w3-hover-black w3-padding-large" style="position: relative; top: -82px;">Register</a>
-
+  <!-- #loginForm is an Angular template reference variable -->
+  <form #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
+  <input class="form-control mr-sm-2" style="position: relative; top: -80px;" type="text" name="username" placeholder="Username" required [(ngModel)]="model.username">
+  <input class="form-control mr-sm-2" style="position: relative; top: -80px;" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
+  <button [disabled]="!loginForm.valid" type="submit" class="w3-button w3-white w3-hover-black w3-padding-large" style="position: relative; top: -82px;">Login</button>
+  <a routerLink="/registerpage" type="register" class="w3-button w3-white w3-hover-black w3-padding-large" style="position: relative; top: -82px;">Register</a>
+  </form>
 </div>
-
-
-<!-- Header 
-<header class="w3-container w3-blue w3-center" style="padding:128px 16px">
-  <h1 class="w3-margin w3-jumbo">My Account</h1>
-  <div align=center>
-      <img src="https://user-images.githubusercontent.com/10379994/31985754-c56b8dba-b998-11e7-9705-a7f984433049.png" width="160" height="120" alt="vscode">
-  </div>
- <a (click)="prevHandler()" class="previous" style="position: relative; left: -15px; top: -95px;">&laquo; Previous</a>
- <a (click)="nextHandler()" class="next" style="position: relative; left: 160px; top: -95px;">Next &raquo;</a>
-  <button routerLink="/login" class="w3-button w3-black w3-padding-large w3-large w3-margin-top" style="position: relative; left: -90px; top: 20px;">Login</button>
-</header>
--->
-
 
 <!-- First Grid -->
 <div class="w3-row-padding w3-padding-64 w3-container">

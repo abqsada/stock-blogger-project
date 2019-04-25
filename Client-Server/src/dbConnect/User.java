@@ -1,3 +1,5 @@
+package dbConnect;
+
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +10,13 @@ public class User {
 	private String userName;
 	private Date dateJoined;
 	private String password;
+
+	public User(int userId, String userName, Date dateJoined, String password) {
+		this.userId = userId;
+		this.userName = userName;
+		this. dateJoined = dateJoined;
+		this.password = password;
+	}
 	
 	public User (String userName, Date dateJoined, String password) throws SQLException {
 		this.userName = userName;

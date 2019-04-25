@@ -1,3 +1,5 @@
+package exampleClientServer;
+
 /*This client program is straightforward and simple because the echo server implements a simple
  protocol. The client sends text to the server, and the server echoes it back. When your client 
  programs are talking to a more complicated server such as an HTTP server, your client program 
@@ -32,6 +34,7 @@ public class TestClient {
                 new BufferedReader(
                     new InputStreamReader(System.in))
         ) {
+            System.out.println("TestClient is being executed."); 
             String userInput;
             // reads a line at a time from the standard input stream and immediately
             // sends it to the server by writing it to the PrintWriter connected to the socket
