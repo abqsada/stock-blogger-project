@@ -8,13 +8,15 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.Socket;
 
-public class APIExample {
+public class APIExample implements Runnable{
 
+	private static Socket connection;
 	private final String USER = "Ken";
 	
 	//HTTP GET Request
-	public void sendGet() throws Exception
+	public String sendGet() throws Exception
 	{
 		String ApiUrl = "https://www.worldtradingdata.com/api/v1/stock?symbol=AAPL,MSFT,&api_token=ljkHFuF0MiRoGZtWL8Y0BmaMNQvdcQPtfjL3Yid5rjPLOEA4cmr3OvT3NL1F";
 		URL obj = new URL(ApiUrl);
@@ -46,12 +48,12 @@ public class APIExample {
 		//Printing the response to a json file
 		 try (FileWriter file = new FileWriter("C:\\Users\\Ken-Laptop\\Documents\\GitHub\\stock-blogger-project\\test.json")) 
 		 {
-
 	            file.write(response.toString());
 	            file.flush();
 		 }
 		//print result
 		System.out.println(response.toString());
+		return response.toString();
 		
 
 	}
@@ -63,50 +65,49 @@ public class APIExample {
 		String finalUrl = "";
 	}
 
-	private void sendPost() throws Exception 
+	String sendPost(String string) throws Exception
 	{
 		//declaring our post URL 
 		String url = "http://localhost:3000";
-		URL obj = new URL(url);
+		URL obj = new URL(null, url, new sun.net.www.protocol.https.Handler());
 		//Setting our URL connection as an obj 
-		HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+		HttpsURLConnection connection = (HttpsURLConnection) obj.openConnection();
 		
 		//add request header
-		con.setRequestMethod("POST");
-		con.setRequestProperty("User-Agent", USER);
-		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+		connection.setRequestMethod("POST");
+		connection.setRequestProperty("User-Agent", USER);
+		connection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 		
 		//POST parameters
 		String urlParameters = "/api/v1/";
 		
 		// Send post request
-		con.setDoOutput(true);
-		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		connection.setDoOutput(true);
+		DataOutputStream wr = new DataOutputStream(connection.getOutputStream());
 		wr.writeBytes(urlParameters);
 		wr.flush();
 		wr.close();
 		
-		int responseCode = con.getResponseCode();
+		int responseCode = connection.getResponseCode();
 		System.out.println("\nSending 'POST' request to URL : " + url);
 		System.out.println("Post parameters : " + urlParameters);
 		System.out.println("Response Code : " + responseCode);
 		
 		//Writing response to inputLine
-		BufferedReader in = new BufferedReader(
-		new InputStreamReader(con.getInputStream()));
+		BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 		String inputLine;
 		StringBuffer response = new StringBuffer();
 		//While loop to write response to input line
 		while ((inputLine = in.readLine()) != null) 
 		{
 			response.append(inputLine);
-			
 		}
 		in.close();
 		
 		
 		//print result
 		System.out.println(response.toString());
+		return response.toString();
 
 	}
 	
@@ -119,8 +120,30 @@ public class APIExample {
 		http.sendGet();
 		
 		System.out.println("Testing 2 - Send Http POST request");
-		http.sendPost();
+		//http.sendPost();
 
+	}
+	
+	@Override
+	public void run() 
+	{
+		try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            System.out.println("Incoming Data...");
+            String line = reader.readLine();
+            while(!line.isEmpty()) {
+                System.out.println(line);
+                line = reader.readLine();
+                if(line.isEmpty()) {
+                    break;
+                }
+            }
+            String response = sendGet();
+            connection.getOutputStream().write(response.getBytes("UTF-8"));
+            connection.getOutputStream().flush();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 	}
 
 }
