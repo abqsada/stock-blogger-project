@@ -1,0 +1,11 @@
+{
+	"command": "addpost",
+	"postData": 
+   		{
+     		"userId": 2,
+     		"title": "next steps for team",
+     		"body": "hooking in Json",
+     		"postDate": "2019-02-30"
+   		}
+
+ }
