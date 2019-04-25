@@ -1,0 +1,8 @@
+{
+	"command": "getPost",
+	"postData": 
+   		{
+     		"userId": 2,
+   		}
+
+ }
