@@ -2,7 +2,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://www.tradingview.com/symbols/NASDAQ-AAPL/">
 <style>
 body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .w3-bar,h1,button {font-family: "Montserrat", sans-serif}
@@ -12,4 +11,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <form (submit)="onSubmit()" align="center">
     <p class="w3-margin w3-jumbo">Enter a ticker symbol here! (Example: AAPL)</p>
     <input [(ngModel)]="tickerSymbol" name="ticker" class="form-control mr-sm-2" style="position: relative;" type="ticker">
+    <div *ngIf="errorMessage">
+            <a class="w3-margin" style="color:red">{{errorMessage}}</a>
+    </div> 
+    <div align=center *ngIf="selectedTicker">
+            <a class="w3-margin" style="color:green">{{selectedTicker}}</a><p></p>
+            <iframe src="https://giphy.com/embed/12Eo7WogCAoj84" width="480" height="361" frameBorder="0"allowFullScreen></iframe>
+    </div> 
 </form>

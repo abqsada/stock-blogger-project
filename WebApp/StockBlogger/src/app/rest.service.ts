@@ -9,9 +9,9 @@ import { map, catchError, tap } from 'rxjs/operators';
 })
 export class RestService {
 
-  // BASE URL *Does NOT include URL parameters
-  // such as /blogposts, or /accounts
-  readonly endpoint = 'http://localhost:3000/api';
+  // BASE URL *Does NOT include URL parameters*
+  // such as /blogposts, /twitter, or /accounts
+  readonly baseUrl = 'http://localhost:3000';
 
 //   readonly httpOptions = {
 //   headers: new HttpHeaders({
