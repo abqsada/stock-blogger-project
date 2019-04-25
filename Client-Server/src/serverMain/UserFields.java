@@ -7,6 +7,8 @@ package serverMain;
 //import com.google.gson.Gson;
 //import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
+//import java.util.Date;
+import java.sql.Date;
 
 /**
  * @author Ruth
@@ -18,21 +20,32 @@ public class UserFields {
     private String userName;
     private String password;
     private int userId;
-    //private LocalDateTime dateUserJoined;
+    //private Date dateUserJoined;
+    //If a field is marked transient, it’s ignored by default and not included 
+    // in the JSON serialization or deserialization.
+    
+    //Actually post,postTitle, & comment should be arrays
+    private transient String post;
+    private transient String postTitle;
+    private transient String comment;
 	//Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public UserFields() {
 		this.userName = "";
 		this.password = "";
 		this.userId = 0;
-		//this.dateUserJoined = LocalDateTime.of(2019, 03, 30, 14, 32);
+		//this.dateUserJoined = Date.valueOf("2019-30-30");
+		this.post = "";
+		this.postTitle = "";
+		this.comment = "";
 	}
-
+    
+    //public UserFields(String userName, String password, int userId, Date dt) {
 	public UserFields(String userName, String password, int userId) {
 		this.userName = userName;
 		this.password = password;
 		this.userId = userId;
-		//this.dateUserJoined = dateUserJoined;
+		//this.dateUserJoined = dt;
 	}
 
 	public String getUserName() {
@@ -59,7 +72,17 @@ public class UserFields {
 		this.userId = userId;
 	}
 
-	/**
+	/*
+	public Date getdateUserJoined() {
+		return dateUserJoined;
+	}
+
+	public void setdateUserJoined(String dateString) {
+		this.dateUserJoined = Date.valueOf(dateString);
+	}
+	*/
+
+	/*
 	public LocalDateTime getDateUserJoined() {
 		return dateUserJoined;
 	}
@@ -74,6 +97,7 @@ public class UserFields {
     	job.addProperty("userName", this.userName);
     	job.addProperty("password",  this.password);
     	job.addProperty("userId", this.userId);
+    	//job.addProperty("dateUserJoined", this.dateUserJoined);
     	
         return job;
     }
@@ -88,3 +112,8 @@ public class UserFields {
 
 
 }
+
+// nor used:import java.time.LocalDateTime;
+// not used:     private LocalDateTime dateUserJoined;
+//this.dateUserJoined = new LocalDateTime(2019, 03, 30);
+

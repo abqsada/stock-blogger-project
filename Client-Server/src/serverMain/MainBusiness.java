@@ -1,7 +1,10 @@
 package serverMain;
 
-import java.io.IOException;
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.io.IOException;
 
 import ioFormat.UserJsonFile;
 import serverMain.UserFields;
@@ -16,7 +19,9 @@ import com.google.gson.JsonArray;
 
 public class MainBusiness {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, SQLException {
+		
+		
         // display a welcome message
         System.out.println("Start server interface with console.\n");
         // The console can be used to run development & unit tests
@@ -35,21 +40,12 @@ public class MainBusiness {
 
             if (action.equalsIgnoreCase("list")) {
                 displayAllUsers();
-            } else if (action.equalsIgnoreCase("query")) {
-                System.out.println("Action Not implemented yet.\n");
-                // This action is intended to request a all users from dataBase
-            	//kensApiDriver();
-            } else if (action.equalsIgnoreCase("trend")) {
-                System.out.println("Action Not implemented yet.\n");
-                // This action is intended to test the web access api
-            	//kensApiDriver();
             } else if (action.equalsIgnoreCase("ident")) { 
                 System.out.println("Action Not implemented yet.\n");
                 System.out.println("Will be listing a specific user account.\n");
             	//displayOneUser();
             } else if (action.equalsIgnoreCase("add")) {
-                System.out.println("Action Not fully implemented yet.\n");
-                addUser();
+                userToAdd();
             } else if (action.equalsIgnoreCase("del") || 
                        action.equalsIgnoreCase("delete")) {
                 System.out.println("Action Not implemented yet.\n");
@@ -93,6 +89,14 @@ public class MainBusiness {
             } else if (webCommand.equalsIgnoreCase("add")) {
                 System.out.println("Action Not implemented yet.\n");
                 //addCustomer();
+            } else if (action.equalsIgnoreCase("query")) {
+                System.out.println("Action Not implemented yet.\n");
+                // This action is intended to test the stock web access api
+            	//kensApiDriver();
+            } else if (action.equalsIgnoreCase("trend")) {
+                System.out.println("Action Not implemented yet.\n");
+                // This action is intended to test the twitter web access api
+            	//kensApiDriver();
             } else if (action.equalsIgnoreCase("help") || 
             	action.equalsIgnoreCase("menu")) {
             	displayWebMenu();
@@ -128,6 +132,7 @@ public class MainBusiness {
         System.out.println("exit    - Exit this application\n");
     }
     
+    // Display all users from a Json file
     public static void displayAllUsers() {
         System.out.println("User Account List from a file");
         //try (){
@@ -145,31 +150,36 @@ public class MainBusiness {
         //}
     }
     
-	public static void addUser() {
-        //try (){
-		String userName = Console.getString("Enter userName ..as 1 word..: ");
-		String password = Console.getString("Enter password: ");
-		int userId = Console.getInt("Enter userId as int: ");
-		//Date addDate = Console.getDate("Enter Date added but not in console yet:");
+	public static void userToAdd() throws SQLException {
+		try {
+			String userName = Console.getString("Enter userName ..as 1 word..: ");
+			String password = Console.getString("Enter password: ");
+			//int userId = Console.getInt("Enter userId as int: ");
+			String stringDate = Console.getString("Enter Date string ie 2019-30-30:");
 
-		UserFields userObj = new UserFields();
-		userObj.setUserName(userName);
-		userObj.setPassword(password);
-		userObj.setUserId(userId);
-    	JsonObject job = userObj.toJsonObj();
-		System.out.println();
-		System.out.println(("User Json object :\n"+job));
-		System.out.println("Should now be added to dataBase.\n");
-    	//Connection dbConnect = DataConnection.getConnection();
-		//dbConnect.addUser(userName, addDate, password)
-		//System.out.println(("User object added to database with userID= :\n"+job));
+			UserFields userObj = new UserFields();
+			userObj.setUserName(userName);
+			userObj.setPassword(password);
+			//userObj.setdateUserJoined(stringDate);
+			userObj.setUserId(20);
+			JsonObject job = userObj.toJsonObj();
+			System.out.println();
+			System.out.println(("User Json object :\n"+job));
+			System.out.println("Should now be added to dataBase.\n");
+			
+			Connection dbConnect = DataConnection.getConnection();
+			int newUserId = DataConnection.addUser(userName, Date.valueOf(stringDate), password);
+			System.out.println(("User object added to database with userID= :\n"+newUserId));
 
-		
-		System.out.println("And try to write JsonObject to the Json file.\n");
+			//System.out.println("And try to write JsonObject to the Json file.\n");
 
+		} catch (SQLException sq) {
+			System.out.println(sq);
+			sq.printStackTrace();
 		//} catch (IOException e) {
-		//	System.out.println(e);
-        //}
+		//		System.out.println(e);
+		//		e.printStackTrace();
+		}
 	}
 
 	public static void quit() {
