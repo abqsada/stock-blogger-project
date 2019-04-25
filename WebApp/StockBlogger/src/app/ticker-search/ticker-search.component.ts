@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { RestService } from '../rest.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-ticker-search',
@@ -17,23 +19,54 @@ export class TickerSearchComponent implements OnInit {
   selectedTicker: string;
   // 'values' object that holds ticker data
   values: any;
+  config: { body: Config; headers: any; feedUrl: string; textfile: string; };
+  error: any;
+  headers: any;
 
-  constructor(private http: HttpClient) { }
+  readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+    })
+  };
+
+  constructor(private http: HttpClient,
+              private rest: RestService) { }
   // Runs on Initialization
   ngOnInit() {
     console.log('Entered ticker-search.component.ts');
     console.log('vvvv IGNORE THIS ERROR vvvv');
-    this.getTickers(); // Gets all available tickers on initialization
+    // this.rest.getTickers(); // Gets all available tickers on initialization
+    this.showConfig();
   }
-  // Gets all ticker data from API
-  getTickers() {  // This URL likely needs to be changed, just boilerplate right now
-    this.http.get('http://localhost:3000/api/ticker').subscribe(response => {
-      this.values = response;
-      console.log(this.values);
-  }, error => {
-    console.log(error);
-    });
+
+  getConfigResponse(): Observable<HttpResponse<Config>> {
+    return this.http.get<Config>(
+      this.rest.baseUrl, { observe: 'response' });
   }
+  // The callback in this method receives a typed data object, 
+  // which is easier and safer to consume:
+  showConfig() {
+    this.rest.getConfig()
+      .subscribe(
+        (data: Config) => this.config = { ...data }, // success path
+        error => this.error = error // error path
+      );
+  }
+ // Displays the response headers as well as the configuration
+  showConfigResponse() {
+    this.rest.getConfig()
+      // resp is of type `HttpResponse<Config>`
+      .subscribe(resp => {
+        // display its headers
+        const keys = resp.headers.keys();
+        this.headers = keys.map(key =>
+          `${key}: ${resp.headers.get(key)}`);
+
+        // access the body directly, which is typed as `Config`.
+        this.config = { ...resp.body };
+      });
+  }
+
   // Sorts Ticker data against users searched ticker
   sortTickers(values: any) {
     // TODO: Use either REGEX or some sorting algorithm to find data
@@ -70,4 +103,12 @@ export class TickerSearchComponent implements OnInit {
 
   }
 
+}
+
+// Define an interface with the correct shape
+export interface Config {
+  body: Config;
+  headers: any;
+  feedUrl: string;
+  textfile: string;
 }

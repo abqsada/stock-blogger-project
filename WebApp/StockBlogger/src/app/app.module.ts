@@ -24,6 +24,7 @@ import { ContributeComponent } from './contribute/contribute.component';
 import { TickerSearchComponent } from './ticker-search/ticker-search.component';
 // 3RD Party Imports
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { DownloaderComponent } from './downloader/downloader.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     ContactComponent,
     RegisterpageComponent,
     ContributeComponent,
-    TickerSearchComponent
+    TickerSearchComponent,
+    DownloaderComponent
   ],
   imports: [
     BrowserModule,
