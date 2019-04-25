@@ -37,6 +37,7 @@ export class TickerSearchComponent implements OnInit {
     console.log('vvvv IGNORE THIS ERROR vvvv');
     // this.rest.getTickers(); // Gets all available tickers on initialization
     this.showConfig();
+    console.log(this.rest.values);
   }
 
   getConfigResponse(): Observable<HttpResponse<Config>> {

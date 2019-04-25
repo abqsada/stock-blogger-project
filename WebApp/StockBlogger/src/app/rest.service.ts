@@ -25,6 +25,12 @@ export class RestService {
   configUrl = 'assets/config.json';
 
   getConfig() {
+    this.http.get<Config>(this.baseUrl).subscribe(response => {
+      this.values = response;
+      console.log(this.values);
+  }, error => {
+    console.log(error);
+    });
     // now returns an Observable of Config
     return this.http.get<Config>(this.baseUrl);
   }
