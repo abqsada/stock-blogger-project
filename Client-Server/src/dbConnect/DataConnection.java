@@ -26,11 +26,13 @@ public class DataConnection {
 	}
 
 	// Get user once logged in
-	public static ResultSet getUser(String username, String password) throws SQLException{
+	public static User getUser(String username, String password) throws SQLException{
 		String query = "select * from users where user_name = " + username + " and password = " + password;
 		pstmt = connection.prepareStatement(query);
-
-
+		pstmt.executeQuery();
+		rs = pstmt.getResultSet();
+		User user = new User(rs.getInt(0),	rs.getString(1), rs.getDate(2), rs.getString(3));
+		return user;
 	}
 	
 	// method called to execute stored proc for select post from user. returns the result set
