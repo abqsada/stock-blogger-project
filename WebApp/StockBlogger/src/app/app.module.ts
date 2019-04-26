@@ -5,7 +5,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-
 // ALL REQUIRED COMPONENTS WE HAVE CREATED
 import { RegisterComponent } from './account/register/register.component';
 import { LoginComponent } from './account/login/login.component';

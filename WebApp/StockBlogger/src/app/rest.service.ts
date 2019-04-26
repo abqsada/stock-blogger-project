@@ -10,43 +10,26 @@ export class RestService {
 
   // BASE URL *Does NOT include URL parameters*
   // such as /blogposts, /twitter, or /accounts
-  readonly baseUrl = 'http://localhost:3000';
-  values: any;
+  readonly tickerEndPoint = 'http://localhost:3000/api/feed';
 
-//   readonly httpOptions = {
-//   headers: new HttpHeaders({
-//     'Content-Type':  'application/json'
-//   })
-// };
+  // Stores tickers as JSON Object
+  values: any;
 
   // Inject the Http Client into the constructor
   constructor(private http: HttpClient) { }
 
-  configUrl = 'assets/config.json';
-
-  getConfig() {
-    this.http.get<Config>(this.baseUrl).subscribe(response => {
-      this.values = response;
-      console.log(this.values);
+  // Gets ticker data from the ticker API
+  getTickers() {
+    // Makes get request that implements the 'Config Interface' at baseURL (localhost:3000)
+    this.http.get<Config>(this.tickerEndPoint).subscribe(response => { // subscribes to the HTTP response
+      this.values = response; // Assign the JSON Object received from the HTTP response to 'values'
+      console.log(this.values); // ! ! ! LOGS JSON OBJECT TO CONSOLE FOR TESTING ! ! !
+      console.log('SUCCESSFULLY RETRIEVED TICKER JSON OBJECT FROM ' + this.tickerEndPoint);
   }, error => {
     console.log(error);
     });
     // now returns an Observable of Config
-    return this.http.get<Config>(this.baseUrl);
+    return this.http.get<Config>(this.tickerEndPoint);
   }
 
-  // Gets all ticker data from API
-  getTickers() {  // This URL likely needs to be changed, just boilerplate right now
-    this.http.get(this.baseUrl + '/api/ticker').subscribe(response => {
-      this.values = response;
-      console.log(this.values);
-  }, error => {
-    console.log(error);
-    });
-  }
-
-  // private extractData(res: Response) {
-  //   let body = res;
-  //   return body || { };
-  // }
 }

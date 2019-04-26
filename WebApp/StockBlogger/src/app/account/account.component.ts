@@ -15,7 +15,7 @@ export class AccountComponent implements OnInit {
 
   // Handles Logging a user in
   login() {
-    console.log(this.model);
+    console.log(this.model); // For Testing
   }
 
   // Handles Clicking Admin Button

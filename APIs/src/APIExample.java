@@ -67,9 +67,12 @@ public class APIExample implements Runnable{
 
 	String sendPost(String string) throws Exception
 	{
+		//POST parameters
+		String urlParameters = "/api/ticker";
+		
 		//declaring our post URL 
 		String url = "http://localhost:3000";
-		URL obj = new URL(null, url, new sun.net.www.protocol.https.Handler());
+		URL obj = new URL(null, url + urlParameters, new sun.net.www.protocol.https.Handler());
 		//Setting our URL connection as an obj 
 		HttpsURLConnection connection = (HttpsURLConnection) obj.openConnection();
 		
@@ -77,9 +80,6 @@ public class APIExample implements Runnable{
 		connection.setRequestMethod("POST");
 		connection.setRequestProperty("User-Agent", USER);
 		connection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-		
-		//POST parameters
-		String urlParameters = "/api/ticker";
 		
 		// Send post request
 		connection.setDoOutput(true);
