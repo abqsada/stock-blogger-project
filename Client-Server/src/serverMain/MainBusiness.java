@@ -10,12 +10,11 @@ import ioFormat.UserJsonFile;
 import serverMain.UserFields;
 import serverMain.Console;
 import dbConnect.DataConnection;
+import dbConnect.User;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
 //import org.json.*;
-
-//import java.util.Scanner;
 
 public class MainBusiness {
 
@@ -39,6 +38,7 @@ public class MainBusiness {
             System.out.println();
 
             if (action.equalsIgnoreCase("list")) {
+            	// This specifically works from the file user_account.json
                 displayAllUsers();
             } else if (action.equalsIgnoreCase("ident")) { 
                 System.out.println("Action Not implemented yet.\n");
@@ -46,6 +46,8 @@ public class MainBusiness {
             	//displayOneUser();
             } else if (action.equalsIgnoreCase("add")) {
                 userToAdd();
+            } else if (action.equalsIgnoreCase("addPost")) {
+                postToAdd();
             } else if (action.equalsIgnoreCase("del") || 
                        action.equalsIgnoreCase("delete")) {
                 System.out.println("Action Not implemented yet.\n");
@@ -88,7 +90,7 @@ public class MainBusiness {
                 // but I don't know how we will pass the Json object
             } else if (webCommand.equalsIgnoreCase("add")) {
                 System.out.println("Action Not implemented yet.\n");
-                //addCustomer();
+                //userToAdd();
             } else if (action.equalsIgnoreCase("query")) {
                 System.out.println("Action Not implemented yet.\n");
                 // This action is intended to test the stock web access api
@@ -150,35 +152,61 @@ public class MainBusiness {
         //}
     }
     
+    // add a user from data entered on the console
 	public static void userToAdd() throws SQLException {
 		try {
 			String userName = Console.getString("Enter userName ..as 1 word..: ");
 			String password = Console.getString("Enter password: ");
-			//int userId = Console.getInt("Enter userId as int: ");
-			String stringDate = Console.getString("Enter Date string ie 2019-30-30:");
+			String userJoinedDate = Console.getString("Enter Date string ie 2019-03-30:");
 
-			UserFields userObj = new UserFields();
-			userObj.setUserName(userName);
-			userObj.setPassword(password);
-			//userObj.setdateUserJoined(stringDate);
-			userObj.setUserId(20);
-			JsonObject job = userObj.toJsonObj();
+			//Connection connection = DataConnection.getConnection();
+			//int newUserId = DataConnection.addUser(userName, Date.valueOf(userJoinedDate), password);
+			//System.out.println(("User object added to database with userID= :\n"+newUserId));
+			
+			UserFields userFieldsObj = new UserFields();
+			userFieldsObj.setUserName(userName);
+			userFieldsObj.setPassword(password);
+			//userObj.setdateUserJoined(userJoinedDate);
+			userFieldsObj.setUserId(20);
+			JsonObject job = userFieldsObj.toJsonObj();
 			System.out.println();
 			System.out.println(("User Json object :\n"+job));
-			System.out.println("Should now be added to dataBase.\n");
 			
-			Connection dbConnect = DataConnection.getConnection();
-			int newUserId = DataConnection.addUser(userName, Date.valueOf(stringDate), password);
-			System.out.println(("User object added to database with userID= :\n"+newUserId));
+			User userObj = new User(20, userName, Date.valueOf(userJoinedDate), password);
+			System.out.println();
+			System.out.println(("User object created :\n"));
+		//} catch (SQLException sq) {
+		//	System.out.println(sq);
+		//	sq.printStackTrace();
+		////} catch (IOException e) {
+		////		System.out.println(e);
+		////		e.printStackTrace();
+		} finally {
+			// cleanup code
+		}
+	}
 
-			//System.out.println("And try to write JsonObject to the Json file.\n");
+    
+	public static void postToAdd() throws SQLException {
+		try {
+			int userId = Console.getInt("Enter userId as int: ");
+			String title = Console.getString("Enter post title surrounded by double quotes: ");
+			String body  = Console.getString("Enter post text surrounded by double quotes: ");
+			String postAddDate = Console.getString("Enter Date string ie 2019-03-30:");
 
-		} catch (SQLException sq) {
-			System.out.println(sq);
-			sq.printStackTrace();
-		//} catch (IOException e) {
-		//		System.out.println(e);
-		//		e.printStackTrace();
+			//Connection connection = DataConnection.getConnection();
+			//int newPostId = DataConnection.addPost(userId, title, body, Date.valueOf(postAddDate));
+			//System.out.println(("Post object added to database with postID= :\n"+newPostId));
+			
+			//Post postObj = new Post(8, userId, Date.valueOf(userJoinedDate), password);
+		//} catch (SQLException sqp) {
+		//	System.out.println(sqp);
+		//	sqp.printStackTrace();
+		////} catch (IOException e) {
+		////		System.out.println(e);
+		////		e.printStackTrace();
+		} finally {
+			// cleanup code
 		}
 	}
 
