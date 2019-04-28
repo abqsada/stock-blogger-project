@@ -1,6 +1,6 @@
 {
-	"command": "getPost",
-	"postData": 
+	"command": "getallposts",
+	"commandData": 
    		{
      		"userId": 2,
    		}

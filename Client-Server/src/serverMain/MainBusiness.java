@@ -11,6 +11,7 @@ import serverMain.UserFields;
 import serverMain.Console;
 import dbConnect.DataConnection;
 import dbConnect.User;
+import cmdsFromClient.ServerThread;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
@@ -20,19 +21,20 @@ public class MainBusiness {
 
 	public static void main(String[] args) throws IOException, SQLException {
 		
-		
         // display a welcome message
-        System.out.println("Start server interface with console.\n");
+        System.out.println("Start server interface with console for development.\n");
         // The console can be used to run development & unit tests
-        System.out.println("then a Serversocket from the webpage can enter commands.\n");
+        System.out.println("enter startWebCommand at prompt for client commands\n");
 
         // display the command menu
         displayMenu();
 
         // perform 1 or more actions ( Default in case of no input)
-        String action = "exit";
+		//JsonObject job = new JsonObject();
+        String action = "";
         Boolean consoleAction = true;
-        while (consoleAction==true) {
+        JsonObject job = new JsonObject();
+        //while (consoleAction==true) {
             // get the input from the user
             action = Console.getString("Please enter the the desired action on console: ");
             System.out.println();
@@ -44,10 +46,12 @@ public class MainBusiness {
                 System.out.println("Action Not implemented yet.\n");
                 System.out.println("Will be listing a specific user account.\n");
             	//displayOneUser();
-            } else if (action.equalsIgnoreCase("add")) {
-                userToAdd();
-            } else if (action.equalsIgnoreCase("addPost")) {
-                postToAdd();
+            } else if (action.equalsIgnoreCase("adduser")) {
+            	job = userToAdd();
+            } else if (action.equalsIgnoreCase("addpost")) {
+            	job = postToAdd();
+            } else if (action.equalsIgnoreCase("getallposts")) {
+                postsToDispylay();
             } else if (action.equalsIgnoreCase("del") || 
                        action.equalsIgnoreCase("delete")) {
                 System.out.println("Action Not implemented yet.\n");
@@ -63,77 +67,36 @@ public class MainBusiness {
                 quit();
             } else if (action.equalsIgnoreCase("startWebCommand")) {
             	// intended to be a Break command to leave this loop
-            	// or change while condition to Boolean consoleAction ==true
-            	consoleAction =false; //& remove quit()
-            	//quit();
+            	consoleAction =false;
             } else {
                 System.out.println("Error! Not a valid command.\n");
             }
-        }
+        //}
 
         // After previous while loop, call methods start serverSocket
         //       listening for commands from front end
         // The following would respond to a JSON object from the webpage
-        String webCommand = "exit";
-        Boolean webAction = true;
-        while (webAction==true) {
-            // parse the webCommand from the Json object 
-        	//   coming in on the serverSocket
-        	// for now test this loop with strings
-        	webCommand = "exit";
-            System.out.println();
-
-            if (webCommand.equalsIgnoreCase("ident")) {
-                System.out.println("Action Not implemented yet.\n");
-                System.out.println("Will be listing a specific user account.\n");
-            	//displayOneUser(); // we should be able to use the same method
-                // but I don't know how we will pass the Json object
-            } else if (webCommand.equalsIgnoreCase("add")) {
-                System.out.println("Action Not implemented yet.\n");
-                //userToAdd();
-            } else if (action.equalsIgnoreCase("query")) {
-                System.out.println("Action Not implemented yet.\n");
-                // This action is intended to test the stock web access api
-            	//kensApiDriver();
-            } else if (action.equalsIgnoreCase("trend")) {
-                System.out.println("Action Not implemented yet.\n");
-                // This action is intended to test the twitter web access api
-            	//kensApiDriver();
-            } else if (action.equalsIgnoreCase("help") || 
-            	action.equalsIgnoreCase("menu")) {
-            	displayWebMenu();
-            } else if (webCommand.equalsIgnoreCase("exit") || 
-            		webCommand.equalsIgnoreCase("quit")) {
-                System.out.println("Ending webCommand.\n");
-            	quit();
-            } else {
-            	System.out.println("Error! Not a valid WEBcommand.\n");
-            }
-        }
-
+		ServerThread testServer = new ServerThread(8888);
+		
+		// JsonObject for testing  !! make this a real JSON
+		testServer.awaitClientCmd(job);
+        
+        System.out.println("ended back in MainBusiness.\n");
+    	quit();
 	}
 
     public static void displayMenu() {
         System.out.println("COMMAND MENU");
         System.out.println("list       all users info");
-        System.out.println("query      list all users from dataBase");
-        System.out.println("trend      website feed based on requested search");
         System.out.println("ident      a specific users info");
-        System.out.println("add        a customer");
+        System.out.println("adduser    add a user account to the database");
+        System.out.println("addpost    add a post for a user to the database");
         System.out.println("delete     a customer");
         System.out.println("update     a customer");
         System.out.println("help    - Show this menu");
         System.out.println("exit    - Exit this application\n");
     }
 
-    public static void displayWebMenu() {
-        System.out.println("Web Page COMMAND MENU");
-        System.out.println("ident  a specific users info");
-        System.out.println("add    a customer");
-        System.out.println("help    - Show this menu");
-        System.out.println("exit    - Exit this application\n");
-    }
-    
     // Display all users from a Json file
     public static void displayAllUsers() {
         System.out.println("User Account List from a file");
@@ -153,28 +116,31 @@ public class MainBusiness {
     }
     
     // add a user from data entered on the console
-	public static void userToAdd() throws SQLException {
+	public static JsonObject userToAdd() throws SQLException {
 		try {
 			String userName = Console.getString("Enter userName ..as 1 word..: ");
 			String password = Console.getString("Enter password: ");
-			String userJoinedDate = Console.getString("Enter Date string ie 2019-03-30:");
+			String dateJoined = Console.getString("Enter Date string ie 2019-03-30:");
 
 			//Connection connection = DataConnection.getConnection();
 			//int newUserId = DataConnection.addUser(userName, Date.valueOf(userJoinedDate), password);
 			//System.out.println(("User object added to database with userID= :\n"+newUserId));
 			
-			UserFields userFieldsObj = new UserFields();
-			userFieldsObj.setUserName(userName);
-			userFieldsObj.setPassword(password);
-			//userObj.setdateUserJoined(userJoinedDate);
-			userFieldsObj.setUserId(20);
-			JsonObject job = userFieldsObj.toJsonObj();
-			System.out.println();
-			System.out.println(("User Json object :\n"+job));
+			User userObj = new User(20, userName, Date.valueOf(dateJoined), password);
 			
-			User userObj = new User(20, userName, Date.valueOf(userJoinedDate), password);
+			JsonObject jobout = new JsonObject();
+			jobout.addProperty("command",  "adduser");
+			
+			JsonObject jobinside = new JsonObject();
+			jobinside.addProperty("userName",  userName);
+			jobinside.addProperty("password",  password);
+			jobinside.addProperty("dateJoined",  dateJoined);
+			
+			jobout.add("commandData",  jobinside);
 			System.out.println();
-			System.out.println(("User object created :\n"));
+			System.out.println(("User Json object created for testing :\n"+jobout));
+			
+			return jobout;
 		//} catch (SQLException sq) {
 		//	System.out.println(sq);
 		//	sq.printStackTrace();
@@ -187,13 +153,50 @@ public class MainBusiness {
 	}
 
     
-	public static void postToAdd() throws SQLException {
+	public static JsonObject  postToAdd() throws SQLException {
 		try {
 			int userId = Console.getInt("Enter userId as int: ");
-			String title = Console.getString("Enter post title surrounded by double quotes: ");
-			String body  = Console.getString("Enter post text surrounded by double quotes: ");
-			String postAddDate = Console.getString("Enter Date string ie 2019-03-30:");
+			String title = Console.getString("Enter post title not surrounded by quotes: ");
+			String body  = Console.getString("Enter post body not surrounded by quotes: ");
+			String postDate = Console.getString("Enter postDate string ie 2019-03-30:");
 
+			//Connection connection = DataConnection.getConnection();
+			//int newPostId = DataConnection.addPost(userId, title, body, Date.valueOf(postAddDate));
+			//System.out.println(("Post object added to database with postID= :\n"+newPostId));
+			
+			//Post postObj = new Post(8, userId, Date.valueOf(postDate), password);
+			JsonObject joboutp = new JsonObject();
+			joboutp.addProperty("command",  "addpost");
+						
+			JsonObject jobinside = new JsonObject();
+			jobinside.addProperty("userId",  userId);
+			jobinside.addProperty("title",  title);
+			jobinside.addProperty("body",  body);
+			jobinside.addProperty("postDate",  postDate);
+
+			joboutp.add("commandData",  jobinside);
+			System.out.println();
+			System.out.println(("User Json object created for testing :\n"+joboutp));
+			
+			return joboutp;
+
+			
+		//} catch (SQLException sqp) {
+		//	System.out.println(sqp);
+		//	sqp.printStackTrace();
+		////} catch (IOException e) {
+		////		System.out.println(e);
+		////		e.printStackTrace();
+		} finally {
+			// cleanup code
+		}
+	}
+
+    
+    // create Json command to pull posts for a user and send to web for display
+	public static void postsToDispylay() throws SQLException {
+		try {
+			int pUserId = Console.getInt("Enter userId as int: ");
 			//Connection connection = DataConnection.getConnection();
 			//int newPostId = DataConnection.addPost(userId, title, body, Date.valueOf(postAddDate));
 			//System.out.println(("Post object added to database with postID= :\n"+newPostId));
@@ -210,6 +213,7 @@ public class MainBusiness {
 		}
 	}
 
+			
 	public static void quit() {
         System.out.println("Bye.\n");
         System.exit(0);

@@ -1,6 +1,6 @@
 {
 	"command": "addpost",
-	"postData": 
+	"commandData": 
    		{
      		"userId": 2,
      		"title": "next steps for team",
