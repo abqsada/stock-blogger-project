@@ -24,6 +24,7 @@ export class RestService implements OnInit {
   // BASE URL *Does NOT include URL parameters*
   // such as /blogposts, /twitter, or /accounts
   readonly baseUrl = 'http://localhost:3000';
+  // Variable used for temporary values
   values: any;
 
   // Inject the Http Client into the constructor
