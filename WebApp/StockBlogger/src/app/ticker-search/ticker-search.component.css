@@ -8,3 +8,15 @@ input[type=ticker]{
     height: 45px;
     width: 100px;
   }
+  #ticker {
+    padding: 6px 14px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 5px solid rgb(33, 150, 243);
+    background-color: rgb(33, 150, 243);
+    border-radius: 4px;
+    box-sizing: border-box;
+    height: 45px;
+    width: 100px;
+    color: white;
+  }

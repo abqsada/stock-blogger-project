@@ -12,7 +12,7 @@ export class AdminGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
 
-    // Returns false to demonstrate rejecting a user for permissions
-    return true;
+    // Return false to demonstrate rejecting a user for permissions
+    return true; // true until we decide to implement permissions
   }
 }

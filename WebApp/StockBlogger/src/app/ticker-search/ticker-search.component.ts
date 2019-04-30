@@ -24,13 +24,18 @@ export class TickerSearchComponent implements OnInit {
   ngOnInit() {
     console.log('Entered ticker-search.component.ts');
     console.log('vvvv IGNORE THIS ERROR vvvv');
-    this.rest.getTickers(); // Gets all available tickers on initialization
+  }
+
+  getTickers() {
+    this.rest.getTickers(); // Gets all available tickers from rest.service
+    this.sortTickers(this.values);
   }
 
   // Sorts Ticker data against users searched ticker
   sortTickers(values: any) {
     // TODO: Use either REGEX or some sorting algorithm to find data
     // Only relevant to the ticker a user has entered
+    console.log('Ticker Sorting not yet implemented');
   }
   // Handles when a user enters a ticker symbol
   onSubmit() {

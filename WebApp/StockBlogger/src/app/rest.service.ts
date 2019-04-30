@@ -1,8 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -41,9 +39,7 @@ export class RestService implements OnInit {
       this.values = response;
       console.log(this.values);
   }, error => {
-    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
-    console.log('* * * * * * Please make sure all necessary servers are up and running properly! * * * * * *');
-    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+    this.serverNotConnected();
     });
   }
 
@@ -68,9 +64,7 @@ export class RestService implements OnInit {
       this.incomingAccount = response;
       console.log(this.incomingAccount);
   }, error => {
-    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
-    console.log('* * * * * * Please make sure all necessary servers are up and running properly! * * * * * *');
-    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+    this.serverNotConnected();
     });
   }
 
@@ -139,6 +133,13 @@ export class RestService implements OnInit {
   public getPostId(): number {
     console.log(this.blogObject.postId);
     return this.blogObject.postId;
+  }
+
+  public serverNotConnected() {
+    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+    console.log('* * * * * * Please make sure all necessary servers are up and running properly! * * * * * *');
+    console.log('* * * * * * * * * * * * * Refresh Page To Retry Server Connection * * * * * * * * * * * * *');
+    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
   }
 
 }
