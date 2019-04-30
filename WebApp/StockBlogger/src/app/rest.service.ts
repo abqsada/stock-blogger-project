@@ -16,13 +16,21 @@ export class RestService implements OnInit {
     password: String;
   };
   private incomingAccount: any;
-  // Declare variables to be used in blog posting methods
+  // Declare the blog object with variables to be used in blog posting methods
   private blogObject: {
     postId: number;
     title: String;
     body: String;
     postDate: Date;
   };
+  // Declare the ticker object with variables to be used in displaying ticker data
+  private tickerObject: {
+    symbol: String;
+    name: String;
+    currency: String;
+    price: number;
+  };
+
   // BASE URL *Does NOT include URL parameters*
   // such as /blogposts, /twitter, or /accounts
   readonly baseUrl = 'http://localhost:3000';
@@ -54,13 +62,6 @@ export class RestService implements OnInit {
     this.accountObject.dateJoined = dateJoined;
   }
 
-  // Not sure if needed
-  // public editUser(userName:String,dateJoined:Date,password:String){
-  // this.userName = userName;
-  // th is.dateJoined = dateJoined;
-  // this.password = password;
-  // }
-
   // Begin user account methods
   public getAccount() { // Makes HTTP get request to snag account data from API
 
@@ -79,9 +80,17 @@ export class RestService implements OnInit {
     return this.accountObject.userName;
   }
 
+  public setUserName(userName: String){
+    this.accountObject.userName = userName;
+  }
+
   public getPassword(): String {
     console.log(this.accountObject.password);
     return this.accountObject.password;
+  }
+
+  public setPassword(password: String) {
+    this.accountObject.password = password;
   }
 
   public getUserId(): number {
@@ -89,10 +98,19 @@ export class RestService implements OnInit {
     return this.accountObject.userId;
   }
 
+  public setUserId(userId: number) {
+    this.accountObject.userId = userId;
+  }
+
   public getDateJoined() {
     console.log(this.accountObject.dateJoined);
     return this.accountObject.dateJoined;
   }
+
+  public setdateJoined(dateJoined: Date) {
+    this.accountObject.dateJoined = dateJoined;
+  }
+
   // Begin blog post methods
   public Post(userId: number, title: String, body: String, postDate: Date) {
     this.accountObject.userId = userId;
@@ -100,14 +118,6 @@ export class RestService implements OnInit {
     this.blogObject.body = body;
     this.blogObject.postDate = postDate;
   }
-
-  // Not sure if needed
-  // public editPost (userId:number,title:String,body:String,postDate:Date){
-  // this.userId = userId;
-  // this.title = title;
-  // this.body = body;
-  // this.postDate = postDate;
-  // }
 
   public getTitle(): String {
     console.log(this.blogObject.title);
@@ -139,6 +149,53 @@ export class RestService implements OnInit {
   public getPostId(): number {
     console.log(this.blogObject.postId);
     return this.blogObject.postId;
+  }
+
+  public setPostId(postId: number){
+    this.blogObject.postId = postId;
+  }
+  // Begin ticker methods
+  public ticker(symbol: String, name: String, currency: String, price: number) {
+    this.tickerObject.symbol = symbol;
+    this.tickerObject.name = name;
+    this.tickerObject.currency = currency;
+    this.tickerObject.price = price;
+  } 
+
+  public getSymbol(): String {
+    console.log(this.tickerObject.symbol);
+    return this.tickerObject.symbol;
+  }
+
+  public setSymbol(symbol: String) {
+    this.tickerObject.symbol = symbol
+  }
+
+  public getName(): String {
+    console.log(this.tickerObject.name);
+    return this.tickerObject.name;
+  }
+
+  public setName(name: String) {
+    this.tickerObject.name = name;
+  }
+
+  public getCurrency(currency: String) {
+    console.log(this.tickerObject.currency);
+    return this.tickerObject.currency;
+  }
+
+  public setCurrency(currency: String) {
+    this.tickerObject.currency = currency;
+  }
+
+  public getPrice(): number {
+    console.log(this.tickerObject.price);
+    return this.tickerObject.price;
+  }
+
+  public setPrice(price: number) {
+    this.tickerObject.price = price;
   }
 
 }
