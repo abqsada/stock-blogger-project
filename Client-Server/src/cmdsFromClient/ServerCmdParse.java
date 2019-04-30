@@ -4,6 +4,8 @@ package cmdsFromClient;
 import dbConnect.User;
 import dbConnect.DataConnection;
 import java.sql.Date;
+import java.sql.SQLException;
+//import java.io.IOException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,8 +28,6 @@ public class ServerCmdParse {
 	private String actionCmd;
 	private JsonObject returnData;
 	int errorCode=100;  //error code default should never be returned
-	// Can I make this connection once and use it throughout this CmdParse???
-	//Connection connection = DataConnection.getConnection();
 
 	
 	//default constructor
@@ -46,8 +46,6 @@ public class ServerCmdParse {
 		// and it's associated user JsonObject that contains
 		// the data necessary to accomplish the command
 		if (joFromWeb.has("command")) {
-			//JsonElement jele = joFromWeb.get("command");
-			//this.actionCmd = jele.getAsString();
 			this.actionCmd = joFromWeb.get("command").toString().replace("\"", "");
 			this.errorCode=200;  //error code denoting successful Json parsing
         } else {
@@ -76,7 +74,8 @@ public class ServerCmdParse {
 	/**
 	 * TTHis method acts on the action command.
 	 * @return a JsonObject that contains at a minimum the errorCode
-	 *         describing the status of the parsing and actions
+	 *         describing the status of the parsing and actions.
+	 *         Sometimes the return Json contains data for web display, i.e. posts
 	 */
 	public JsonObject takeAction() {
         System.out.println(("Command provided takeAction\n"+actionCmd));
@@ -89,24 +88,11 @@ public class ServerCmdParse {
         if (actionCmd.equalsIgnoreCase("identuser")) {
             System.out.println("Action Not implemented with database call yet.\n");
             System.out.println("Will be listing a specific user account.\n");
-        	//displayOneUser(); // we should be able to use the same method
+        	//identOneUser(); // we should be able to use the same method
             // but I don't know how we will pass the Json object
 
         } else if (actionCmd.equalsIgnoreCase("adduser")) {
-            System.out.println(("Data provided for adduser command\n"+commandData));
-            if(commandData.has("userName")&&commandData.has("password")
-            		                      &&commandData.has("password")) {
-            	String userName   = commandData.get("userName").toString();
-            	String password   = commandData.get("password").toString();
-            	String dateJoined = commandData.get("dateJoined").toString();
-    			//int newUserId = DataConnection.addUser(userName, Date.valueOf(dateJoined), password);
-            	int newUserId = 89; // debug statement only. Please remove
-                returnData.addProperty("userId",  newUserId);
-    			System.out.println(("User object added to database with userID= :\n"+returnData));
-            	errorCode=500;//error code denoting successful addition of user
-            } else {   
-            	errorCode=5;//error code denoting incorrect user data
-            }
+        	addUserAction();
 
         } else if (actionCmd.equalsIgnoreCase("addpost")) {
             System.out.println(("Data provided for addpost command\n"+commandData));
@@ -145,6 +131,30 @@ public class ServerCmdParse {
 		
         returnData.addProperty("errCode",  errorCode);
 		return returnData;
+	}
+
+	public void addUserAction() {
+		try {
+            System.out.println(("Data provided for adduser command\n"+commandData));
+            if(commandData.has("userName")&&commandData.has("password")
+            		                      &&commandData.has("dateJoined")) {
+            	String userName   = commandData.get("userName").toString();
+            	String password   = commandData.get("password").toString();
+            	String dateJoined = commandData.get("dateJoined").toString();
+            	//Date jdate = Date.valueOf(dateJoined);
+    			int newUserId = DataConnection.addUser(userName, Date.valueOf("2019-03-30"), password);
+            	//int newUserId = 89; // debug statement only. Please remove
+                returnData.addProperty("userId",  newUserId);
+    			System.out.println(("User object added to database with userID= :\n"+returnData));
+            	errorCode=500;//error code denoting successful addition of user
+            } else {   
+            	errorCode=5;//error code denoting incorrect user data
+            }
+
+			
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 	}
 
 
