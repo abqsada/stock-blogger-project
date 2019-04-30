@@ -31,7 +31,9 @@ export class TickerSearchComponent implements OnInit {
       this.values = response;
       console.log(this.values);
   }, error => {
-    console.log(error);
+    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+    console.log('* * * * * * Please make sure all necessary servers are up and running properly! * * * * * *');
+    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
     });
   }
   // Sorts Ticker data against users searched ticker
@@ -56,6 +58,7 @@ export class TickerSearchComponent implements OnInit {
       }
 
     }
+
     if (this.tickerSymbol.length > 6 || this.tickerSymbol.length < 2) {
       // For Binding to the HTML
       this.errorMessage = 'Something isn\'t right. Try again.';
