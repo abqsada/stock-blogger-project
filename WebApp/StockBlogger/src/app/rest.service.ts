@@ -25,13 +25,26 @@ export class RestService implements OnInit {
   };
   // BASE URL *Does NOT include URL parameters*
   // such as /blogposts, /twitter, or /accounts
-  readonly tickerEndPoint = 'http://localhost:3000/api/feed';
+  readonly baseUrl = 'http://localhost:3000';
+  values: any;
 
   // Inject the Http Client into the constructor
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
+  }
+
+  // Gets all ticker data from API
+  getTickers() {  // This URL likely needs to be changed, just boilerplate right now
+    this.http.get(this.baseUrl + '/api/ticker').subscribe(response => {
+      this.values = response;
+      console.log(this.values);
+  }, error => {
+    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+    console.log('* * * * * * Please make sure all necessary servers are up and running properly! * * * * * *');
+    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+    });
   }
 
   public User(userId: number, userName: String, dateJoined: Date, password: String) {
