@@ -22,10 +22,20 @@ export class TickerSearchComponent implements OnInit {
               private rest: RestService) { }
   // Runs on Initialization
   ngOnInit() {
-    console.log('Entered ticker-search.component.ts'); // For testing
-    console.log('SENDING GET REQUEST TO ' + this.rest.tickerEndPoint); // For testing
-    this.rest.getTickers(); // Makes the HTTP GET request, logs any errors to console
-    this.values = this.rest.values; // Keep the tickers updated locally
+    console.log('Entered ticker-search.component.ts');
+    console.log('vvvv IGNORE THIS ERROR vvvv');
+    this.getTickers(); // Gets all available tickers on initialization
+  }
+  // Gets all ticker data from API
+  getTickers() {  // This URL likely needs to be changed, just boilerplate right now
+    this.http.get('http://localhost:3000/api/ticker').subscribe(response => {
+      this.values = response;
+      console.log(this.values);
+  }, error => {
+    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+    console.log('* * * * * * Please make sure all necessary servers are up and running properly! * * * * * *');
+    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+    });
   }
 
   // Sorts Ticker data against users searched ticker
@@ -50,6 +60,7 @@ export class TickerSearchComponent implements OnInit {
       }
 
     }
+
     if (this.tickerSymbol.length > 6 || this.tickerSymbol.length < 2) {
       // For Binding to the HTML
       this.errorMessage = 'Something isn\'t right. Try again.';
