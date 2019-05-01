@@ -50,12 +50,12 @@ public class MainBusiness {
 
     public static void displayMenu() {
         System.out.println("COMMAND MENU");
-        System.out.println("list       all users info");
-        System.out.println("startWebCommand      skips this console request, returns null cmd");
-        System.out.println("ident      a specific users info");
+        System.out.println("list       all users info from a test file");
+        System.out.println("startWebCommand     skips this console request, returns null cmd");
+        System.out.println("getuser    return a specific user account from the database");
         System.out.println("adduser    add a user account to the database");
         System.out.println("addpost    add a post for a user to the database");
-        System.out.println("getallpost gets all the posts for a user from the database");
+        System.out.println("getuserposts gets all the posts for a user from the database");
         System.out.println("delete     a user account from the database");
         System.out.println("update     a user account");
         System.out.println("help    - Show this menu");
@@ -90,15 +90,13 @@ public class MainBusiness {
             	// intended to be a Break command to leave this loop
             	//   which is no longer a loop
             	//consoleAction =false;
-            } else if (action.equalsIgnoreCase("ident")) { 
-                System.out.println("Action Not implemented yet.\n");
-                System.out.println("Will be listing a specific user account.\n");
-            	//displayOneUser();
+            } else if (action.equalsIgnoreCase("getuser")) { 
+            	jobin = getOneUser();
             } else if (action.equalsIgnoreCase("adduser")) {
             	jobin = userToAdd();
             } else if (action.equalsIgnoreCase("addpost")) {
             	jobin = postToAdd();
-            } else if (action.equalsIgnoreCase("getallposts")) {
+            } else if (action.equalsIgnoreCase("getuserposts")) {
             	jobin = postsToDispylay();
             } else if (action.equalsIgnoreCase("del") || 
                        action.equalsIgnoreCase("delete")) {
@@ -157,7 +155,7 @@ public class MainBusiness {
 			return jobout;
 	}
 
-    
+	// add a post for a user from data entered on the console
 	public static JsonObject  postToAdd() {
 			int userId = Console.getInt("Enter userId as int: ");
 			String title = Console.getString("Enter post title not surrounded by quotes: ");
@@ -165,8 +163,8 @@ public class MainBusiness {
 			String postDate = Console.getString("Enter postDate string ie 2019-03-30:");
 
 			//Post postObj = new Post(8, userId, Date.valueOf(postDate), password);
-			JsonObject joboutp = new JsonObject();
-			joboutp.addProperty("command",  "addpost");
+			JsonObject jobout = new JsonObject();
+			jobout.addProperty("command",  "addpost");
 						
 			JsonObject jobinside = new JsonObject();
 			jobinside.addProperty("userId",  userId);
@@ -174,23 +172,43 @@ public class MainBusiness {
 			jobinside.addProperty("body",  body);
 			jobinside.addProperty("postDate",  postDate);
 
-			joboutp.add("commandData",  jobinside);
+			jobout.add("commandData",  jobinside);
 			System.out.println();
-			System.out.println(("User Json object created for testing :\n"+joboutp));
+			System.out.println(("User Json object created for testing :\n"+jobout));
 			
-			return joboutp;
+			return jobout;
 	}
 
-    
     // This would create the command for testing the display of posts
 	// the return should be a JsonArray but if we can return an object that is good for now
 	public static JsonObject postsToDispylay() {
-			int pUserId = Console.getInt("Enter userId as int: ");
+			int userId = Console.getInt("Enter userId int of account to get posts for: ");
 			JsonObject jobout = new JsonObject();
-			//System.out.println(("Post object added to database with postID= :\n"+newPostId));
+			jobout.addProperty("command",  "getuserposts");
 			
-			//Post postObj = new Post(8, userId, Date.valueOf(userJoinedDate), password);
+			JsonObject jobinside = new JsonObject();
+			jobinside.addProperty("userId",  userId);
+
+			jobout.add("commandData",  jobinside);
+			System.out.println(("command to get Posts for this userID= :\n"+jobout));
 			return jobout;
+	}
+
+    // This would create the command for testing getting a user account
+	public static JsonObject getOneUser() {
+		String userName = Console.getString("Enter userName ..as 1 word..: ");
+		String password = Console.getString("Enter password: ");
+		JsonObject jobout = new JsonObject();
+		jobout.addProperty("command",  "getuser");
+		
+		JsonObject jobinside = new JsonObject();
+		jobinside.addProperty("userName",  userName);
+		jobinside.addProperty("password",  password);
+
+		jobout.add("commandData",  jobinside);
+		System.out.println();
+		System.out.println(("User Json object created for testing :\n"+jobout));
+		return jobout;
 	}
 
 			

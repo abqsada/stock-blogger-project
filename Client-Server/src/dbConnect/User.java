@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.google.gson.JsonObject;
+
 public class User {
 
 	private int userId;
@@ -63,5 +65,15 @@ public class User {
 	public Date getDateJoined() {
 		return dateJoined;
 	}
+
+    public JsonObject toJsonObj() {
+    	JsonObject job = new JsonObject();
+    	job.addProperty("userId", this.userId);
+    	job.addProperty("userName", this.userName);
+    	job.addProperty("password",  this.password);
+    	
+    	//job.addProperty("dateJoined", this.dateJoined);
+        return job;
+    }
 
 }
