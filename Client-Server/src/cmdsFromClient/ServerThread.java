@@ -42,6 +42,7 @@ public class ServerThread {
                 
                 // Now that we have some action from the web client 
                 //  I assume we have a Json object that contains command & data
+                //  JsonObject job will be parsed into useable data
                 ServerCmdParse cmdParsed = new ServerCmdParse(job);
                 
                 // take action with the parsed Json data
