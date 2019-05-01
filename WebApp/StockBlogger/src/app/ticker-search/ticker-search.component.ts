@@ -23,7 +23,6 @@ export class TickerSearchComponent implements OnInit {
   // Runs on Initialization
   ngOnInit() {
     console.log('Entered ticker-search.component.ts');
-    console.log('vvvv IGNORE THIS ERROR vvvv');
   }
 
   getTickers() {
