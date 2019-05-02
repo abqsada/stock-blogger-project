@@ -22,7 +22,8 @@ public class ClientConnection implements Runnable {
         	//Declaring Output headers for the HTTP page
         	final String OUTPUT_HEADERS = "HTTP/1.1 200 OK\r\n" +
                     "Content-Type: text/html\r\n" +
-                    "Content-Length: ";
+                    "Content-Length: " + 
+                    "Access-Control-Allow-Origin: *";
         	final String OUTPUT_END_OF_HEADERS = "\r\n\r\n";
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             System.out.println("Incoming Data...");
