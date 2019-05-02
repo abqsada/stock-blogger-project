@@ -4,6 +4,9 @@ package cmdsFromClient;
 import dbConnect.User;
 import dbConnect.DataConnection;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.sql.ResultSet;
+//import java.io.IOException;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -26,8 +29,6 @@ public class ServerCmdParse {
 	private String actionCmd;
 	private JsonObject returnData;
 	int errorCode=100;  //error code default should never be returned
-	// Can I make this connection once and use it throughout this CmdParse???
-	//Connection connection = DataConnection.getConnection();
 
 	
 	//default constructor
@@ -46,8 +47,6 @@ public class ServerCmdParse {
 		// and it's associated user JsonObject that contains
 		// the data necessary to accomplish the command
 		if (joFromWeb.has("command")) {
-			//JsonElement jele = joFromWeb.get("command");
-			//this.actionCmd = jele.getAsString();
 			this.actionCmd = joFromWeb.get("command").toString().replace("\"", "");
 			this.errorCode=200;  //error code denoting successful Json parsing
         } else {
@@ -76,54 +75,35 @@ public class ServerCmdParse {
 	/**
 	 * TTHis method acts on the action command.
 	 * @return a JsonObject that contains at a minimum the errorCode
-	 *         describing the status of the parsing and actions
+	 *         describing the status of the parsing and actions.
+	 *         Sometimes the return Json contains data for web display, i.e. posts
 	 */
 	public JsonObject takeAction() {
         System.out.println(("Command provided takeAction\n"+actionCmd));
         System.out.println(("Data    provided takeAction\n"+commandData));
+        // zero the returnData Json for new command action
+        returnData = null;
+        
 		if(actionCmd.equalsIgnoreCase(null)) {
 			System.out.println(("Null data in actionCmd :\n"+actionCmd));
 			System.exit(0);
 		}
 		// Decide which action to take base on actionCmd
-        if (actionCmd.equalsIgnoreCase("identuser")) {
-            System.out.println("Action Not implemented with database call yet.\n");
-            System.out.println("Will be listing a specific user account.\n");
-        	//displayOneUser(); // we should be able to use the same method
-            // but I don't know how we will pass the Json object
+        if (actionCmd.equalsIgnoreCase("adduser")) {
+        	addUserAction();
 
-        } else if (actionCmd.equalsIgnoreCase("adduser")) {
-            System.out.println(("Data provided for adduser command\n"+commandData));
-            if(commandData.has("userName")&&commandData.has("password")
-            		                      &&commandData.has("password")) {
-            	String userName   = commandData.get("userName").toString();
-            	String password   = commandData.get("password").toString();
-            	String dateJoined = commandData.get("dateJoined").toString();
-    			//int newUserId = DataConnection.addUser(userName, Date.valueOf(dateJoined), password);
-            	int newUserId = 89; // debug statement only. Please remove
-                returnData.addProperty("userId",  newUserId);
-    			System.out.println(("User object added to database with userID= :\n"+returnData));
-            	errorCode=500;//error code denoting successful addition of user
-            } else {   
-            	errorCode=5;//error code denoting incorrect user data
-            }
+        } else if (actionCmd.equalsIgnoreCase("getuser")) {
+        	getUserAction();
+
+        //} else if (actionCmd.equalsIgnoreCase("deluser")) {
+            //System.out.println("Action Not implemented yet.\n");
+        	//delUserAction();
 
         } else if (actionCmd.equalsIgnoreCase("addpost")) {
-            System.out.println(("Data provided for addpost command\n"+commandData));
-            if(commandData.has("userId") &&commandData.has("title")
-             &&commandData.has("body") &&commandData.has("postDate")) {
-            	int userId     = commandData.get("userId").getAsInt();
-            	String title   = commandData.get("title").toString();
-            	String body   = commandData.get("body").toString();
-            	String postDate = commandData.get("postDate").toString();
-    			//int newPostId = DataConnection.addPost(userId, title, body, Date.valueOf(postAddDate));
-            	int newPostId = 99; // debug statement only. Please remove
-                returnData.addProperty("postId",  newPostId);
-    			System.out.println(("User object added to database with userID= :\n"+returnData));
-            	errorCode=600;//error code denoting successful addition of post
-            } else {   
-            	errorCode=6;//error code denoting incorrect data to add post
-            }
+        	addPostAction();
+
+        } else if (actionCmd.equalsIgnoreCase("getuserposts")) {
+        	getPostsAction();
 
         } else if (actionCmd.equalsIgnoreCase("query")) {
             System.out.println("Action Not implemented yet.\n");
@@ -142,10 +122,108 @@ public class ServerCmdParse {
     		errorCode=4;  //error code denoting invalid "command" string
         }
 
-		
         returnData.addProperty("errCode",  errorCode);
 		return returnData;
 	}
+
+	public void addUserAction() {
+		try {
+            System.out.println(("Data provided for adduser command\n"+commandData));
+            if(commandData.has("userName")&&commandData.has("password")
+            		                      &&commandData.has("dateJoined")) {
+            	String userName   = commandData.get("userName").toString().replace("\"", "");
+            	String password   = commandData.get("password").toString().replace("\"", "");
+            	String dateJoined = commandData.get("dateJoined").toString().replace("\"", "");
+    			int newUserId = DataConnection.addUser(userName, Date.valueOf(dateJoined), password);
+                returnData.addProperty("userId",  newUserId);
+    			System.out.println(("User object added to database with userID= :\n"+returnData));
+            	errorCode=500;//error code denoting successful addition of user
+            } else {   
+            	errorCode=5;//error code denoting incorrect user data
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void getUserAction() {
+		try {
+            System.out.println(("Data provided for getuser command\n"+commandData));
+            if(commandData.has("userName")&&commandData.has("password") ) {
+            	String userName   = commandData.get("userName").toString().replace("\"", "");
+            	String password   = commandData.get("password").toString().replace("\"", "");
+            	User userReturn = DataConnection.getUser(userName, password);
+
+                returnData.addProperty("userId",     userReturn.getUserId());
+                returnData.addProperty("userName",   userReturn.getUserName());
+                returnData.addProperty("password",   userReturn.getPassword());
+                //returnData.addProperty("dateJoined", userReturn.getDateJoined());
+            	errorCode=800;//error code denoting successful return of user for display
+    			System.out.println(("userData returned for  :\n"+returnData));
+            } else {   
+            	errorCode=7;//error code denoting incorrect deletion of user data
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
+
+	public void addPostAction() {
+		try {
+            System.out.println(("Data provided for addpost command\n"+commandData));
+            if(commandData.has("userId") &&commandData.has("title")
+             &&commandData.has("body") &&commandData.has("postDate")) {
+            	int userId     = commandData.get("userId").getAsInt();
+            	String title   = commandData.get("title").toString().replace("\"", "");
+            	String body   = commandData.get("body").toString().replace("\"", "");
+            	String postDate = commandData.get("postDate").toString().replace("\"", "");
+    			int newPostId = DataConnection.addPost(userId, title, body, Date.valueOf(postDate));
+                returnData.addProperty("postId",  newPostId);
+    			System.out.println(("User object added to database with userID= :\n"+returnData));
+            	errorCode=600;//error code denoting successful addition of post
+            } else {   
+            	errorCode=6;//error code denoting incorrect data to add post
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
+
+	public void getPostsAction() {
+		try {
+            System.out.println(("Data provided for getuserposts command\n"+commandData));
+            if(commandData.has("userId") ) {
+            	int userId     = commandData.get("userId").getAsInt();
+            	ResultSet rs = DataConnection.getPostsForUser(userId);
+                //returnData.addProperty("postId",  newPostId);
+    			System.out.println(("Not implemented fully yet :\n"));
+    			System.out.println(("All posts returned from the database with userID= :\n"+userId));
+            	errorCode=600;//error code denoting successful addition of post
+            } else {   
+            	errorCode=6;//error code denoting incorrect data to add post
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	/*
+	public void delUserAction() {
+		try {
+            System.out.println(("Data provided for deluser command\n"+commandData));
+            if(commandData.has("userId")) {
+            	int userId     = commandData.get("userId").getAsInt();
+    			int delUserId = DataConnection.delUser(userId);
+            	errorCode=700;//error code denoting successful deletion of user
+    			System.out.println(("error code returned to web signalling deletion= :\n"+errorCode));
+            } else {   
+            	errorCode=7;//error code denoting incorrect deletion of user data
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
+	*/
 
 
 }

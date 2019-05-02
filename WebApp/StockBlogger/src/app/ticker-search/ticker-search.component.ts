@@ -22,16 +22,19 @@ export class TickerSearchComponent implements OnInit {
               private rest: RestService) { }
   // Runs on Initialization
   ngOnInit() {
-    console.log('Entered ticker-search.component.ts'); // For testing
-    console.log('SENDING GET REQUEST TO ' + this.rest.tickerEndPoint); // For testing
-    this.rest.getTickers(); // Makes the HTTP GET request, logs any errors to console
-    this.values = this.rest.values; // Keep the tickers updated locally
+    console.log('Entered ticker-search.component.ts');
+  }
+
+  getTickers() {
+    this.rest.getTickers(); // Gets all available tickers from rest.service
+    this.sortTickers(this.values);
   }
 
   // Sorts Ticker data against users searched ticker
   sortTickers(values: any) {
     // TODO: Use either REGEX or some sorting algorithm to find data
     // Only relevant to the ticker a user has entered
+    console.log('Ticker Sorting not yet implemented');
   }
   // Handles when a user enters a ticker symbol
   onSubmit() {
@@ -50,6 +53,7 @@ export class TickerSearchComponent implements OnInit {
       }
 
     }
+
     if (this.tickerSymbol.length > 6 || this.tickerSymbol.length < 2) {
       // For Binding to the HTML
       this.errorMessage = 'Something isn\'t right. Try again.';

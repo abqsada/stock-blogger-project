@@ -15,7 +15,8 @@ import { FeedComponent } from './feed/feed.component';
 import { ContactComponent } from './contact/contact.component';
 import { RegisterpageComponent } from './registerpage/registerpage.component';
 import { ContributeComponent } from './contribute/contribute.component';
-
+// Handles the page navigation within the application
+// each path specifies a URL Parameter, with a component that controls the logic(.ts),Markup(.html), and Styling(.css) of that path
 const routes: Routes = [
   { path: '', component: HomeComponent} ,
   {
@@ -63,7 +64,7 @@ const routes: Routes = [
     component: AdminComponent,
     canActivate: [AdminGuard]
   },
-  {
+  { // Handles pages not specified
     path: '**',
     component: ErrorComponent
   }
