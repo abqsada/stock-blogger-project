@@ -24,6 +24,7 @@ public class Server {
         while(testServer.running) {
             try {
                 System.out.println("Server Awaiting Client Connection...");
+
                 new Thread(new ClientConnection(testServer.getServerSocket().accept())).start();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -34,5 +35,20 @@ public class Server {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        while(testServer.running) {
+            try {
+                System.out.println("Server Awaiting Client Connection...");
+
+                new Thread(new ClientConnection(testServer.getServerSocket().accept())).start();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            testServer.getServerSocket().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 }

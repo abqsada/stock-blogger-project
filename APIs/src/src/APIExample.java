@@ -4,8 +4,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.Socket;
@@ -45,12 +43,6 @@ public class APIExample implements Runnable{
 		}
 		in.close();
 		
-		//Printing the response to a json file
-		 try (FileWriter file = new FileWriter("C:\\Shit\\stock-blogger-project\\test.json")) 
-		 {
-	            file.write(response.toString());
-	            file.flush();
-		 }
 		//print result
 		System.out.println(response.toString());
 		return response.toString();
