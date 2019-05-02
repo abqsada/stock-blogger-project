@@ -2,12 +2,10 @@ package serverMain;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.io.IOException;
 
 import ioFormat.UserJsonFile;
-import serverMain.UserFields;
 import serverMain.Console;
 import dbConnect.DataConnection;
 import dbConnect.User;
@@ -89,7 +87,7 @@ public class MainBusiness {
             } else if (action.equalsIgnoreCase("startWebCommand")) {
             	// intended to be a Break command to leave this loop
             	//   which is no longer a loop
-            	//consoleAction =false;
+            	jobin.addProperty("command", "startWebCommand");
             } else if (action.equalsIgnoreCase("getuser")) { 
             	jobin = getOneUser();
             } else if (action.equalsIgnoreCase("adduser")) {

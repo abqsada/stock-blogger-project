@@ -38,25 +38,30 @@ public class ServerThread {
             try {
                 System.out.println("Server Awaiting Client Connection...");
                 // This is where we create a connection to the web client
-                //new Thread(new ClientConnection(serverSocket.getServerSocket().accept())).start();
-                
-                // Now that we have some action from the web client 
-                //  I assume we have a Json object that contains command & data
-                //  JsonObject job will be parsed into useable data
-                ServerCmdParse cmdParsed = new ServerCmdParse(job);
-                
-                // take action with the parsed Json data
-                JsonObject returnData = cmdParsed.takeAction();
-                System.out.println(
-                		("Json to be returned to web from this action\n"+returnData));
-                // A successful action should result in some Json object 
-                //  to return to the web, even if that object only has errorCode=0
-                
-                // ??How do we pass this Json back to the web client?
-
+                new Thread(new ClientThread(serverSocket.getServerSocket().accept())).start();
+                /* the .start() method starts the Thread above running the method
+                 *  ClientThread.run()
+                 *  which will parse the web command and start to take database actions
+                 */
+        		
+                // This next code was testing Json commands from the console
+                // delete this code once the thread is providing commands
+                if (job.has("command")) {
+        			String actionCmd = job.get("command").toString().replace("\"", "");
+        			if(!actionCmd.equalsIgnoreCase("webCommand") ) {
+        				//  parse the JsonObject job from the console
+        				ServerCmdParse cmdParsed = new ServerCmdParse(job);
+        				// take action with the parsed Json data
+        				JsonObject returnData = cmdParsed.takeAction();
+        				System.out.println(
+        						("Json to be returned to web from this action\n"+returnData));
+        				// A successful action should result in some Json object 
+        				//  to return to the web, even if that object only has errorCode=0
+            		}
+        		}
             
-            //} catch (IOException e) {
-            //    e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
     		} finally {
     			// How do we signal Server termination? Would the web give the command?
     	        running = false;
