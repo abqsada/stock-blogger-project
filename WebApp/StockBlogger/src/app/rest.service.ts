@@ -15,6 +15,7 @@ export class RestService implements OnInit {
     dateJoined: Date;
     password: String;
   };
+  // Declare objects for incoming account and twitter data
   private incomingAccount: any;
   // Declare the blog object with variables to be used in blog posting methods
   private blogObject: {
@@ -30,18 +31,17 @@ export class RestService implements OnInit {
     currency: String;
     price: number;
   };
-// Declare the twitter object with variables to be used in displaying twitter data
+
   private twitterObject: {
-
-
+    twitterUser: String;
+    hashTag: String;
   }
+  
 
   // BASE URL *Does NOT include URL parameters*
   // such as /blogposts, /twitter, or /accounts
   readonly baseUrl = 'http://localhost:3000';
   values: any;
-
-  readonly twitterUrl = 'http:localhost:3001';
   hashTags: any;
 
   // Inject the Http Client into the constructor
@@ -62,13 +62,17 @@ export class RestService implements OnInit {
     console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
     });
   }
-
-  public User(userId: number, userName: String, dateJoined: Date, password: String) {
-    this.accountObject.userId = userId;
-    this.accountObject.userName = userName;
-    this.accountObject.password = password;
-    this.accountObject.dateJoined = dateJoined;
-  }
+  // Get the generated twitter data from the twitter API
+  getHashtags() { // The twitter api is currently designed to post to the localhost port 3001
+    this.http.get('http://localhost:3001').subscribe(response => {
+      this.hashTags = response;
+      console.log(this.hashTags);
+    }, error => {
+    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+    console.log('* * * * * * Please make sure all necessary servers are up and running properly! * * * * * *');
+    console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
+    });
+ }
 
   // Begin user account methods
   public getAccount() { // Makes HTTP get request to snag account data from API
@@ -81,6 +85,13 @@ export class RestService implements OnInit {
     console.log('* * * * * * Please make sure all necessary servers are up and running properly! * * * * * *');
     console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
     });
+  }
+
+  public User(userId: number, userName: String, dateJoined: Date, password: String) {
+    this.accountObject.userId = userId;
+    this.accountObject.userName = userName;
+    this.accountObject.password = password;
+    this.accountObject.dateJoined = dateJoined;
   }
 
   public getUserName(): String {
@@ -206,4 +217,5 @@ export class RestService implements OnInit {
     this.tickerObject.price = price;
   }
 
+  //Begin twitter methods
 }

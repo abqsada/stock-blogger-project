@@ -21,9 +21,11 @@ import { ContactComponent } from './contact/contact.component';
 import { RegisterpageComponent } from './registerpage/registerpage.component';
 import { ContributeComponent } from './contribute/contribute.component';
 import { TickerSearchComponent } from './ticker-search/ticker-search.component';
+import { TwitterSearchComponent } from './twitter-search/twitter-search.component';
 // 3RD Party Imports
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { DownloaderComponent } from './downloader/downloader.component';
+
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { DownloaderComponent } from './downloader/downloader.component';
     RegisterpageComponent,
     ContributeComponent,
     TickerSearchComponent,
-    DownloaderComponent
+    DownloaderComponent,
+    TwitterSearchComponent
   ],
   imports: [
     BrowserModule,
