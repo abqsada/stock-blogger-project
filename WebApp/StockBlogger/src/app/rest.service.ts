@@ -30,6 +30,11 @@ export class RestService implements OnInit {
     currency: String;
     price: number;
   };
+// Declare the twitter object with variables to be used in displaying twitter data
+  private twitterObject: {
+
+
+  }
 
   // BASE URL *Does NOT include URL parameters*
   // such as /blogposts, /twitter, or /accounts
