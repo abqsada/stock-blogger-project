@@ -36,6 +36,9 @@ export class RestService implements OnInit {
   readonly baseUrl = 'http://localhost:3000';
   values: any;
 
+  readonly twitterUrl = 'http:localhost:3001';
+  hashTags: any;
+
   // Inject the Http Client into the constructor
   constructor(private http: HttpClient) {}
 
