@@ -35,6 +35,7 @@ export class RestService implements OnInit {
   private twitterObject: {
     twitterUser: String;
     hashTag: String;
+    volume: number;
   }
   
 
@@ -62,7 +63,7 @@ export class RestService implements OnInit {
     console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
     });
   }
-  // Get the generated twitter data from the twitter API
+  //  Http Get request for the generated twitter data from the twitter API
   getHashtags() { // The twitter api is currently designed to post to the localhost port 3001
     this.http.get('http://localhost:3001').subscribe(response => {
       this.hashTags = response;
@@ -199,7 +200,7 @@ export class RestService implements OnInit {
     this.tickerObject.name = name;
   }
 
-  public getCurrency(currency: String) {
+  public getCurrency(): String {
     console.log(this.tickerObject.currency);
     return this.tickerObject.currency;
   }
@@ -218,4 +219,38 @@ export class RestService implements OnInit {
   }
 
   //Begin twitter methods
+  public Twitter(twitterUser: String, hashTag: String, volume: number) {
+    this.twitterObject.twitterUser = twitterUser;
+    this.twitterObject.hashTag = hashTag;
+    this.twitterObject.volume = volume;
+  }
+  
+  public getTwitterUser(): String {
+    console.log(this.twitterObject.twitterUser);
+    return this.twitterObject.twitterUser;
+  }
+
+  public setTwitterUser(twitterUser: String) {
+    this.twitterObject.twitterUser = twitterUser;
+  }
+
+  public getHashTag(): String {
+    console.log(this.twitterObject.hashTag);
+    return this.twitterObject.hashTag;
+  }
+
+  public setHashTag(hashTag: String) {
+    this.twitterObject.hashTag = hashTag;
+  }
+
+  public getVolume(): number {
+    console.log(this.twitterObject.volume);
+    return this.twitterObject.volume;
+  }
+
+  public setVolume(volume: number) {
+    this.twitterObject.volume = volume;
+  }
+  
+
 }
