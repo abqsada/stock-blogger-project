@@ -1,0 +1,2 @@
+localhost:8888 
+GET /user/testuser2/password HTTP/1.1

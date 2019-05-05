@@ -38,7 +38,7 @@ public class ServerThread {
             try {
                 System.out.println("Server Awaiting Client Connection...");
                 // This is where we create a connection to the web client
-                new Thread(new ClientThread(serverSocket.getServerSocket().accept())).start();
+                new Thread(new ClientThread(serverSocket.accept())).start();
                 /* the .start() method starts the Thread above running the method
                  *  ClientThread.run()
                  *  which will parse the web command and start to take database actions
@@ -48,6 +48,8 @@ public class ServerThread {
                 // delete this code once the thread is providing commands
                 if (job.has("command")) {
         			String actionCmd = job.get("command").toString().replace("\"", "");
+        			
+        			// only go through this test code when the command is NOT "webCommand"
         			if(!actionCmd.equalsIgnoreCase("webCommand") ) {
         				//  parse the JsonObject job from the console
         				ServerCmdParse cmdParsed = new ServerCmdParse(job);
@@ -64,6 +66,7 @@ public class ServerThread {
                 e.printStackTrace();
     		} finally {
     			// How do we signal Server termination? Would the web give the command?
+    			// I believe this finally section will end the while loop after 1 execute.
     	        running = false;
             }
         }

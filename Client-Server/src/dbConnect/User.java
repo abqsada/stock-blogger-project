@@ -71,8 +71,7 @@ public class User {
     	job.addProperty("userId", this.userId);
     	job.addProperty("userName", this.userName);
     	job.addProperty("password",  this.password);
-    	
-    	//job.addProperty("dateJoined", this.dateJoined);
+    	job.addProperty("dateJoined", this.dateJoined.toString());
         return job;
     }
 
