@@ -11,11 +11,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 <form (submit)="onSubmit()" align="center">
     <p>Enter the hashtag you would like data for (without #)</p>
     <p>
-        <input type = "text"
+        <input type = "twitter"
                id = "twitterBox" />
     </p>
     <div align=center *ngIf="selectedHashtag">
             <a class ="w3-margin" style="color:cornflowerblue">{{selectedHashtag}}</a><p></p>
-            <iframe src="https://media.giphy.com/media/xUPGcEOEllmvFAvako/giphy.gif"></iframe>
+            <iframe src="https://giphy.com/embed/xUPGcEOEllmvFAvako" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p>
     </div>
 </form>

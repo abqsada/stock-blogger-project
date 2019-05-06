@@ -32,13 +32,13 @@ export class RestService implements OnInit {
     price: number;
   };
 
+  // Declare the twitter object with variables to be used in displaying twitter data
   private twitterObject: {
     twitterUser: String;
     hashTag: String;
     volume: number;
   }
   
-
   // BASE URL *Does NOT include URL parameters*
   // such as /blogposts, /twitter, or /accounts
   readonly baseUrl = 'http://localhost:3000';
