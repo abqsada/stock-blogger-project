@@ -13,6 +13,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <p>
         <input type = "twitter"
                id = "twitterBox" />
+               <button (click)="getHashtag()" class="mr-sm-2 w3-hover-white" style="position: absolute;" id="twitter">Submit</button>
     </p>
     <div align=center *ngIf="selectedHashtag">
             <a class ="w3-margin" style="color:cornflowerblue">{{selectedHashtag}}</a><p></p>
