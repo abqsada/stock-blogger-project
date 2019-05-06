@@ -14,12 +14,12 @@ export class TwitterSearchComponent implements OnInit {
               private rest: RestService) { }
 
   ngOnInit() {
-    console.log("Entered twitter-search component.ts")
+    console.log('Entered twitter-search component.ts');
     this.rest.getHashtags();
   }
 
-  sortHashtags(hashTags: any){
-    
+  sortHashtags(hashTags: any) {
+
   }
 
 }

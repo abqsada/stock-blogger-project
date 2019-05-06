@@ -26,9 +26,10 @@ import { TwitterSearchComponent } from './twitter-search/twitter-search.componen
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { DownloaderComponent } from './downloader/downloader.component';
 
-
-@NgModule({
-  declarations: [
+// This is the Angular Project's entry point
+// Basically the 'meeting place' for all components (classes)
+@NgModule({ //Root App Module
+  declarations: [ // Components added here via Angular CLI
     AppComponent,
     HomeComponent,
     RegisterComponent,
@@ -48,7 +49,7 @@ import { DownloaderComponent } from './downloader/downloader.component';
     DownloaderComponent,
     TwitterSearchComponent
   ],
-  imports: [
+  imports: [ // Modules added here via Angular CLI
     BrowserModule,
     HttpClientModule,
     FormsModule,

@@ -7,7 +7,7 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
   providedIn: 'root'
 })
 export class RestService implements OnInit {
-
+// Objects
   // Declare the account object with variables to be used in account methods
   private accountObject: {
     userId: number;
@@ -35,12 +35,11 @@ export class RestService implements OnInit {
   private twitterObject: {
     twitterUser: String;
     hashTag: String;
-  }
-  
-
-  // BASE URL *Does NOT include URL parameters*
-  // such as /blogposts, /twitter, or /accounts
-  readonly baseUrl = 'http://localhost:3000';
+  };
+  // baseURL's for each API
+  readonly tickerUrl = 'http://localhost:3000';
+  readonly twitterUrl =  'http://localhost:3001';
+  // Temporary Data
   values: any;
   hashTags: any;
 
@@ -53,7 +52,7 @@ export class RestService implements OnInit {
 
   // Gets all ticker data from API
   getTickers() {  // This URL likely needs to be changed, just boilerplate right now
-    this.http.get(this.baseUrl + '/api/ticker').subscribe(response => {
+    this.http.get(this.tickerUrl + '/api/ticker').subscribe(response => {
       this.values = response;
       console.log(this.values);
   }, error => {
@@ -77,7 +76,7 @@ export class RestService implements OnInit {
   // Begin user account methods
   public getAccount() { // Makes HTTP get request to snag account data from API
 
-    this.http.get(this.baseUrl + '/api/account').subscribe(response => {
+    this.http.get(this.tickerUrl + '/api/account').subscribe(response => {
       this.incomingAccount = response;
       console.log(this.incomingAccount);
   }, error => {
