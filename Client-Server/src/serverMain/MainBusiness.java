@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.io.IOException;
 
-import ioFormat.UserJsonFile;
 import serverMain.Console;
 import dbConnect.DataConnection;
 import dbConnect.User;
@@ -13,30 +12,32 @@ import cmdsFromClient.ServerThread;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonArray;
-//import org.json.*;
 
 public class MainBusiness {
 
 	public static void main(String[] args) throws IOException, SQLException {
 		// Resources that will be closed after try-with-resources block 
-		//   create database connection & 
+		//   create database connection to the local MySql database 
         try (	Connection connection = DataConnection.getConnection();
-        		
-        		){ // start connection to the MySql database
-        	  // 
-
-            // JsonObject for testing  
-        	//  !! this will be removed when we have real website commands
-            JsonObject job = new JsonObject();
-            job = getConsoleCommand();
-
+        		){ 
     		//  start server socket on port 8888 
     		//    listening to respond to commands from website
             ServerThread testServer = new ServerThread(8888);
             
+	        System.out.println("This code is set up to run commands from the web.");
+	        System.out.println("So you must have a blank browser open to start a command thread!!!");
+	        System.out.println("On browser command line type localhost:8888 & add command.");
+	        System.out.println("i.e.: localhost:8888/?action=getUser&user_id=5");
+	        System.out.println("\n");
+	        System.out.println("Also you need to have mySql running");
+	        System.out.println("  and the local database instance connected.");
+	        System.out.println("  and database already created by the stockbloggerDB.sql script.\n");
+
+
+            
             // there is a JsonObject=job passed in for testing.
             // job should be removed when we have a client connection
-            testServer.awaitClientCmd(job);
+            testServer.awaitClientCmd();
         
         } catch (SQLException e) {
             System.out.println(e);
@@ -48,7 +49,6 @@ public class MainBusiness {
 
     public static void displayMenu() {
         System.out.println("COMMAND MENU");
-        System.out.println("list       all users info from a test file");
         System.out.println("startWebCommand     skips this console request, returns null cmd");
         System.out.println("getuser    return a specific user account from the database");
         System.out.println("adduser    add a user account to the database");
@@ -81,13 +81,10 @@ public class MainBusiness {
             action = Console.getString("Please enter the the desired action on console: ");
             System.out.println();
 
-            if (action.equalsIgnoreCase("list")) {
-            	// This specifically works from the file user_account.json
-                displayAllUsers();
-            } else if (action.equalsIgnoreCase("startWebCommand")) {
+            if (action.equalsIgnoreCase("webCommand")) {
             	// intended to be a Break command to leave this loop
             	//   which is no longer a loop
-            	jobin.addProperty("command", "startWebCommand");
+            	jobin.addProperty("command", "webCommand");
             } else if (action.equalsIgnoreCase("getuser")) { 
             	jobin = getOneUser();
             } else if (action.equalsIgnoreCase("adduser")) {
@@ -115,19 +112,6 @@ public class MainBusiness {
         //}
 			return jobin;
     
-    }
-
-	// Display all users from a Json file
-    public static void displayAllUsers() {
-        System.out.println("User Account List from a file");
-    	JsonArray usersJson = UserJsonFile.getUsers();
-        System.out.println("return from getUsers");
-        if (usersJson == null) {
-        	System.out.println("usersJson was null");
-        } else {
-            System.out.println("JSON Array of all user accounts.\n");
-            System.out.println(usersJson);        	
-        }
     }
     
     // add a user from data entered on the console
