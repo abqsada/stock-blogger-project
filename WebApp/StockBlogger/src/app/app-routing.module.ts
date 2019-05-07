@@ -71,8 +71,8 @@ const routes: Routes = [
 
 ];
 
-@NgModule({
+@NgModule({ // Specifies we want ^these^ routes set in the Url Router
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule] // Makes the Router public
 })
 export class AppRoutingModule { }
