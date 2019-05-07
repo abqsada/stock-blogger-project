@@ -10,47 +10,50 @@ import java.sql.Date;
  *
  */
 public class CmdHttp  {
-	private ArrayList<String[]> cmdLines;
 	private String actionCommand;
 	private JsonObject cmdData;
-	//String transient? postId; so that we may or may not need poetID
 	
 	/** Constructor parsing the commands from the web into Json
 	 *  This constructor
 	 * @param elements
 	 */
 	public CmdHttp(ArrayList<String[]> httpLines) {
-		this.cmdLines = httpLines;
 		int sizeCmdLines = httpLines.size();
 		System.out.println(("CmdHttpGet constructor with #lines: "+sizeCmdLines));
-		// We are only responding to 1 line of command
-		String[] elements = httpLines.get(0);
-		for(String element : elements) {
-			System.out.println(("element of command line elements: "+element ) );
-		}
 		JsonObject httpParams = new JsonObject();
-		// process the http line into our desired parameters
-		// split along slashes to get major portions of string
-		String[] pieces = splitOnSlash(elements[1]);
-		// split along ampersand to get key=value pairs
-		String[] params = splitOnAmpersand(pieces[1]);
-		// split each pair to get values
-		int sizeParms = params.length;
-		for(int i=0; i<sizeParms; i++) {
-			String[] doublet = splitOnEquals(params[i]);
-			String propertyName  = doublet[0];
-			String propertyValue = doublet[1];
-			if (i==0) {
-				// remove leading question mark off the first pair
-				if(propertyName.startsWith("?") ) {
-					propertyName = removeLeadingChar(propertyName);
-				}
+		if(sizeCmdLines == 0) {
+			System.out.println("There was no GET or PUT on this thread to provide data");
+			// httpParams will remain empty & be caught later
+		} else {
+
+			// The ArrayList of array of strings was to get around resizing of array
+			// so we should only have 1 line of commands to parse
+			String[] elements = httpLines.get(0);
+			for(String element : elements) {
+				System.out.println(("element of command line: "+element ) );
 			}
-			// getting the parameters into Json lets us pass this data around
-			//  and decide later whether we have the data for the desired action 
-			httpParams.addProperty(propertyName, propertyValue);
+			// process the http line into our desired parameters
+			// split along slashes to get major portions of string
+			String[] pieces = splitOnSlash(elements[1]);
+			// split along ampersand to get key=value pairs
+			String[] params = splitOnAmpersand(pieces[1]);
+			// split each pair to get values
+			int sizeParms = params.length;
+			for(int i=0; i<sizeParms; i++) {
+				String[] doublet = splitOnEquals(params[i]);
+				String propertyName  = doublet[0];
+				String propertyValue = doublet[1];
+				if (i==0) {
+					// remove leading question mark off the first pair
+					if(propertyName.startsWith("?") ) {
+						propertyName = removeLeadingChar(propertyName);
+					}
+				}
+				// getting the parameters into Json lets us pass this data around
+				//  and decide later whether we have the data for the desired action 
+				httpParams.addProperty(propertyName, propertyValue);
+			}
 		}
-		
 		this.actionCommand = setAction(httpParams);
 		this.cmdData = httpParams;
 	}
@@ -60,7 +63,7 @@ public class CmdHttp  {
 		if (params.has("command")) {
 			action = params.get("command").toString().replace("\"", "");
         } else {
-        	System.out.println("no actionCmd was in the Json recieved from HTTP\n");
+        	System.out.println("no command was in the Json recieved from HTTP\n");
         }
 		return action;
 	}

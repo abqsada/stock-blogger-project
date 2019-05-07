@@ -38,7 +38,7 @@ public class ServerCmdParse {
 		this.errorCode=1;  //error code denoting null object
 	}
 	
-	//constructor using String ActionCmd & JsonObject commandData
+	//constructor using String ActionCmd & JsonObject commandData from web
 	public ServerCmdParse (String command, JsonObject cmdData) {
 		// parse the Json from the web into a command string 
 		// and it's associated user JsonObject that contains
@@ -50,19 +50,19 @@ public class ServerCmdParse {
 	}
 	
 	//constructor using compound JsonObject including actionCmd & its data
-	public ServerCmdParse (JsonObject joFromWeb) {
-		// parse the Json from the web into a command string 
-		// and it's associated user JsonObject that contains
-		// the data necessary to accomplish the command
-		if (joFromWeb.has("command")) {
-			this.actionCmd = joFromWeb.get("command").toString().replace("\"", "");
+	public ServerCmdParse (JsonObject joFromConsole) {
+		// parse the Json developed from console interaction
+		// that contains the command string and it's associated JsonObject
+		//  that contains the data necessary to accomplish the command
+		if (joFromConsole.has("command")) {
+			this.actionCmd = joFromConsole.get("command").toString().replace("\"", "");
 			this.errorCode=200;  //error code denoting successful Json parsing
         } else {
         	System.out.println("no actionCmd was in the Json recieved\n");
     		this.errorCode=2;  //error code denoting no "command" string
         }
-		if (joFromWeb.has("commandData")) {
-			this.commandData = joFromWeb.getAsJsonObject("commandData");
+		if (joFromConsole.has("commandData")) {
+			this.commandData = joFromConsole.getAsJsonObject("commandData");
         } else {
         	System.out.println("no commandData was in the Json recieved\n");
     		this.errorCode=3;  //error code denoting no "commandData" object
@@ -87,15 +87,19 @@ public class ServerCmdParse {
 	public JsonObject takeAction() {
         System.out.println(("Command provided takeAction\n"+actionCmd));
         System.out.println(("Data    provided takeAction\n"+commandData));
-        // zero the returnData Json for new command action
-        returnData = null;
         
 		if(actionCmd.equalsIgnoreCase(null)) {
-			System.out.println(("Null data in actionCmd :\n"+actionCmd));
+			System.out.println(("Null data in actionCmd : "+actionCmd));
+			System.out.println("Exit server execution");
 			System.exit(0);
 		}
-		// Decide which action to take base on actionCmd
-        if (actionCmd.equalsIgnoreCase("adduser")) {
+		if(commandData.entrySet().size() == 0) {
+			System.out.println(("Json command data is empty : "+commandData));
+			System.out.println("Continue but respond with error code ");
+        	errorCode=30;//error code denoting empty user data
+
+        // Decide which action to take base on actionCmd
+		} else if (actionCmd.equalsIgnoreCase("adduser")) {
         	addUserAction();
 
         } else if (actionCmd.equalsIgnoreCase("getuser")) {
@@ -114,18 +118,10 @@ public class ServerCmdParse {
         } else if (actionCmd.equalsIgnoreCase("getuserposts")) {
         	getPostsAction();
 
-        } else if (actionCmd.equalsIgnoreCase("query")) {
-            System.out.println("Action Not implemented yet.\n");
-            // This action is intended to test the stock web access api
-        	//kensApiDriver();
-        } else if (actionCmd.equalsIgnoreCase("trend")) {
-            System.out.println("Action Not implemented yet.\n");
-            // This action is intended to test the twitter web access api
-        	//kensApiDriver();
-//        } else if (actionCmd.equalsIgnoreCase("exit") || 
-//        		   actionCmd.equalsIgnoreCase("quit")) {
-//            System.out.println("Ending server execution.\n");
-//            System.exit(0);
+        } else if (actionCmd.equalsIgnoreCase("exit") || 
+        		   actionCmd.equalsIgnoreCase("quit")) {
+            System.out.println("Ending server execution.\n");
+            System.exit(0);
         } else {
         	System.out.println("Error! Not a valid actionCmd.\n");
     		errorCode=4;  //error code denoting invalid "command" string
@@ -145,7 +141,6 @@ public class ServerCmdParse {
     			int newUserId = DataConnection.addUser(userName, Date.valueOf(dateJoined), password);
     			System.out.println(("User object added to database with userID= :\n"+newUserId));
                 returnData.addProperty("userId",  newUserId);
-    			System.out.println(("Put into JsonObject (causing error)= :\n"+returnData));
             	errorCode=500;//error code denoting successful addition of user
             } else {   
             	errorCode=5;//error code denoting incorrect user data
@@ -257,24 +252,5 @@ public class ServerCmdParse {
             e.printStackTrace();
         }
 	}
-	
-	/*
-	public void delUserAction() {
-		try {
-            System.out.println(("Data provided for deluser command\n"+commandData));
-            if(commandData.has("userId")) {
-            	int userId     = commandData.get("userId").getAsInt();
-    			int delUserId = DataConnection.delUser(userId);
-            	errorCode=700;//error code denoting successful deletion of user
-    			System.out.println(("error code returned to web signalling deletion= :\n"+errorCode));
-            } else {   
-            	errorCode=7;//error code denoting incorrect deletion of user data
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-	}
-	*/
-
 
 }
