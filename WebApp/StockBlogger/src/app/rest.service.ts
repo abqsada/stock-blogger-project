@@ -78,7 +78,7 @@ export class RestService implements OnInit {
 
   // Begin user account methods
   public getAccount() { // Makes HTTP get request to snag account data from API
-
+    console.log("Getting Account!");
     this.http.get(this.userUrl).subscribe(response => {
       this.incomingAccount = response;
       console.log(this.incomingAccount);
