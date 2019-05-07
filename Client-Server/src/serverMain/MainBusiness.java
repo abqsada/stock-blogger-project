@@ -27,16 +27,17 @@ public class MainBusiness {
 	        System.out.println("This code is set up to run commands from the web.");
 	        System.out.println("So you must have a blank browser open to start a command thread!!!");
 	        System.out.println("On browser command line type localhost:8888 & add command.");
-	        System.out.println("i.e.: localhost:8888/?action=getUser&user_id=5");
+	        System.out.println("i.e.: localhost:8888/?action=getUserbyid&user_id=5");
 	        System.out.println("\n");
 	        System.out.println("Also you need to have mySql running");
 	        System.out.println("  and the local database instance connected.");
-	        System.out.println("  and database already created by the stockbloggerDB.sql script.\n");
-
-
+	        System.out.println("  and database already created by the stockbloggerDB.sql script.");
+	        System.out.println("\n");
+	        System.out.println("Once started the server will remain in a continuous loop");
+	        System.out.println("  waiting for commands.");
+	        System.out.println("  I have inserted a wait point to allow the user to prepare.\n");
+            String moveon = Console.getString("Please enter any key when you are ready to continue: ");
             
-            // there is a JsonObject=job passed in for testing.
-            // job should be removed when we have a client connection
             testServer.awaitClientCmd();
         
         } catch (SQLException e) {
@@ -49,7 +50,7 @@ public class MainBusiness {
 
     public static void displayMenu() {
         System.out.println("COMMAND MENU");
-        System.out.println("startWebCommand     skips this console request, returns null cmd");
+        System.out.println("webCommand     skips this console request, returns null cmd");
         System.out.println("getuser    return a specific user account from the database");
         System.out.println("adduser    add a user account to the database");
         System.out.println("addpost    add a post for a user to the database");
