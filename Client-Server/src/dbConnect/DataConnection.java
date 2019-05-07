@@ -27,7 +27,17 @@ public class DataConnection {
 
 	// Get user once logged in
 	public static User getUser(String username, String password) throws SQLException{
-		String query = "select * from users where user_name = " + username + " and password = " + password;
+		String query = "select * from users where user_name = \"" + username + "\" and password = \"" + password+"\"";
+		pstmt = connection.prepareStatement(query);
+		pstmt.executeQuery();
+		rs = pstmt.getResultSet();
+		User user = new User(rs.getInt(0),	rs.getString(1), rs.getDate(2), rs.getString(3));
+		return user;
+	}
+
+	// Get user once logged in
+	public static User getUserById(int user_id) throws SQLException{
+		String query = "select * from users where user_id = " + user_id;
 		pstmt = connection.prepareStatement(query);
 		pstmt.executeQuery();
 		rs = pstmt.getResultSet();

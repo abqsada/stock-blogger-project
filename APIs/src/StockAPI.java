@@ -4,8 +4,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import javax.net.ssl.HttpsURLConnection;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.net.Socket;
@@ -147,4 +145,3 @@ public class APIExample implements Runnable{
 	}
 
 }
-//https://www.worldtradingdata.com/api/v1/stock?symbol=AAPL,MSFT,HSBA.L&api_token=ljkHFuF0MiRoGZtWL8Y0BmaMNQvdcQPtfjL3Yid5rjPLOEA4cmr3OvT3NL1F

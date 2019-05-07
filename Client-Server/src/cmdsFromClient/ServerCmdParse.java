@@ -24,7 +24,6 @@ import com.google.gson.JsonElement;
  *     carry out those commands
  */
 public class ServerCmdParse {
-	private JsonObject joCmd;
 	private JsonObject commandData;
 	private String actionCmd;
 	private JsonObject returnData;
@@ -33,16 +32,25 @@ public class ServerCmdParse {
 	
 	//default constructor
 	public ServerCmdParse () {
-		this.joCmd = new JsonObject();
 		this.commandData = new JsonObject();
 		this.returnData = new JsonObject();
 		this.actionCmd = "exit";
 		this.errorCode=1;  //error code denoting null object
 	}
 	
-	//constructor using JsonObject passed as parameter
+	//constructor using String ActionCmd & JsonObject commandData
+	public ServerCmdParse (String command, JsonObject cmdData) {
+		// parse the Json from the web into a command string 
+		// and it's associated user JsonObject that contains
+		// the data necessary to accomplish the command
+		this.actionCmd = command;
+		this.commandData = cmdData;
+		this.returnData = new JsonObject();
+		this.errorCode=100;  //error code denoting successful construction
+	}
+	
+	//constructor using compound JsonObject including actionCmd & its data
 	public ServerCmdParse (JsonObject joFromWeb) {
-		this.joCmd = joFromWeb;
 		// parse the Json from the web into a command string 
 		// and it's associated user JsonObject that contains
 		// the data necessary to accomplish the command
@@ -50,8 +58,6 @@ public class ServerCmdParse {
 			this.actionCmd = joFromWeb.get("command").toString().replace("\"", "");
 			this.errorCode=200;  //error code denoting successful Json parsing
         } else {
-        	// signal that bad Json was recieved
-        	// maybe try/catch
         	System.out.println("no actionCmd was in the Json recieved\n");
     		this.errorCode=2;  //error code denoting no "command" string
         }
@@ -94,6 +100,9 @@ public class ServerCmdParse {
 
         } else if (actionCmd.equalsIgnoreCase("getuser")) {
         	getUserAction();
+
+        } else if (actionCmd.equalsIgnoreCase("getuserbyid")) {
+        	getUserByIdAction();
 
         //} else if (actionCmd.equalsIgnoreCase("deluser")) {
             //System.out.println("Action Not implemented yet.\n");
@@ -152,7 +161,29 @@ public class ServerCmdParse {
             if(commandData.has("userName")&&commandData.has("password") ) {
             	String userName   = commandData.get("userName").toString().replace("\"", "");
             	String password   = commandData.get("password").toString().replace("\"", "");
+            	//int userId = 5;
             	User userReturn = DataConnection.getUser(userName, password);
+
+                returnData.addProperty("userId",     userReturn.getUserId());
+                returnData.addProperty("userName",   userReturn.getUserName());
+                returnData.addProperty("password",   userReturn.getPassword());
+                //returnData.addProperty("dateJoined", userReturn.getDateJoined());
+            	errorCode=800;//error code denoting successful return of user for display
+    			System.out.println(("userData returned for  :\n"+returnData));
+            } else {   
+            	errorCode=7;//error code denoting incorrect deletion of user data
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void getUserByIdAction() {
+		try {
+            System.out.println(("Data provided for getuser command\n"+commandData));
+            if(commandData.has("userName")&&commandData.has("password") ) {
+            	int userId     = commandData.get("userId").getAsInt();
+            	User userReturn = DataConnection.getUserById(userId);
 
                 returnData.addProperty("userId",     userReturn.getUserId());
                 returnData.addProperty("userName",   userReturn.getUserName());
