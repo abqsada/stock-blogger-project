@@ -68,6 +68,10 @@ a {
     margin-top: 6px;
     padding: 20px;
   }
+
+  img {
+    border-radius: 50%;
+  }
   
   /* Clear floats after the columns */
   .row:after {
@@ -82,4 +86,7 @@ a {
       width: 100%;
       margin-top: 0;
     }
+
+
+
   }
