@@ -33,7 +33,7 @@ public class CmdHttp  {
 		// split along slashes to get major portions of string
 		String[] pieces = splitOnSlash(elements[1]);
 		// split along ampersand to get key=value pairs
-		String[] params = splitOnAmpersand(pieces[0]);
+		String[] params = splitOnAmpersand(pieces[1]);
 		// split each pair to get values
 		int sizeParms = params.length;
 		for(int i=0; i<sizeParms; i++) {
@@ -46,11 +46,13 @@ public class CmdHttp  {
 					propertyName = removeLeadingChar(propertyName);
 				}
 			}
+			// getting the parameters into Json lets us pass this data around
+			//  and decide later whether we have the data for the desired action 
 			httpParams.addProperty(propertyName, propertyValue);
 		}
 		
 		this.actionCommand = setAction(httpParams);
-		this.cmdData = new JsonObject();
+		this.cmdData = httpParams;
 	}
 		
 	public String setAction (JsonObject params) {
@@ -63,49 +65,77 @@ public class CmdHttp  {
 		return action;
 	}
 
-		
+	// This method looks at the desired httpAction, 
+	//   checks whether the data needed for that action has been provided in params
+	//   and builds/returns the JsonObject that contains that data	
 	public JsonObject setDataForCmd (String httpAction, JsonObject params) {
 		JsonObject buildCmdData = new JsonObject();
+		int userId;
 		if (params.has("command")) {
 			String action = params.get("command").toString().replace("\"", "");
 			
 			if (action.equals("getuserbyid") ) {
-            	int userId     = params.get("userId").getAsInt();
+            	userId     = params.get("userId").getAsInt();
             	buildCmdData.addProperty("userId", userId);
 
+			} else if (action.equals("getuser") ) {
+				if(params.has("userName")&&params.has("password") ) {
+            		String userName   = params.get("userName").toString().replace("\"", "");
+            		String password   = params.get("password").toString().replace("\"", "");
+            		buildCmdData.addProperty("userName", userName);
+            		buildCmdData.addProperty("password", password);
+				} else {
+					System.out.println("Params were not given for getuser command.\n");
+				}			
+
+			} else if (action.equals("adduser") ) {
+	            if(params.has("userName")&&params.has("password")
+	             &&params.has("dateJoined")) {
+					String userName = params.get("userName").toString().replace("\"", "");
+					String password = params.get("password").toString().replace("\"", "");
+					String dateJoined   = params.get("dateJoined").toString().replace("\"", "");
+					buildCmdData.addProperty("userName", userName);
+					buildCmdData.addProperty("password", password);
+					buildCmdData.addProperty("dateJoined", dateJoined);
+				} else {
+					System.out.println("Params were not given for adduser command.\n");
+				}			
+					
+			} else if (action.equals("addpost") ) {
+				if(params.has("userId")&&params.has("title")
+	             &&params.has("body")  &&params.has("dateJoined") ) {
+            		userId     = params.get("userId").getAsInt();
+					String title = params.get("title").toString().replace("\"", "");
+					String body = params.get("body").toString().replace("\"", "");
+					String postDate = params.get("postDate").toString().replace("\"", "");
+					buildCmdData.addProperty("userId", userId);
+					buildCmdData.addProperty("title", title);
+					buildCmdData.addProperty("postDate", postDate);
+				} else {
+					System.out.println("Params were not given for addpost command.\n");
+				}			
+			
 			} else if (action.equals("getpost") ) {
 				System.out.println("Action Not implemented yet.\n");			
 			} else if (action.equals("getcomment") ) {
 				System.out.println("Action Not implemented yet.\n");
-			} else if (action.equals("adduser") ) {
-	            if(params.has("userName")&&params.has("password")
-	                      &&params.has("dateJoined")) {
-					String tempUserName = params.get("userName").toString().replace("\"", "");
-					String tempPassword = params.get("password").toString().replace("\"", "");
-					String dateString   = params.get("dateJoined").toString().replace("\"", "");
-					buildCmdData.addProperty("userName", tempUserName);
-					buildCmdData.addProperty("password", tempPassword);
-					buildCmdData.addProperty("dateJoined", dateString);
-					
-				}
-			} else if (action.equals("addpost") ) {
-				System.out.println("Action Not implemented yet.\n");			
 			} else if (action.equals("addcomment") ) {
 				System.out.println("Action Not implemented yet.\n");
 			} else  {
 				// signal that this http command is not recognized
 				System.out.println("Problem parsing the Http cmd string.  ");
-				System.out.println("Unrecognized Data for Action command.\n");
+				System.out.println("Unrecognized Action command.\n");
 			}
 			
 		} else  {
 			System.out.println("Problem parsing the Http cmd string.  ");
 			System.out.println("no command in parameters.\n");
 		}
+		
 		return buildCmdData;
 	}
-	
-	// this is the Json object to pass into Server actions
+
+	// this is the command String
 	public String getActionCmd() {
 		return actionCommand;
 	}
@@ -113,6 +143,12 @@ public class CmdHttp  {
 	// this is the Json object to pass into Server actions
 	public JsonObject getCmdData() {
 		return cmdData;
+	}
+	
+	// this is the Json object to pass into Server actions
+	public String[] splitOnSpace(String input) {
+		String[] spaceStrings = input.split(" ");
+		return spaceStrings;
 	}
 	
 	// this is the Json object to pass into Server actions

@@ -29,7 +29,6 @@ public class ClientThread implements Runnable {
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             System.out.println("Incoming Data...");
             String line = reader.readLine();
-			//String outputString = "";
             while(!line.isEmpty()) {
                 System.out.println(("http line: "+line));
 				if (line.startsWith("GET") || line.startsWith("PUT")) {
@@ -39,7 +38,6 @@ public class ClientThread implements Runnable {
 						System.out.println(("element of http cmd line: "+element ) );
 					}
 					// Save this line of command strings from Http web command
-					// ?? I don't know whether this will catch all data from the web command
 					httpLines.add(elements);
 				}
                 line = reader.readLine();
@@ -47,7 +45,6 @@ public class ClientThread implements Runnable {
                     break;
                 }
             }
-			//System.out.println(outputString);
 			// Create objects to react to GET (retrieve) & PUT (add) requests for users, posts, or comments
 			CmdHttp cmd = new CmdHttp(httpLines);
 			// Create object ready for database action
@@ -73,10 +70,12 @@ public class ClientThread implements Runnable {
 
 			// Now request server action from database
 			JsonObject jsonReturnFromDb = serverCmd.takeAction();
-			String response = jsonReturnFromDb.toString();
-			
+			String jsonResponse = jsonReturnFromDb.toString();
+			int lenJResponse = jsonResponse.length();
+            System.out.println(("Json response string = \n"+jsonResponse));
+
 			// I don't know whether I need to add anything to this String
-			//String response = OUTPUT_HEADERS + (OUTPUT.length() - 2 + outputString.length())  + OUTPUT_END_OF_HEADERS + String.format(OUTPUT,outputString);
+			String response = OUTPUT_HEADERS + (OUTPUT.length() - 2 + lenJResponse)  + OUTPUT_END_OF_HEADERS + String.format(OUTPUT,jsonResponse);
             connection.getOutputStream().write(response.getBytes("UTF-8"));
             // send the output buffer back to the web
             connection.getOutputStream().flush();

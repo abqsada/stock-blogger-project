@@ -137,15 +137,15 @@ public class ServerCmdParse {
 
 	public void addUserAction() {
 		try {
-            System.out.println(("Data provided for adduser command\n"+commandData));
             if(commandData.has("userName")&&commandData.has("password")
             		                      &&commandData.has("dateJoined")) {
             	String userName   = commandData.get("userName").toString().replace("\"", "");
             	String password   = commandData.get("password").toString().replace("\"", "");
             	String dateJoined = commandData.get("dateJoined").toString().replace("\"", "");
     			int newUserId = DataConnection.addUser(userName, Date.valueOf(dateJoined), password);
+    			System.out.println(("User object added to database with userID= :\n"+newUserId));
                 returnData.addProperty("userId",  newUserId);
-    			System.out.println(("User object added to database with userID= :\n"+returnData));
+    			System.out.println(("Put into JsonObject (causing error)= :\n"+returnData));
             	errorCode=500;//error code denoting successful addition of user
             } else {   
             	errorCode=5;//error code denoting incorrect user data
@@ -161,7 +161,6 @@ public class ServerCmdParse {
             if(commandData.has("userName")&&commandData.has("password") ) {
             	String userName   = commandData.get("userName").toString().replace("\"", "");
             	String password   = commandData.get("password").toString().replace("\"", "");
-            	//int userId = 5;
             	User userReturn = DataConnection.getUser(userName, password);
 
                 returnData.addProperty("userId",     userReturn.getUserId());
@@ -229,6 +228,27 @@ public class ServerCmdParse {
                 //returnData.addProperty("postId",  newPostId);
     			System.out.println(("Not implemented fully yet :\n"));
     			System.out.println(("All posts returned from the database with userID= :\n"+userId));
+            	errorCode=600;//error code denoting successful addition of post
+            } else {   
+            	errorCode=6;//error code denoting incorrect data to add post
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
+
+	public void addCommentAction() {
+		try {
+            System.out.println(("Data provided for addcomment command\n"+commandData));
+            if(commandData.has("postId") &&commandData.has("userId") 
+             &&commandData.has("body")&&commandData.has("commentDate")) {
+            	int postId     = commandData.get("postId").getAsInt();
+            	int userId     = commandData.get("userId").getAsInt();
+            	String body   = commandData.get("body").toString().replace("\"", "");
+            	String commentDate = commandData.get("commentDate").toString().replace("\"", "");
+    			int commentId = DataConnection.addComment(postId, userId, body, Date.valueOf(commentDate));
+                returnData.addProperty("commentId",  commentId);
+    			System.out.println(("Comment object added to database with commentID= :\n"+returnData));
             	errorCode=600;//error code denoting successful addition of post
             } else {   
             	errorCode=6;//error code denoting incorrect data to add post

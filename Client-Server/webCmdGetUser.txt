@@ -1,4 +1,24 @@
 localhost:8888 
 GET /user/testuser2/password HTTP/1.1
+localhost:8888/?command=getuserbyid&userId=1
 
-http://localhost:8888/?command=adduser&userName=Silly&password=oldBear&dateJoined=2019-03-30
+localhost:8888/?command=getuser&userName=Silly&password=oldBear
+
+http://localhost:8888/?command=adduser&userName=Same&password=oldThing&dateJoined=2019-01-30
+This parsed correctly and the sql ran.  Then there was some thread exception
+
+
+
+
+I need to prepare my ending documents: 
+ 1. UML diagram of CLient-Server folder
+ 2. description of Json & interface layer
+ 3. Turn this text into a user guide of how to run this beast.
+ 
+ I found out that the Http protocol, which we use, will probably not support 
+   returning any parameters on the connection;
+   although Darian got the client-Thread example to print back not just 'Hello world'
+   but also the echo of the parameters from input
+ 
+ 
+ 

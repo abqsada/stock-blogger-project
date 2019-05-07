@@ -32,6 +32,9 @@ public class MainBusiness {
 	        System.out.println("Also you need to have mySql running");
 	        System.out.println("  and the local database instance connected.");
 	        System.out.println("  and database already created by the stockbloggerDB.sql script.\n");
+	        System.out.println("\n");
+	        System.out.println("  I have inserted a wait point to allow the user to prepare.\n");
+            String moveon = Console.getString("Please enter any key when you are ready to continue: ");
 
 
             
@@ -49,7 +52,7 @@ public class MainBusiness {
 
     public static void displayMenu() {
         System.out.println("COMMAND MENU");
-        System.out.println("startWebCommand     skips this console request, returns null cmd");
+        System.out.println("webCommand     skips this console request, returns null cmd");
         System.out.println("getuser    return a specific user account from the database");
         System.out.println("adduser    add a user account to the database");
         System.out.println("addpost    add a post for a user to the database");
