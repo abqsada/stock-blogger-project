@@ -2,3 +2,5 @@
 *.map
 node_modules
 WebApp/StockBlogger/package-lock.json
+test.json
+test.json
