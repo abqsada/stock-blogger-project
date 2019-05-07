@@ -27,7 +27,7 @@ DROP TABLE IF EXISTS `stockblogger`.`users` ;
 
 CREATE TABLE IF NOT EXISTS `stockblogger`.`users` (
   `user_id` INT(11) NOT NULL AUTO_INCREMENT,
-  `user_name` VARCHAR(45) NOT NULL,
+  `user_name` VARCHAR(45) NOT NULL UNIQUE,
   `date_user_joined` DATE NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`user_id`))

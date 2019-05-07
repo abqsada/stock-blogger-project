@@ -21,6 +21,7 @@ public class test {
 		int ic = DataConnection.addComment(1, 1, "some text", Date.valueOf("2002-12-01"));
 		
 		System.out.println(ic);
+		
 
 	}
 
