@@ -18,6 +18,14 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <a (click)="nextHandler()" class="next" style="position: relative; left: 80px; top: -80px;">Next Page &raquo;</a>
   <a></a>
 </header>
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+    <!-- <app-chart></app-chart> -->
+    <!-- Implements the twitter-search componenett -->
+    <app-twitter-search></app-twitter-search> 
+  </div>
+</div>
 </body>
 <ckeditor [editor]="Editor" data="
         <p>Type here to get the party started!</p>
@@ -34,3 +42,4 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <p></p>
         <p></p>
 "></ckeditor>
+

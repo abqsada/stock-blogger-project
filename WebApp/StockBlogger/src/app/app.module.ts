@@ -21,12 +21,15 @@ import { ContactComponent } from './contact/contact.component';
 import { RegisterpageComponent } from './registerpage/registerpage.component';
 import { ContributeComponent } from './contribute/contribute.component';
 import { TickerSearchComponent } from './ticker-search/ticker-search.component';
+import { TwitterSearchComponent } from './twitter-search/twitter-search.component';
 // 3RD Party Imports
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { DownloaderComponent } from './downloader/downloader.component';
 
-@NgModule({
-  declarations: [
+// This is the Angular Project's entry point
+// Basically the 'meeting place' for all components (classes)
+@NgModule({ //Root App Module
+  declarations: [ // Components added here via Angular CLI
     AppComponent,
     HomeComponent,
     RegisterComponent,
@@ -43,9 +46,10 @@ import { DownloaderComponent } from './downloader/downloader.component';
     RegisterpageComponent,
     ContributeComponent,
     TickerSearchComponent,
-    DownloaderComponent
+    DownloaderComponent,
+    TwitterSearchComponent
   ],
-  imports: [
+  imports: [ // Modules added here via Angular CLI
     BrowserModule,
     HttpClientModule,
     FormsModule,
