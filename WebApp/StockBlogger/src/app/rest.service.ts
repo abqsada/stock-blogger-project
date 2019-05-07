@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http'; // Import the HTTPClient for GET/POST requests
 
 @Injectable({
   providedIn: 'root'
@@ -39,19 +39,19 @@ export class RestService implements OnInit {
   readonly tickerUrl = 'http://localhost:3000';
   readonly twitterUrl =  'http://localhost:3001';
   // Temporary Data
-  values: any;
+  tickers: any;
   hashTags: any;
+  values: any;
 
   // Inject the Http Client into the constructor
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  ngOnInit() {
   }
 
-  // Gets all ticker data from API
+  // Gets ticker data from API (after the user has specified which tickers to search for)
   getTickers() {  // This URL likely needs to be changed, just boilerplate right now
-    this.http.get(this.tickerUrl + '/api/ticker').subscribe(response => {
+    this.http.get(this.tickerUrl).subscribe(response => {
       this.values = response;
       console.log(this.values);
   }, error => {
