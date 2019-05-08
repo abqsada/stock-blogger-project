@@ -50,6 +50,25 @@ public class ClientThread implements Runnable {
 			// Create object ready for database action
 			ServerCmdParse serverCmd = new ServerCmdParse(cmd.getActionCmd(), cmd.getCmdData() );
 
+			/*
+			ServerCmdParse serverCmd = new ServerCmdParse();
+            // This next code was testing Json commands driven from the console
+            // delete this code once the thread is providing commands
+            JsonObject job = new JsonObject();
+            job = MainBusiness.getConsoleCommand();
+            if (job.has("command")) {
+    			String actionCmd = job.get("command").toString().replace("\"", "");
+    			// the action "webCommand" will skip further testing with the console
+    			if(actionCmd.equalsIgnoreCase("webCommand") ) {
+    				//  Use the commands interpreted from the web 
+    				serverCmd = new ServerCmdParse(cmd.getActionCmd(), cmd.getCmdData() );
+        		} else {
+    				//  parse the JsonObject job from the console 
+    				serverCmd = new ServerCmdParse(job);
+        			
+        		}
+    		}
+			 */
 			// Now request server action from database
 			JsonObject jsonReturnFromDb = serverCmd.takeAction();
 			// database interpreter code responds with at least an error code
