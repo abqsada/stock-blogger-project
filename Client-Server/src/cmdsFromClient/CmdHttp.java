@@ -68,76 +68,6 @@ public class CmdHttp  {
 		return action;
 	}
 
-	// This method looks at the desired httpAction, 
-	//   checks whether the data needed for that action has been provided in params
-	//   and builds/returns the JsonObject that contains that data	
-	public JsonObject setDataForCmd (String httpAction, JsonObject params) {
-		JsonObject buildCmdData = new JsonObject();
-		int userId;
-		if (params.has("command")) {
-			String action = params.get("command").toString().replace("\"", "");
-			
-			if (action.equals("getuserbyid") ) {
-            	userId     = params.get("userId").getAsInt();
-            	buildCmdData.addProperty("userId", userId);
-
-			} else if (action.equals("getuser") ) {
-				if(params.has("userName")&&params.has("password") ) {
-            		String userName   = params.get("userName").toString().replace("\"", "");
-            		String password   = params.get("password").toString().replace("\"", "");
-            		buildCmdData.addProperty("userName", userName);
-            		buildCmdData.addProperty("password", password);
-				} else {
-					System.out.println("Params were not given for getuser command.\n");
-				}			
-
-			} else if (action.equals("adduser") ) {
-	            if(params.has("userName")&&params.has("password")
-	             &&params.has("dateJoined")) {
-					String userName = params.get("userName").toString().replace("\"", "");
-					String password = params.get("password").toString().replace("\"", "");
-					String dateJoined   = params.get("dateJoined").toString().replace("\"", "");
-					buildCmdData.addProperty("userName", userName);
-					buildCmdData.addProperty("password", password);
-					buildCmdData.addProperty("dateJoined", dateJoined);
-				} else {
-					System.out.println("Params were not given for adduser command.\n");
-				}			
-					
-			} else if (action.equals("addpost") ) {
-				if(params.has("userId")&&params.has("title")
-	             &&params.has("body")  &&params.has("dateJoined") ) {
-            		userId     = params.get("userId").getAsInt();
-					String title = params.get("title").toString().replace("\"", "");
-					String body = params.get("body").toString().replace("\"", "");
-					String postDate = params.get("postDate").toString().replace("\"", "");
-					buildCmdData.addProperty("userId", userId);
-					buildCmdData.addProperty("title", title);
-					buildCmdData.addProperty("postDate", postDate);
-				} else {
-					System.out.println("Params were not given for addpost command.\n");
-				}			
-			
-			} else if (action.equals("getpost") ) {
-				System.out.println("Action Not implemented yet.\n");			
-			} else if (action.equals("getcomment") ) {
-				System.out.println("Action Not implemented yet.\n");
-			} else if (action.equals("addcomment") ) {
-				System.out.println("Action Not implemented yet.\n");
-			} else  {
-				// signal that this http command is not recognized
-				System.out.println("Problem parsing the Http cmd string.  ");
-				System.out.println("Unrecognized Action command.\n");
-			}
-			
-		} else  {
-			System.out.println("Problem parsing the Http cmd string.  ");
-			System.out.println("no command in parameters.\n");
-		}
-		
-		return buildCmdData;
-	}
-
 	// this is the command String
 	public String getActionCmd() {
 		return actionCommand;
@@ -148,30 +78,26 @@ public class CmdHttp  {
 		return cmdData;
 	}
 	
-	// this is the Json object to pass into Server actions
 	public String[] splitOnSpace(String input) {
 		String[] spaceStrings = input.split(" ");
 		return spaceStrings;
 	}
 	
-	// this is the Json object to pass into Server actions
 	public String[] splitOnSlash(String input) {
 		String[] slashStrings = input.split("/");
 		return slashStrings;
 	}
 	
-	// this is the Json object to pass into Server actions
 	public String[] splitOnAmpersand(String input) {
 		String[] ampStrings = input.split("&");
 		return ampStrings;
 	}
 	
-	// this is the Json object to pass into Server actions
 	public String[] splitOnEquals(String input) {
 		String[] pairs = input.split("=");
 		return pairs;
 	}
-	// this is the Json object to pass into Server actions
+
 	public String removeLeadingChar(String input) {
 		StringBuilder sb = new StringBuilder(input);
 		String newString = sb.deleteCharAt(0).toString();

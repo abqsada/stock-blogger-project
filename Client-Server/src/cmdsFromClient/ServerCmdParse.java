@@ -7,12 +7,10 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.ResultSet;
 //import java.io.IOException;
+import dbConnect.Post;
+import dbConnect.Comment;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonElement;
 
 /**
  * 
@@ -108,15 +106,17 @@ public class ServerCmdParse {
         } else if (actionCmd.equalsIgnoreCase("getuserbyid")) {
         	getUserByIdAction();
 
-        //} else if (actionCmd.equalsIgnoreCase("deluser")) {
-            //System.out.println("Action Not implemented yet.\n");
-        	//delUserAction();
-
         } else if (actionCmd.equalsIgnoreCase("addpost")) {
         	addPostAction();
 
         } else if (actionCmd.equalsIgnoreCase("getuserposts")) {
         	getPostsAction();
+
+        } else if (actionCmd.equalsIgnoreCase("addcomment")) {
+        	addCommentAction();
+
+        } else if (actionCmd.equalsIgnoreCase("getcomments")) {
+        	getCommentsAction();
 
         } else if (actionCmd.equalsIgnoreCase("exit") || 
         		   actionCmd.equalsIgnoreCase("quit")) {
@@ -161,11 +161,12 @@ public class ServerCmdParse {
                 returnData.addProperty("userId",     userReturn.getUserId());
                 returnData.addProperty("userName",   userReturn.getUserName());
                 returnData.addProperty("password",   userReturn.getPassword());
-                //returnData.addProperty("dateJoined", userReturn.getDateJoined());
-            	errorCode=800;//error code denoting successful return of user for display
-    			System.out.println(("userData returned for  :\n"+returnData));
+    			// need to convert this SQL date to String
+                returnData.addProperty("dateJoined", userReturn.getDateJoined().toString());
+            	errorCode=600;//error code denoting successful return of user for display
+    			System.out.println(("userData returned for getuser :\n"+returnData));
             } else {   
-            	errorCode=7;//error code denoting incorrect deletion of user data
+            	errorCode=6;//error code denoting incorrect deletion of user data
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -174,17 +175,18 @@ public class ServerCmdParse {
 	
 	public void getUserByIdAction() {
 		try {
-            System.out.println(("Data provided for getuser command\n"+commandData));
-            if(commandData.has("userName")&&commandData.has("password") ) {
+            System.out.println(("Data provided for getuserbyid command\n"+commandData));
+            if(commandData.has("userId") ) {
             	int userId     = commandData.get("userId").getAsInt();
             	User userReturn = DataConnection.getUserById(userId);
 
                 returnData.addProperty("userId",     userReturn.getUserId());
                 returnData.addProperty("userName",   userReturn.getUserName());
                 returnData.addProperty("password",   userReturn.getPassword());
-                //returnData.addProperty("dateJoined", userReturn.getDateJoined());
-            	errorCode=800;//error code denoting successful return of user for display
-    			System.out.println(("userData returned for  :\n"+returnData));
+    			// need to convert this SQL date to String
+                returnData.addProperty("dateJoined", userReturn.getDateJoined().toString());
+            	errorCode=700;//error code denoting successful return of user for display
+    			System.out.println(("userData returned for getuserbyid :\n"+returnData));
             } else {   
             	errorCode=7;//error code denoting incorrect deletion of user data
             }
@@ -205,9 +207,9 @@ public class ServerCmdParse {
     			int newPostId = DataConnection.addPost(userId, title, body, Date.valueOf(postDate));
                 returnData.addProperty("postId",  newPostId);
     			System.out.println(("User object added to database with userID= :\n"+returnData));
-            	errorCode=600;//error code denoting successful addition of post
+            	errorCode=800;//error code denoting successful addition of post
             } else {   
-            	errorCode=6;//error code denoting incorrect data to add post
+            	errorCode=8;//error code denoting incorrect data to add post
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -220,12 +222,18 @@ public class ServerCmdParse {
             if(commandData.has("userId") ) {
             	int userId     = commandData.get("userId").getAsInt();
             	ResultSet rs = DataConnection.getPostsForUser(userId);
-                //returnData.addProperty("postId",  newPostId);
-    			System.out.println(("Not implemented fully yet :\n"));
-    			System.out.println(("All posts returned from the database with userID= :\n"+userId));
-            	errorCode=600;//error code denoting successful addition of post
+            	rs.first(); //set result set at 1st row
+            	Post post = new Post(rs.getInt(0),	rs.getInt(1), rs.getString(2), rs.getString(3),  rs.getDate(4));
+                returnData.addProperty("postId",   post.getPostId());
+                returnData.addProperty("userId",   post.getUserId());
+                returnData.addProperty("title",    post.getTitle());
+                returnData.addProperty("body",     post.getBody());
+    			// need to convert this SQL date to String
+                returnData.addProperty("postDate", post.getPostDate().toString());
+    			System.out.println(("1st row posts returned from the database with userID= :\n"+userId));
+            	errorCode=900;//error code denoting successful addition of post
             } else {   
-            	errorCode=6;//error code denoting incorrect data to add post
+            	errorCode=9;//error code denoting incorrect data to add post
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -244,13 +252,38 @@ public class ServerCmdParse {
     			int commentId = DataConnection.addComment(postId, userId, body, Date.valueOf(commentDate));
                 returnData.addProperty("commentId",  commentId);
     			System.out.println(("Comment object added to database with commentID= :\n"+returnData));
-            	errorCode=600;//error code denoting successful addition of post
+            	errorCode=1000;//error code denoting successful addition of post
             } else {   
-            	errorCode=6;//error code denoting incorrect data to add post
+            	errorCode=10;//error code denoting incorrect data to add post
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 	}
+
+	public void getCommentsAction() {
+		try {
+            System.out.println(("Data provided for getcomments command\n"+commandData));
+            if(commandData.has("postId") ) {
+            	int postId     = commandData.get("postId").getAsInt();
+            	ResultSet rs = DataConnection.getCommentsForPost(postId);
+            	rs.first(); //set result set at 1st row
+            	Comment comment = new Comment(rs.getInt(0),	rs.getInt(1),	rs.getInt(2), rs.getString(3),  rs.getDate(4));
+                returnData.addProperty("commentId",   comment.getCommentID());
+                returnData.addProperty("postId",   comment.getPostID());
+                returnData.addProperty("userId",   comment.getUserID());
+                returnData.addProperty("body",     comment.getBody());
+    			// need to convert this SQL date to String
+                returnData.addProperty("postDate", comment.getCommentDate().toString());
+    			System.out.println(("1st row Comments returned from the database with postId= :\n"+postId));
+            	errorCode=1100;//error code denoting successful addition of post
+            } else {   
+            	errorCode=11;//error code denoting incorrect data to add post
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	}
+	// 
 
 }
