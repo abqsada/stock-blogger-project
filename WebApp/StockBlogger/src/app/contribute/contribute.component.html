@@ -8,6 +8,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 </style>
 <body>
+
 <!-- Header -->
 <header class="w3-container w3-blue w3-center" style="padding:128px 16px">
   <h1 class="w3-margin w3-jumbo">Contribute</h1>
@@ -18,6 +19,15 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <a (click)="nextHandler()" class="next" style="position: relative; left: 80px; top: -80px;">Next Page &raquo;</a>
   <a></a>
 </header>
+
+<!-- First Grid -->
+<div class="w3-row-padding w3-padding-64 w3-container">
+  <div class="w3-content">
+
+    <!-- Implements the twitter-search componenent -->
+    <app-twitter-search></app-twitter-search> 
+  </div>
+</div>
 </body>
 <ckeditor [editor]="Editor" data="
         <p>Type here to get the party started!</p>
@@ -34,3 +44,4 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <p></p>
         <p></p>
 "></ckeditor>
+

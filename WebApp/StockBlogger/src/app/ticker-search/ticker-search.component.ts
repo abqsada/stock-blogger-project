@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { RestService } from '../rest.service';
 
 @Component({
@@ -17,6 +17,15 @@ export class TickerSearchComponent implements OnInit {
   selectedTicker: string;
   // 'values' object that holds ticker data
   values: any;
+  // Request options for HTTP POST request for sending ticker
+  // to backend for specific ticker data
+  readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+      'Authorization': 'my-auth-token'
+    })
+  };
+
   // Inject the HTTP Client and the RestService
   constructor(private http: HttpClient,
               private rest: RestService) { }
@@ -36,6 +45,11 @@ export class TickerSearchComponent implements OnInit {
     // Only relevant to the ticker a user has entered
     console.log('Ticker Sorting not yet implemented');
   }
+
+  sendTicker(ticker: any): any {
+    return this.http.post(this.rest.tickerUrl + '/api/postticker',
+                   ticker, this.httpOptions);
+  }
   // Handles when a user enters a ticker symbol
   onSubmit() {
     // Acceptable characters for input
@@ -44,11 +58,11 @@ export class TickerSearchComponent implements OnInit {
     if (this.tickerSymbol.valueOf().match(letters)) {
       if (this.tickerSymbol.length < 6 && this.tickerSymbol.length > 2) {
         // Log to Console for Testing
-        console.log('SENDING TICKER: ' + this.tickerSymbol);
+        console.log('SENDING TICKER: ' + this.tickerSymbol + ' TO BACKEND!!');
         this.errorMessage = '';
         this.selectedTicker = 'Displaying Stock Data for: ' + this.tickerSymbol.toUpperCase();
         // Find data relevant only to the users specified ticker
-        this.sortTickers(this.tickerSymbol);
+        this.sendTicker(this.tickerSymbol); // POST ticker to backend
         return this.tickerSymbol;
       }
 
