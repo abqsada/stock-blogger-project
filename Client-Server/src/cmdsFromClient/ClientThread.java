@@ -33,7 +33,7 @@ public class ClientThread implements Runnable {
                 System.out.println(("http line: "+line));
 				if (line.startsWith("GET") || line.startsWith("PUT")) {
 					// split the command line into separate strings for later action
-					String[] elements = line.split(" ");
+					String[] elements = line.split("/");
 					for(String element : elements) {
 						System.out.println(("element of http cmd line: "+element ) );
 					}

@@ -34,9 +34,11 @@ public class CmdHttp  {
 			}
 			// process the http line into our desired parameters
 			// split along slashes to get major portions of string
-			String[] pieces = splitOnSlash(elements[1]);
+			// Really I should Remove the string from Http till end
+			// So that the remaining string (split on&) would allow SPACES in it.
+			String[] pieces = splitOnSpace(elements[1]);
 			// split along ampersand to get key=value pairs
-			String[] params = splitOnAmpersand(pieces[1]);
+			String[] params = splitOnAmpersand(pieces[0]);
 			// split each pair to get values
 			int sizeParms = params.length;
 			for(int i=0; i<sizeParms; i++) {
