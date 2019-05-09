@@ -69,8 +69,9 @@ a {
     padding: 20px;
   }
 
+  /* Round the image next to the contact form on this page */
   img {
-    border-radius: 50%;
+    border-radius: 25px;
   }
   
   /* Clear floats after the columns */
