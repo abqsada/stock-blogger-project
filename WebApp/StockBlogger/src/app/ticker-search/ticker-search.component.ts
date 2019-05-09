@@ -21,8 +21,7 @@ export class TickerSearchComponent implements OnInit {
   // to backend for specific ticker data
   readonly httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-      'Authorization': 'my-auth-token'
+      'Content-Type':  'application/json'
     })
   };
 
@@ -37,6 +36,10 @@ export class TickerSearchComponent implements OnInit {
   getTickers() {
     this.rest.getTickers(); // Gets all available tickers from rest.service
     this.sortTickers(this.values);
+  }
+
+  testTicker() {
+    this.rest.setTickers();
   }
 
   // Sorts Ticker data against users searched ticker

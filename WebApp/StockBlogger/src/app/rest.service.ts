@@ -28,6 +28,15 @@ export class RestService implements OnInit {
     name: String;
     currency: String;
     price: number;
+    priceOpen: number;
+    weekLow: number;
+    weekHigh: number;
+    dayLow: number;
+    dayHigh: number;
+    volume: number;
+    stockExchange: String;
+    timeZone: String;
+    lastTrade: any;
   };
   // Declare the twitter object with variables to be used in displaying twitter data
   private twitterObject: {
@@ -53,10 +62,23 @@ export class RestService implements OnInit {
   getTickers() {  // This URL likely needs to be changed, just boilerplate right now
     this.http.get(this.tickerUrl + '/api/ticker').subscribe(response => {
       this.values = response;
+      console.log(response);
       console.log(this.values);
   }, error => {
     this.serverNotConnected();
     });
+  }
+  setTickers() {
+    this.tickerObject.name = this.values.data[0]['name'];
+    this.tickerObject.currency = this.values.data[0]['currency'];
+    this.tickerObject.price = this.values.data[0]['price'];
+    this.tickerObject.symbol = this.values.data[0]['symbol'];
+    this.tickerObject.dayHigh = this.values.data[0]['day_high'];
+    console.log(this.tickerObject.name);
+    console.log(this.tickerObject.currency);
+    console.log(this.tickerObject.price);
+    console.log(this.tickerObject.symbol);
+    console.log(this.tickerObject.dayHigh);
   }
 
   //  Http Get request for the generated twitter data from the twitter API
