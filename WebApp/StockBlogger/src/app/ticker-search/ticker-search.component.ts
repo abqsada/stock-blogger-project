@@ -15,8 +15,9 @@ export class TickerSearchComponent implements OnInit {
   errorMessage: string;
   // Handles displaying which ticker was selected
   selectedTicker: string;
-  // 'values' object that holds ticker data
-  values: any;
+  showTicker: boolean = false;
+
+  private tickerObject: any;
   // Request options for HTTP POST request for sending ticker
   // to backend for specific ticker data
   readonly httpOptions = {
@@ -35,11 +36,8 @@ export class TickerSearchComponent implements OnInit {
 
   getTickers() {
     this.rest.getTickers(); // Gets all available tickers from rest.service
+    this.tickerObject = this.rest.tickerObject;
     // this.sortTickers(this.values);
-  }
-
-  testTicker() {
-    this.rest.setTickers();
   }
 
   // Sorts Ticker data against users searched ticker
@@ -52,6 +50,9 @@ export class TickerSearchComponent implements OnInit {
   sendTicker(ticker: any): any {
     return this.http.post(this.rest.tickerUrl + '/api/postticker',
                           ticker, this.httpOptions);
+  }
+  showTickers() {
+    this.showTicker = true;
   }
   // Handles when a user enters a ticker symbol
   onSubmit() {

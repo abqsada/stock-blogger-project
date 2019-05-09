@@ -23,10 +23,10 @@ export class RestService implements OnInit {
     postDate: Date;
   };
   // Declare the ticker object with variables to be used in displaying ticker data
-  private tickerObject: {
+  public tickerObject: {
     symbol: String;
     name: String;
-    currency: String;
+    currency: any;
     price: number;
     priceOpen: number;
     weekLow: number;
@@ -34,7 +34,7 @@ export class RestService implements OnInit {
     dayLow: number;
     dayHigh: number;
     volume: number;
-    stockExchange: String;
+    stock_exchange_long: String;
     timeZone: String;
     lastTrade: any;
   };
@@ -48,42 +48,54 @@ export class RestService implements OnInit {
   readonly tickerUrl: any = 'http://localhost:3000';
   readonly twitterUrl: any =  'http://localhost:3001';
   readonly userUrl: any = 'http://locahlost:3002';
+  readonly testTickers: any = 'assets/testTickers.json';
+  readonly testHashTags: any = 'assets/testTwitter.txt';
   // Temporary Data
-  // tickers: any;
   hashTags: any;
-  values: any;
+  values: any; // Handles ALL incoming Raw JSON data
+  tickers: any; // Handles the tickers array
+  ticker: any; // Handles individual ticker objects
+  first: any;
+  second: any;
 
   // Inject the Http Client into the constructor
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
   }
+  public getTickerObject(): any {
+    return this.tickerObject;
+  }
 
-  // Gets all ticker data from API
-  getTickers(): void {  // Through our HTTP Client, make a get request to our tickerUrl (asks the backend nicely)
-                                                // 'Subscribe' to the response we get back from the backend
-    this.http.get(this.tickerUrl + '/api/ticker').subscribe(response => { // Subscribing opens a data stream to our values variable
-      this.values = response; // This allows us to not only use the incoming data, but store it and share it with other classes.
-      console.log(this.values); // Log the whole JSON Object to the console
+  // Gets all ticker data from API and assigns the tickers to local variables
+  public getTickers(): void {  // Through our HTTP Client, make a get request to our tickerUrl (asks the backend nicely)
+    // 'Subscribe' to the response we get back from the backend. Subscribing opens a data stream to our values variable
+    // This allows us to not only use the incoming data, but store it and share it with other classes.
+    // Currently getting test data!
+    this.http.get(/*this.tickerUrl*/ this.testTickers ).subscribe(response => {
+      this.values = response; // Example: {symbols_requested: 3, symbols_returned: 2, data: Array(2)}
+      this.tickers = response['data']; // Get tickers object
+      this.first = response['data'][0]; // Get the first ticker object
+      this.second = response['data'][1]; // Get the second ticker object
+
+      this.tickerObject = this.first;
+
+      console.log(this.values); // Log the whole data JSON Object to the console
+      console.log(this.tickers); // Log the ticker objects to the console
+      console.log(this.tickerObject);
+      console.log('Testing ticker symbol: ' + this.tickerObject.symbol);
+      console.log('Testing ticker name: ' + this.tickerObject.name);
+      console.log('Testing ticker currency: ' + this.tickerObject.currency);
+      console.log('Testing ticker price: ' + this.tickerObject.price);
+      console.log('Testing ticker stock: ' + this.tickerObject.stock_exchange_long);
+
   }, error => { // Handles any thrown errors by the HTTP Client
     this.serverNotConnected(); // Log the error to the console
     });
   }
-  setTickers() {
-    this.tickerObject.name = this.values.data[0];//['name'];
-    // this.tickerObject.currency = this.values.data[0]['currency'];
-    // this.tickerObject.price = this.values.data[0]['price'];
-    // this.tickerObject.symbol = this.values.data[0]['symbol'];
-    // this.tickerObject.dayHigh = this.values.data[0]['day_high'];
-    console.log(this.tickerObject.name);
-    // console.log(this.tickerObject.currency);
-    // console.log(this.tickerObject.price);
-    // console.log(this.tickerObject.symbol);
-    // console.log(this.tickerObject.dayHigh);
-  }
 
   //  Http Get request for the generated twitter data from the twitter API
-  getHashtags() { // The twitter api is currently designed to post to the localhost port 3001
+  public getHashtags() { // The twitter api is currently designed to post to the localhost port 3001
     console.log('Getting Hashtags!');
     this.http.get(this.twitterUrl).subscribe((res) => {
       console.log(res);
@@ -193,8 +205,8 @@ export class RestService implements OnInit {
     this.blogObject.postId = postId;
   }
   // Begin ticker methods
-  public ticker(symbol: String, name: String, currency: String, price: number) {
-    this.tickerObject.symbol = symbol;
+  public assignTicker(symbol: String, name: String, currency: String, price: number) {
+    this.ticker['symbol'] = symbol;
     this.tickerObject.name = name;
     this.tickerObject.currency = currency;
     this.tickerObject.price = price;
