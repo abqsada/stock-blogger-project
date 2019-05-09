@@ -1,4 +1,32 @@
+This is the command that the web page would provide
+  This creates the basic connection, but then it doesn't do anything
 localhost:8888 
-GET /user/testuser2/password HTTP/1.1
 
-http://localhost:8888/?command=adduser&userName=Silly&password=oldBear&dateJoined=2019-03-30
+  This command adds a user to the database
+localhost:8888?command=adduser&userName=Same&password=oldThing&dateJoined=2019-01-30
+
+  This command gets a user supplying the integer ID
+localhost:8888?command=getuserbyid&userId=1
+
+  This command gets a user supplying the userName & password
+localhost:8888?command=getuser&userName=Silly&password=oldBear
+
+  This command adds a post for userId to the database
+localhost:8888?command=addpost&userId=1&title=TheseWords&body=ShouldSplit&postDate=2019-02-07
+
+  This command gets all posts supplying this userId
+localhost:8888?command=getuserposts&userId=2
+
+  This command adds a comment for user#1 to the database
+localhost:8888?command=addcomment&userId=1&title=TheseWords&body=ShouldSplit&postDate=2019-02-07
+
+  This command gets all comments supplying the postId
+localhost:8888?command=getuserposts&postId=3
+
+  This command ends server execution
+localhost:8888?command=exit
+
+
+
+ 
+ 
