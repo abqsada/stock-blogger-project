@@ -16,7 +16,7 @@ public class Comment {
 	// Instance variables to represent the different attributes of a Comment
 	private int commentId;
     private int postId;
-    private int userId; // Change to: String userName in DB
+    private int userId;
     private String body;
     private Date commentDate;
 
