@@ -68,6 +68,11 @@ a {
     margin-top: 6px;
     padding: 20px;
   }
+
+  /* Round the image next to the contact form on this page */
+  img {
+    border-radius: 25px;
+  }
   
   /* Clear floats after the columns */
   .row:after {
@@ -82,4 +87,7 @@ a {
       width: 100%;
       margin-top: 0;
     }
+
+
+
   }
