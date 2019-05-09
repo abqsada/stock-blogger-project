@@ -8,16 +8,18 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 </style>
 <body>
+  
 <!-- Header -->
 <header class="w3-container w3-blue w3-center" style="padding:128px 16px">
   <h1 class="w3-margin w3-jumbo">Contribute</h1>
   <div align=center>
-      <img src="https://user-images.githubusercontent.com/10379994/31985754-c56b8dba-b998-11e7-9705-a7f984433049.png" width="160" height="120" alt="vscode">
+      <img src="https://www.maxpixel.net/static/photo/1x/Business-Finance-Currency-Money-Dollar-Cash-1924523.png" width="120" height="140" alt="logo">
   </div>
   <a (click)="prevHandler()" class="previous" style="position: relative; left: -110px; top: -80px;">&laquo; Previous Page </a>
   <a (click)="nextHandler()" class="next" style="position: relative; left: 80px; top: -80px;">Next Page &raquo;</a>
   <a></a>
 </header>
+
 <!-- First Grid -->
 <div class="w3-row-padding w3-padding-64 w3-container">
   <div class="w3-content">
@@ -27,6 +29,8 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   </div>
 </div>
 </body>
+
+<!-- This is the text editor with all built in functionality to create the user post-->
 <ckeditor [editor]="Editor" data="
         <p>Type here to get the party started!</p>
         <p></p>
@@ -40,6 +44,26 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
         <p></p>
         <p></p>
         <p></p>
-        <p></p>
 "></ckeditor>
+
+<!-- Second Grid -->
+<div class="w3-container w3-black w3-center w3-opacity w3-padding-64">
+    <div align=middle>
+      </div>
+    </div>
+
+<!-- Footer -->
+<!-- Add social media stickers at the bottom of the page -->
+<footer class="w3-container w3-padding-64 w3-center w3-opacity">  
+    <div class="w3-xlarge w3-padding-32">
+      <div class="w3-xlarge w3-padding-32">
+        <i class="fa fa-facebook-official w3-hover-opacity"></i>
+        <i class="fa fa-instagram w3-hover-opacity"></i>
+        <i class="fa fa-snapchat w3-hover-opacity"></i>
+        <i class="fa fa-pinterest-p w3-hover-opacity"></i>
+        <i class="fa fa-twitter w3-hover-opacity"></i>
+        <i class="fa fa-linkedin w3-hover-opacity"></i>
+     </div>
+   </div>
+  </footer>
 
