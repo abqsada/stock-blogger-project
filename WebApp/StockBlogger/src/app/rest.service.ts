@@ -48,7 +48,7 @@ export class RestService implements OnInit {
   readonly tickerUrl: any = 'http://localhost:3000';
   readonly twitterUrl: any =  'http://localhost:3001';
   readonly userUrl: any = 'http://locahlost:3002';
-  readonly testTickers: any = 'assets/testTickers.json';
+  readonly testTickers: any = 'assets/testData.json';
   readonly testHashTags: any = 'assets/testTwitter.txt';
   // Temporary Data
   hashTags: any;
