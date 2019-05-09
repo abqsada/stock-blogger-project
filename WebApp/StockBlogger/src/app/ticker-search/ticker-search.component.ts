@@ -35,7 +35,7 @@ export class TickerSearchComponent implements OnInit {
 
   getTickers() {
     this.rest.getTickers(); // Gets all available tickers from rest.service
-    this.sortTickers(this.values);
+    // this.sortTickers(this.values);
   }
 
   testTicker() {
@@ -51,7 +51,7 @@ export class TickerSearchComponent implements OnInit {
 
   sendTicker(ticker: any): any {
     return this.http.post(this.rest.tickerUrl + '/api/postticker',
-                   ticker, this.httpOptions);
+                          ticker, this.httpOptions);
   }
   // Handles when a user enters a ticker symbol
   onSubmit() {

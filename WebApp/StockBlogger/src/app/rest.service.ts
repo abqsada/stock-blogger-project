@@ -1,5 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http'; // Import the HTTPClient for GET/POST requests
 
 @Injectable({
   providedIn: 'root'
@@ -45,17 +45,18 @@ export class RestService implements OnInit {
     volume: any
   };
   // baseURL's for each API
-  readonly tickerUrl = 'http://localhost:3000';
-  readonly twitterUrl =  'http://localhost:3001';
+  readonly tickerUrl: any = 'http://localhost:3000';
+  readonly twitterUrl: any =  'http://localhost:3001';
+  readonly userUrl: any = 'http://locahlost:3002';
   // Temporary Data
-  values: any;
+  // tickers: any;
   hashTags: any;
+  values: any;
 
   // Inject the Http Client into the constructor
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  ngOnInit() {
   }
 
   // Gets all ticker data from API
@@ -83,8 +84,11 @@ export class RestService implements OnInit {
 
   //  Http Get request for the generated twitter data from the twitter API
   getHashtags() { // The twitter api is currently designed to post to the localhost port 3001
-    this.http.get(this.twitterUrl).subscribe(response => {
-      this.hashTags = response;
+    console.log('Getting Hashtags!');
+    this.http.get(this.twitterUrl).subscribe((res) => {
+      console.log(res);
+      this.hashTags = res;
+      console.log('Incoming Hashtags: ');
       console.log(this.hashTags);
     }, error => {
     this.serverNotConnected();
@@ -93,8 +97,8 @@ export class RestService implements OnInit {
 
   // Begin user account methods
   public getAccount() { // Makes HTTP get request to snag account data from API
-
-    this.http.get(this.tickerUrl + '/api/account').subscribe(response => {
+    console.log("Getting Account!");
+    this.http.get(this.userUrl).subscribe(response => {
       this.incomingAccount = response;
       console.log(this.incomingAccount);
   }, error => {
