@@ -59,26 +59,26 @@ export class RestService implements OnInit {
   }
 
   // Gets all ticker data from API
-  getTickers() {  // This URL likely needs to be changed, just boilerplate right now
-    this.http.get(this.tickerUrl + '/api/ticker').subscribe(response => {
-      this.values = response;
-      console.log(response);
-      console.log(this.values);
-  }, error => {
-    this.serverNotConnected();
+  getTickers(): void {  // Through our HTTP Client, make a get request to our tickerUrl (asks the backend nicely)
+                                                // 'Subscribe' to the response we get back from the backend
+    this.http.get(this.tickerUrl + '/api/ticker').subscribe(response => { // Subscribing opens a data stream to our values variable
+      this.values = response; // This allows us to not only use the incoming data, but store it and share it with other classes.
+      console.log(this.values); // Log the whole JSON Object to the console
+  }, error => { // Handles any thrown errors by the HTTP Client
+    this.serverNotConnected(); // Log the error to the console
     });
   }
   setTickers() {
-    this.tickerObject.name = this.values.data[0]['name'];
-    this.tickerObject.currency = this.values.data[0]['currency'];
-    this.tickerObject.price = this.values.data[0]['price'];
-    this.tickerObject.symbol = this.values.data[0]['symbol'];
-    this.tickerObject.dayHigh = this.values.data[0]['day_high'];
+    this.tickerObject.name = this.values.data[0];//['name'];
+    // this.tickerObject.currency = this.values.data[0]['currency'];
+    // this.tickerObject.price = this.values.data[0]['price'];
+    // this.tickerObject.symbol = this.values.data[0]['symbol'];
+    // this.tickerObject.dayHigh = this.values.data[0]['day_high'];
     console.log(this.tickerObject.name);
-    console.log(this.tickerObject.currency);
-    console.log(this.tickerObject.price);
-    console.log(this.tickerObject.symbol);
-    console.log(this.tickerObject.dayHigh);
+    // console.log(this.tickerObject.currency);
+    // console.log(this.tickerObject.price);
+    // console.log(this.tickerObject.symbol);
+    // console.log(this.tickerObject.dayHigh);
   }
 
   //  Http Get request for the generated twitter data from the twitter API

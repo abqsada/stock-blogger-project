@@ -18,10 +18,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <div align=center *ngIf="selectedTicker">
             <a class="w3-margin" style="color:green">{{selectedTicker}}</a><p></p>
             <iframe src="https://giphy.com/embed/12Eo7WogCAoj84" width="480" height="361" frameBorder="0"allowFullScreen></iframe>
-                <button (click)="testTicker()" class="mr-sm-2 w3-hover-white" style="position: absolute;" id="ticker">Press after data is recieved</button>
+                <button (click)="testTicker()" class="mr-sm-2 w3-hover-white" style="position: absolute;" id="ticker">Show Data</button>
                 <div>
 
                         <li *ngFor="let value of values">
+                                {{values}}
                                 {{tickerObject.name}}
                                 {{tickerObject.currency}}
                                 {{tickerObject.price}}
