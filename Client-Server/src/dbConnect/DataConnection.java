@@ -4,7 +4,7 @@
  * functionality. 
  */
 
-package dbConnect;
+
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -36,21 +36,28 @@ public class DataConnection {
 
 	// Get user once logged in
 	public static User getUser(String username, String password) throws SQLException{
-		String query = "select * from users where user_name = \"" + username + "\" and password = \"" + password+"\"";
+		User user = null;
+		String query = "select * from users where user_name = ? and password = ?";
 		pstmt = connection.prepareStatement(query);
-		pstmt.executeQuery();
-		rs = pstmt.getResultSet();
-		User user = new User(rs.getInt(0),	rs.getString(1), rs.getDate(2), rs.getString(3));
+		pstmt.setString(1, username);
+		pstmt.setString(2, password);
+		rs = pstmt.executeQuery();
+		while (rs.next()) {
+			user = new User(rs.getInt(1),	rs.getString(2), rs.getDate(3), rs.getString(4));
+		}
 		return user;
 	}
 
 	// Get user once logged in
 	public static User getUserById(int user_id) throws SQLException{
-		String query = "select * from users where user_id = " + user_id;
+		User user = null;
+		String query = "select * from users where user_id = ?";
 		pstmt = connection.prepareStatement(query);
-		pstmt.executeQuery();
-		rs = pstmt.getResultSet();
-		User user = new User(rs.getInt(0),	rs.getString(1), rs.getDate(2), rs.getString(3));
+		pstmt.setInt(1, user_id);
+		rs = pstmt.executeQuery();
+		while (rs.next()) {
+			user = new User(rs.getInt(1),	rs.getString(2), rs.getDate(3), rs.getString(4));
+		}
 		return user;
 	}
 	
