@@ -89,4 +89,14 @@ public class User {
         return job;
     }
 
+    public User() {}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public void setDate(Date date) {
+		this.dateJoined = date;
+	}
+
 }

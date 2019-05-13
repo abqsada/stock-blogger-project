@@ -22,6 +22,10 @@ public class test {
 		
 		System.out.println(ic);
 
+		User user = DataConnection.getUserById(1);
+
+		ResultSet postSearch = DataConnection.searchPosts("some");
+		System.out.println(postSearch.toString());
 	}
 
 }

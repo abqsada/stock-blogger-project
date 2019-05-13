@@ -38,9 +38,14 @@ public class DataConnection {
 	public static User getUserById(int user_id) throws SQLException{
 		String query = "select * from users where user_id = " + user_id;
 		pstmt = connection.prepareStatement(query);
-		pstmt.executeQuery();
-		rs = pstmt.getResultSet();
-		User user = new User(rs.getInt(0),	rs.getString(1), rs.getDate(2), rs.getString(3));
+		rs = pstmt.executeQuery();
+		User user = new User();
+		user.setUserId(rs.getInt("user_id"));
+		user.setUserName(rs.getString("user_name"));
+		user.setDate(rs.getDate("date_user_joined"));
+		user.setPassword(rs.getString("password"));
+
+		//User user = new User(rs.getInt(0),	rs.getString(1), rs.getDate(2), rs.getString(3));
 		return user;
 	}
 	
