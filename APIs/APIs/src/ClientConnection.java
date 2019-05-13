@@ -28,7 +28,7 @@ public class ClientConnection implements Runnable {
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             System.out.println("Incoming Data...");
             String line = reader.readLine();
-            // If line is not empty, print the inputstream Reader. If it is empty, break out of loop.
+            // If line is not empty, print the Inputstream Reader. If it is empty, break out of loop.
             while(!line.isEmpty()) 
             {
             		System.out.println(line);

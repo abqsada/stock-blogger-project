@@ -28,7 +28,7 @@ import { DownloaderComponent } from './downloader/downloader.component';
 
 // This is the Angular Project's entry point
 // Basically the 'meeting place' for all components (classes)
-@NgModule({ //Root App Module
+@NgModule({ // Root App Module
   declarations: [ // Components added here via Angular CLI
     AppComponent,
     HomeComponent,

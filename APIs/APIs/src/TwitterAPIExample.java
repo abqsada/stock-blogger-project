@@ -1,3 +1,5 @@
+
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import twitter4j.*;
@@ -17,7 +19,7 @@ public class TwitterAPIExample {
 	 static Integer getTrendLocationId(String locationName) 
 	 {
 		    int idTrendLocation = 0;
-		    //Getting Twitters trend location just by taking a String and converting it to a WoeID
+		    //Getting Twitters trend location just 	by taking a String and converting it to a WoeID
 		    try {
 
 		        ConfigurationBuilder cb = new ConfigurationBuilder();

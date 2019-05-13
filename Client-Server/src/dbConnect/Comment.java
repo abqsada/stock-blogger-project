@@ -49,6 +49,10 @@ public class Comment {
 
     // getters and setters for User object.
  	// setters update the database as well
+    public int getCommentID() {
+        return commentId;
+    }
+
     public int getPostID() {
         return postId;
     }

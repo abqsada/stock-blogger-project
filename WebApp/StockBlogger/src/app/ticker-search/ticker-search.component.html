@@ -2,21 +2,126 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
-.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
-.fa-anchor,.fa-coffee {font-size:200px}
-</style>
 
 <form (submit)="onSubmit()" align="center">
-    <p class="w3-margin w3-jumbo">Enter a ticker symbol here! (Example: AAPL)</p>
-    <input [(ngModel)]="tickerSymbol" name="ticker" class="form-control mr-sm-2" style="position: relative;" type="ticker">
-    <button (click)="getTickers()" class="mr-sm-2 w3-hover-white" style="position: absolute;" id="ticker">Submit</button>
-    <div *ngIf="errorMessage">
-            <a class="w3-margin" style="color:red">{{errorMessage}}</a>
-    </div> 
-    <div align=center *ngIf="selectedTicker">
-            <a class="w3-margin" style="color:green">{{selectedTicker}}</a><p></p>
-            <iframe src="https://giphy.com/embed/12Eo7WogCAoj84" width="480" height="361" frameBorder="0"allowFullScreen></iframe>
-    </div> 
+        <p class="w3-margin w3-jumbo">Enter a ticker symbol here! (Example: AAPL/MSFT)</p>
+        <!-- <p class="w3-margin">*Available Ticker Data Available For: {{rest.first.name}}, {{rest.second.name}}, {{rest.third.name}}, {{rest.fourth.name}}, and {{rest.fifth.name}}*</p> -->
+        <p class="w3-margin">*Available Ticker Data Available For: Apple Inc., Microsoft Corporation, Netflix, Inc., Teva Pharmaceutical Industries Limited, and Tesla, Inc.*</p>
+        <p class="w3-margin">*You might have to give our servers a nudge and click submit a few times*</p>
+        <input [(ngModel)]="tickerSymbol" name="ticker" class="form-control mr-sm-2" style="position: relative;"
+                type="ticker">
+        <button (click)="getTickers()" class="mr-sm-2 w3-hover-white" id="ticker">Submit</button>
+        <div *ngIf="tickerSymbol != 'AAPL' || 'MSFT' || 'TSLA' || 'NFLX' || 'TEVA'">
+                <a class="w3-margin" style="color:red">{{errorMessage}}</a>
+        </div>
+        <div align=center *ngIf="showTicker == true">
+                <a class="w3-margin" style="color:green">Displaying Stock info for: {{tickerObject.name}}</a>
+                <p></p>
+                <ul>
+                        <li>Ticker Symbol: {{tickerObject.symbol}}</li>
+                        <li>Stock Name: {{tickerObject.name}}</li>
+                        <li>Stock Exchange: : {{tickerObject.stock_exchange_long}}</li>
+                        <li>Stock Volume: {{tickerObject.volume}}</li>
+                        <li>Last Trade: {{tickerObject.last_trade_time}}</li>
+                        <li>Stock Price: ${{tickerObject.price}}</li>
+                        <li>Stock Price Open: ${{tickerObject.price_open}}</li>
+                        <li>Stock Currency: {{tickerObject.currency}}</li>
+                        <li>Day High: ${{tickerObject.day_high}}</li>
+                        <li>Day Low: ${{tickerObject.day_low}}</li>
+                        <li>Time Zone: {{tickerObject.timezone}}</li>
+                </ul>
+                <p></p>
+                <iframe src="https://giphy.com/embed/12Eo7WogCAoj84" width="480" height="361" frameBorder="0"allowFullScreen></iframe>
+        </div>
+        <!-- REFACTORED REPETITIVE CODE -->
+        <!-- <div align=center *ngIf="tickerSymbol == 'AAPL'">
+                <a class="w3-margin" style="color:green">{{selectedTicker}}</a>
+                <p></p>
+                <ul>
+                        <li>Ticker Symbol: {{rest.first.symbol}}</li>
+                        <li>Stock Name: {{rest.first.name}}</li>
+                        <li>Stock Exchange: : {{rest.first.stock_exchange_long}}</li>
+                        <li>Stock Volume: {{rest.first.volume}}</li>
+                        <li>Last Trade: {{rest.first.last_trade_time}}</li>
+                        <li>Stock Price: ${{rest.first.price}}</li>
+                        <li>Stock Price Open: ${{rest.first.price_open}}</li>
+                        <li>Stock Currency: {{rest.first.currency}}</li>
+                        <li>Day High: ${{rest.first.day_high}}</li>
+                        <li>Day Low: ${{rest.first.day_low}}</li>
+                        <li>Time Zone: {{rest.first.timezone}}</li>
+                </ul>
+                <p></p>
+        </div>
+        <div align=center *ngIf="tickerSymbol == 'MSFT'">
+                <a class="w3-margin" style="color:green">{{selectedTicker}}</a>
+                <p></p>
+                <ul>
+                        <li>Ticker Symbol: {{rest.second.symbol}}</li>
+                        <li>Stock Name: {{rest.second.name}}</li>
+                        <li>Stock Exchange: : {{rest.second.stock_exchange_long}}</li>
+                        <li>Stock Volume: {{rest.second.volume}}</li>
+                        <li>Last Trade: {{rest.second.last_trade_time}}</li>
+                        <li>Stock Price: ${{rest.second.price}}</li>
+                        <li>Stock Price Open: ${{rest.second.price_open}}</li>
+                        <li>Stock Currency: {{rest.second.currency}}</li>
+                        <li>Day High: ${{rest.second.day_high}}</li>
+                        <li>Day Low: ${{rest.second.day_low}}</li>
+                        <li>Time Zone: {{rest.second.timezone}}</li>
+                </ul>
+                <p></p>
+        </div>
+        <div align=center *ngIf="tickerSymbol == 'NFLX'">
+                <a class="w3-margin" style="color:green">{{selectedTicker}}</a>
+                <p></p>
+                <ul>
+                        <li>Ticker Symbol: {{rest.third.symbol}}</li>
+                        <li>Stock Name: {{rest.third.name}}</li>
+                        <li>Stock Exchange: : {{rest.third.stock_exchange_long}}</li>
+                        <li>Stock Volume: {{rest.third.volume}}</li>
+                        <li>Last Trade: {{rest.third.last_trade_time}}</li>
+                        <li>Stock Price: ${{rest.third.price}}</li>
+                        <li>Stock Price Open: ${{rest.third.price_open}}</li>
+                        <li>Stock Currency: {{rest.third.currency}}</li>
+                        <li>Day High: ${{rest.third.day_high}}</li>
+                        <li>Day Low: ${{rest.third.day_low}}</li>
+                        <li>Time Zone: {{rest.third.timezone}}</li>
+                </ul>
+                <p></p>
+        </div>
+        <div align=center *ngIf="tickerSymbol == 'TEVA'">
+                <a class="w3-margin" style="color:green">{{selectedTicker}}</a>
+                <p></p>
+                <ul>
+                        <li>Ticker Symbol: {{rest.fourth.symbol}}</li>
+                        <li>Stock Name: {{rest.fourth.name}}</li>
+                        <li>Stock Exchange: : {{rest.fourth.stock_exchange_long}}</li>
+                        <li>Stock Volume: {{rest.fourth.volume}}</li>
+                        <li>Last Trade: {{rest.fourth.last_trade_time}}</li>
+                        <li>Stock Price: ${{rest.fourth.price}}</li>
+                        <li>Stock Price Open: ${{rest.fourth.price_open}}</li>
+                        <li>Stock Currency: {{rest.fourth.currency}}</li>
+                        <li>Day High: ${{rest.fourth.day_high}}</li>
+                        <li>Day Low: ${{rest.fourth.day_low}}</li>
+                        <li>Time Zone: {{rest.fourth.timezone}}</li>
+                </ul>
+                <p></p>
+        </div>
+        <div align=center *ngIf="tickerSymbol == 'TSLA'">
+                <a class="w3-margin" style="color:green">{{selectedTicker}}</a>
+                <p></p>
+                <ul>
+                        <li>Ticker Symbol: {{rest.fifth.symbol}}</li>
+                        <li>Stock Name: {{rest.fifth.name}}</li>
+                        <li>Stock Exchange: : {{rest.fifth.stock_exchange_long}}</li>
+                        <li>Stock Volume: {{rest.fifth.volume}}</li>
+                        <li>Last Trade: {{rest.fifth.last_trade_time}}</li>
+                        <li>Stock Price: ${{rest.fifth.price}}</li>
+                        <li>Stock Price Open: ${{rest.fifth.price_open}}</li>
+                        <li>Stock Currency: {{rest.fifth.currency}}</li>
+                        <li>Day High: ${{rest.fifth.day_high}}</li>
+                        <li>Day Low: ${{rest.fifth.day_low}}</li>
+                        <li>Time Zone: {{rest.fifth.timezone}}</li>
+                </ul>
+                <p></p>
+        </div> -->
 </form>

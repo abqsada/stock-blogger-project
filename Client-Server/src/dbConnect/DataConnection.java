@@ -1,4 +1,10 @@
-package dbConnect;
+/*
+ * This a DataConnection class which implements methods to connect and interact with the database.
+ * These methods will be called within the appropriate Class ie. User/Comment/Post to implement various
+ * functionality. 
+ */
+
+
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -11,41 +17,46 @@ import java.sql.PreparedStatement;
 
 public class DataConnection {
 	
+	// login information for the database connection
 	private static final String USERNAME = "dbuser";
 	private static final String PASSWORD = "user";
 	private static final String CONN = "jdbc:mysql://localhost/stockblogger";
 	
+	// instance variables for sql statements or stored procedures (stored proc)
 	private static PreparedStatement pstmt = null;
 	private static CallableStatement stmt = null;
 	private static ResultSet rs = null;
 	private static Connection connection = null;
 	
+	// establishes a connection to the database
 	public static Connection getConnection() throws SQLException {
 		return connection = DriverManager.getConnection(CONN, USERNAME, PASSWORD);
 	}
 
 	// Get user once logged in
 	public static User getUser(String username, String password) throws SQLException{
-		String query = "select * from users where user_name = \"" + username + "\" and password = \"" + password+"\"";
+		User user = null;
+		String query = "select * from users where user_name = ? and password = ?";
 		pstmt = connection.prepareStatement(query);
-		pstmt.executeQuery();
-		rs = pstmt.getResultSet();
-		User user = new User(rs.getInt(0),	rs.getString(1), rs.getDate(2), rs.getString(3));
+		pstmt.setString(1, username);
+		pstmt.setString(2, password);
+		rs = pstmt.executeQuery();
+		while (rs.next()) {
+			user = new User(rs.getInt(1),	rs.getString(2), rs.getDate(3), rs.getString(4));
+		}
 		return user;
 	}
 
 	// Get user once logged in
 	public static User getUserById(int user_id) throws SQLException{
-		String query = "select * from users where user_id = " + user_id;
+		User user = null;
+		String query = "select * from users where user_id = ?";
 		pstmt = connection.prepareStatement(query);
+		pstmt.setInt(1, user_id);
 		rs = pstmt.executeQuery();
-		User user = new User();
-		user.setUserId(rs.getInt("user_id"));
-		user.setUserName(rs.getString("user_name"));
-		user.setDate(rs.getDate("date_user_joined"));
-		user.setPassword(rs.getString("password"));
-
-		//User user = new User(rs.getInt(0),	rs.getString(1), rs.getDate(2), rs.getString(3));
+		while (rs.next()) {
+			user = new User(rs.getInt(1),	rs.getString(2), rs.getDate(3), rs.getString(4));
+		}
 		return user;
 	}
 	
@@ -56,13 +67,14 @@ public class DataConnection {
 		return rs = stmt.executeQuery();
 	}
 	
+	// method called to execute stored proc for selecting all comments for a post. returns the result set
 	public static ResultSet getCommentsForPost(int post_id) throws SQLException {
 		stmt = connection.prepareCall("{?= call select_comments_from_post(?)");
 		stmt.setInt(1, post_id);
 		return rs = stmt.executeQuery();
 	}
 	
-	// method called to execute the stored proc for adding a comment. returns the auto generated PK for comment id
+	// method called to execute a sql statemen for adding a comment. returns the auto generated PK for comment id
 	public static int addComment(int post_id, int user_id, String body, Date date) throws SQLException {
 		String query = "insert into comments (post_id, user_id, body, comment_date) values(?,?,?,?)";
 		pstmt = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
@@ -79,6 +91,7 @@ public class DataConnection {
 			return 0;
 	}
 	
+	// method called to execute a sql statemen for adding a post. returns the auto generated PK for post id
 	public static int addPost(int user_id, String title, String body, Date date) throws SQLException {
 		String query = "insert into posts (user_id, title,body,post_date) values(?,?,?,?)";
 		pstmt = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
@@ -95,6 +108,7 @@ public class DataConnection {
 			return 0;
 	}
 	
+	// method called to execute a sql statement for adding a user. returns the auto generated PK for user id
 	public static int addUser(String name, Date date, String password) throws SQLException {
 		String query = "insert into users (user_name, date_user_joined,password) values(?,?,?)";
 		pstmt = connection.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
@@ -110,6 +124,7 @@ public class DataConnection {
 			return 0;
 	}
 	
+	// method called to execute the stored proc for editing a user
 	public static void editUser(int user_id, String name, Date date, String password) throws SQLException {
 		stmt = connection.prepareCall("{ call edit_user(?,?,?,?) }");
 		stmt.setInt(1,user_id);
@@ -119,6 +134,7 @@ public class DataConnection {
 		stmt.executeUpdate();
 	}
 	
+	// method called to execute the stored proc for editing a post
 	public static void editPost(int post_id, int user_id, String title, String body, Date date) throws SQLException {
 		stmt = connection.prepareCall("{ call edit_post(?,?,?,?,?) }");
 		stmt.setInt(1,post_id);
@@ -129,6 +145,7 @@ public class DataConnection {
 		stmt.executeUpdate();
 	}
 	
+	// method called to execute the stored proc for editing a comment
 	public static void editComment(int comment_id, int post_id, int user_id, String body, Date date) throws SQLException {
 		stmt = connection.prepareCall("{ call edit_post(?,?,?,?,?) }");
 		stmt.setInt(1,comment_id);
@@ -139,6 +156,7 @@ public class DataConnection {
 		stmt.executeUpdate();
 	}
 	
+	// method called to execute the stored proc for searching a post
 	public static ResultSet searchPosts(String keywords) throws SQLException {
 		stmt = connection.prepareCall("{?= call select_posts_from_user(?)");
 		stmt.setString(1, keywords);
