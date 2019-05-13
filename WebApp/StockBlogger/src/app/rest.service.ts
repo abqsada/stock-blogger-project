@@ -39,7 +39,7 @@ export class RestService implements OnInit {
     lastTrade: any;
   };
   // Declare the twitter object with variables to be used in displaying twitter data
-  private twitterObject: {
+  public twitterObject: {
     twitterUser: String;
     hashTag: String;
     volume: any
@@ -98,10 +98,10 @@ export class RestService implements OnInit {
 
   //  Http Get request for the generated twitter data from the twitter API
   public getHashtags() { // The twitter api is currently designed to post to the localhost port 3001
-    console.log('Getting Hashtags!');
+    
     this.http.get(this.twitterUrl).subscribe((res) => {
-      console.log(res);
       this.hashTags = res;
+      console.log(this.hashTags);
       console.log('Incoming Hashtags: ');
       console.log(this.hashTags);
     }, error => {

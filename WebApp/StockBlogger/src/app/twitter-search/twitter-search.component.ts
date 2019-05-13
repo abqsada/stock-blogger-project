@@ -16,6 +16,8 @@ export class TwitterSearchComponent implements OnInit {
   tValues: any;
   // Handles ALL selected hashtags
   allHashtags: any[];
+  //
+  private twitterObject;
 
   // httpOptions decides which format can be received from GET and POST
   readonly httpOptions = {
@@ -30,7 +32,6 @@ export class TwitterSearchComponent implements OnInit {
 
   ngOnInit() {
     console.log('Entered twitter-search component.ts');
-    this.tValues =  this.rest.hashTags; // Assign incoming Twitter data to tValues
   }
 
   // Sort through twitter API data for relevant match to user entered search
@@ -47,6 +48,7 @@ export class TwitterSearchComponent implements OnInit {
 
 getHashtags() {
   this.rest.getHashtags();
+  this.twitterObject = this.rest.twitterObject;
 }
 
 // Used when a user enters a keyword for twitter
