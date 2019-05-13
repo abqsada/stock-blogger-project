@@ -29,14 +29,11 @@ export class RestService implements OnInit {
     currency: any;
     price: number;
     priceOpen: number;
-    weekLow: number;
-    weekHigh: number;
     dayLow: number;
     dayHigh: number;
     volume: number;
-    stock_exchange_long: String;
-    timeZone: String;
-    lastTrade: any;
+    stockNameLong: String;
+    timezone: String;
   };
   // Declare the twitter object with variables to be used in displaying twitter data
   public twitterObject: {
@@ -59,6 +56,9 @@ export class RestService implements OnInit {
   ticker: any; // Handles individual ticker objects
   first: any;
   second: any;
+  third: any;
+  fourth: any;
+  fifth: any;
 
   // Inject the Http Client into the constructor
   constructor(private http: HttpClient) {}
@@ -79,17 +79,19 @@ export class RestService implements OnInit {
       this.tickers = response['data']; // Get tickers object
       this.first = response['data'][0]; // Get the first ticker object
       this.second = response['data'][1]; // Get the second ticker object
-
-      this.tickerObject = this.first;
-
+      this.third = response['data'][2]; // Get the third ticker object
+      this.fourth = response['data'][3]; // Get the fourth ticker object
+      this.fifth = response['data'][4]; // Get the fifth ticker object
+      console.log('Logging entire JSON Object to console for testing: ');
       console.log(this.values); // Log the whole data JSON Object to the console
+      console.log('Logging all arrays of ticker data to console for testing: ');
       console.log(this.tickers); // Log the ticker objects to the console
-      console.log(this.tickerObject);
-      console.log('Testing ticker symbol: ' + this.tickerObject.symbol);
-      console.log('Testing ticker name: ' + this.tickerObject.name);
-      console.log('Testing ticker currency: ' + this.tickerObject.currency);
-      console.log('Testing ticker price: ' + this.tickerObject.price);
-      console.log('Testing ticker stock: ' + this.tickerObject.stock_exchange_long);
+      console.log('Logging each array of ticker data to console for testing: ');
+      console.log(this.first);
+      console.log(this.second);
+      console.log(this.third);
+      console.log(this.fourth);
+      console.log(this.fifth);
 
   }, error => { // Handles any thrown errors by the HTTP Client
     this.serverNotConnected(); // Log the error to the console
@@ -98,7 +100,6 @@ export class RestService implements OnInit {
 
   //  Http Get request for the generated twitter data from the twitter API
   public getHashtags() { // The twitter api is currently designed to post to the localhost port 3001
-    
     this.http.get(this.twitterUrl).subscribe((res) => {
       this.hashTags = res;
       console.log(this.hashTags);
@@ -291,4 +292,12 @@ export class RestService implements OnInit {
     console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
   }
 
+}
+
+// Define a *public* interface with the correct shape for HTTP Headers
+export interface Config {
+  body: Config;
+  headers: any;
+  testData: string;
+  testTwitter: string;
 }

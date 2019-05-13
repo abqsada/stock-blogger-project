@@ -22,13 +22,13 @@ export class TickerSearchComponent implements OnInit {
   // to backend for specific ticker data
   readonly httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json'
+      'Content-Type': 'application/json'
     })
   };
 
   // Inject the HTTP Client and the RestService
   constructor(private http: HttpClient,
-              private rest: RestService) { }
+    private rest: RestService) { }
   // Runs on Initialization
   ngOnInit() {
     console.log('Entered ticker-search.component.ts');
@@ -49,7 +49,7 @@ export class TickerSearchComponent implements OnInit {
 
   sendTicker(ticker: any): any {
     return this.http.post(this.rest.tickerUrl + '/api/postticker',
-                          ticker, this.httpOptions);
+      ticker, this.httpOptions);
   }
   showTickers() {
     this.showTicker = true;
@@ -63,13 +63,14 @@ export class TickerSearchComponent implements OnInit {
       if (this.tickerSymbol.length < 6 && this.tickerSymbol.length > 2) {
         // Log to Console for Testing
         console.log('SENDING TICKER: ' + this.tickerSymbol + ' TO BACKEND!!');
+        console.log('VVVV IGNORE THIS ERROR **Cannot read property \'symbol\' of undefined** IGNORE THIS ERROR VVVV')
         this.errorMessage = '';
+        // Ensure each entry displays the proper info for each ticker
         this.selectedTicker = 'Displaying Stock Data for: ' + this.tickerSymbol.toUpperCase();
         // Find data relevant only to the users specified ticker
         this.sendTicker(this.tickerSymbol); // POST ticker to backend
         return this.tickerSymbol;
       }
-
     }
 
     if (this.tickerSymbol.length > 6 || this.tickerSymbol.length < 2) {
@@ -86,12 +87,4 @@ export class TickerSearchComponent implements OnInit {
 
   }
 
-}
-
-// Define a *public* interface with the correct shape
-export interface Config {
-  body: Config;
-  headers: any;
-  feedUrl: string;
-  textfile: string;
 }
