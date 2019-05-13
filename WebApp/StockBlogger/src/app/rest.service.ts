@@ -44,10 +44,12 @@ export class RestService implements OnInit {
     hashTag: String;
     volume: any
   };
-  // baseURL's for each API
+  // baseURL's for each API back end functions
   readonly tickerUrl: any = 'http://localhost:3000';
   readonly twitterUrl: any =  'http://localhost:3001';
-  readonly userUrl: any = 'http://locahlost:3002';
+  readonly userUrl: any = 'http://localhost:8888?command=getuser&userName=Silly&password=oldBear';
+  readonly addUserUrl: any = 'http://localhost:8888?command=adduser&userName=Same&password=oldThing&dateJoined=2019-01-30';
+  readonly postUrl: any = 'http://localhost:8888?command=addpost&userId=1&title=TheseWords&body=ShouldSplit&postDate=2019-02-07';
   readonly testTickers: any = 'assets/testData.json';
   readonly testHashTags: any = 'assets/testTwitter.txt';
   // Temporary Data
