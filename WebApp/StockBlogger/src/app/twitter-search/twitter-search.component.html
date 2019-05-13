@@ -22,18 +22,19 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 
 <form (submit)="onSubmit()" align="center">
     <p class="w3-margin">Enter the hashtag you would like data for (without #)</p>
-    <input [(ngModel)]="hashTagName" name="hashtag" class="form-control mr-sm-2" style="position: relative;" type="twitter">
-    <button (click)="getHashtags()" class="mr-sm-2 w3-hover-white" style="position: absolute;" id="twitter">Submit</button>
-    <div *ngIf="errorMessage">
+    <input [(ngModel)]="hashTagName" class="form-control mr-sm-2 ng-pristine ng-valid ng-touched" name="hashtag" style="position: relative; left: -46px; top: 0px;" type="twitter" ng-reflect-name="hashtag">
+    <button (click)="getHashtags()" class="mr-sm-2 w3-hover-white" id="twitter" style="position: absolute; left: 1006px; top: 680px;">Submit</button>
+    <div *ngIf="hashTagName != 'AAPL' || 'MSFT' || 'TSLA' || 'NFLX' || 'TEVA' || 'TSLA'">
         <a class="w3-margin" style="color:red">{{errorMessage}}</a>
     </div> 
     <div align=center *ngIf="selectedHashtag">
         <a class="w3-margin" style="color:green">{{selectedHashtag}}</a><p></p>
         <p></p>
-        <ul>
-                <li>{{rest.hashTags}}</li>
-        </ul>
-        <!--<iframe src="https://giphy.com/embed/xUPGcEOEllmvFAvako" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p>-->
+        
+                <p class="w3-margin">Hashtag Selected: {{twitterObject.Hashtag}}</p>
+                <p class= "w3-maring">Volume of tweets for {{twitterObject.Hashtag}} in the last 24 hours: {{twitterObject.Volume}}</p>
+       
+        <iframe src="https://giphy.com/embed/xUPGcEOEllmvFAvako" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p>
                 <ul>
                         <li *ngFor="let hashtag of tValues" >
                           -- hashtags: {{hashtag}}

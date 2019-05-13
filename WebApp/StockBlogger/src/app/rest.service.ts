@@ -50,17 +50,23 @@ export class RestService implements OnInit {
   readonly addUserUrl: any = 'http://localhost:8888?command=adduser&userName=Same&password=oldThing&dateJoined=2019-01-30';
   readonly postUrl: any = 'http://localhost:8888?command=addpost&userId=1&title=TheseWords&body=ShouldSplit&postDate=2019-02-07';
   readonly testTickers: any = 'assets/testData.json';
-  readonly testHashTags: any = 'assets/testTwitter.txt';
+  readonly testHashTags: any = 'assets/testTwitter.json';
   // Temporary Data
   hashTags: any;
   values: any; // Handles ALL incoming Raw JSON data
   tickers: any; // Handles the tickers array
   ticker: any; // Handles individual ticker objects
   first: any;
+  tFirst: any;
   second: any;
+  tSecond: any;
   third: any;
+  tThird:any;
   fourth: any;
+  tFourth: any;
   fifth: any;
+  tFifth: any;
+  console: any;
 
   // Inject the Http Client into the constructor
   constructor(private http: HttpClient) {}
@@ -102,30 +108,22 @@ export class RestService implements OnInit {
 
   //  Http Get request for the generated twitter data from the twitter API
   public getHashtags(): void {
-    this.http.get('assets/testTwitter.txt', { responseType: 'text'})
-      .subscribe(data => {
+    this.http.get(this.testHashTags).subscribe(data => {
         this.hashTags = data;
+        this.tFirst =  data [0];
+        this.tSecond = data [1];
+        this.tThird = data [2];
+        this.tFourth =data [3];
+        this.tFifth = data [4];
         console.log("This is everything at once!")
         console.log(this.hashTags);
+        console.log("Testing twitter data for four specified searches")
+        console.log(this.tFirst);
+        console.log(this.tSecond);
+        console.log(this.tThird);
+        console.log(this.tFourth);
       });
   }
-  logError(fileName: String, error: any): void {
-    throw new Error("Method not implemented.");
-  }
-  log(fileName: String, data: ArrayBuffer): void {
-    throw new Error("Method not implemented.");
-  }
-
-//   public getHashtags() { // The twitter api is currently designed to post to the localhost port 3001
-//     this.http.get(this.testHashTags).subscribe(res => {
-//       this.hashTags = res;
-//       console.log(this.getHashtags);
-//       console.log('Incoming Hashtags: ');
-//       console.log(this.hashTags);
-//     }, error => {
-//     this.serverNotConnected();
-//     });
-//  }
 
   // Begin user account methods
   public getAccount() { // Makes HTTP get request to snag account data from API

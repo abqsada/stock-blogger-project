@@ -18,6 +18,8 @@ export class TwitterSearchComponent implements OnInit {
   allHashtags: any[];
   //
   private twitterObject;
+    Hashtag: String;
+    Volume: number;
 
   // httpOptions decides which format can be received from GET and POST
   readonly httpOptions = {
@@ -56,8 +58,31 @@ onSubmit() {
   console.log('Sending Twitter data: ' + this.hashTagName);
   this.selectedHashtag = ('Displaying selected hashtag and volume of tweets for: ' +
                            this.hashTagName);
+  this.hashTagName = this.hashTagName.toUpperCase();
 
-  // Just like the ticker-search componenet, only display what was asked for
+  switch(this.hashTagName){
+    case 'AAPL':
+    this.twitterObject = this.rest.tFirst;
+    break;
+
+    case "MSFT":
+    this.twitterObject = this.rest.tSecond;
+    break;
+
+    case "NFLX":
+    this.twitterObject = this.rest.tThird;
+    break;
+
+    case "TEVA":
+    this.twitterObject.tFourth;
+    break;
+
+    case "TSLA":
+    this.twitterObject.tFifth;
+    break;
+
+  }
+   // Just like the ticker-search componenet, only display what was asked for
   // this.sortHashtags(this.hashTagName);
   return this.hashTagName;
 }
