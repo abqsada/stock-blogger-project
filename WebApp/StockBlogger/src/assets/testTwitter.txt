@@ -12,50 +12,20 @@ John Kerry
 45909
 #VALARS
 15265
-Albert Pujols
--1
 IT Chapter 2
 25216
 ProJared
 224672
-Ben Watson
--1
 IT 2
 14757
-Telvin Smith
--1
-Breakpoint
--1
 Pennywise
 33012
-Red Socks
--1
-Wildlands
--1
 Chris Hughes
 32953
 Alabama Senate
 18375
-Anna Delvey
--1
 Chapter Two
 14203
-Jordan Luplow
--1
-Wise Honest
--1
-2,000 RBI
--1
-Brad Friedel
--1
-Aperol Spritz
--1
-Jessica Chastain
--1
-Anna Sorokin
--1
-#ItChapterTwo
--1
 #PutinsGOP
 143423
 #5WordSpeech
@@ -98,3 +68,7 @@ Anna Sorokin
 -1
 #NewmarkEthics
 -1
+#MondayMotivation 
+131919 
+#DorisDay 
+16597

@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; // Import the HTTPClient for GET/POST requests
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -99,16 +100,31 @@ export class RestService implements OnInit {
   }
 
   //  Http Get request for the generated twitter data from the twitter API
-  public getHashtags() { // The twitter api is currently designed to post to the localhost port 3001
-    this.http.get(this.twitterUrl).subscribe((res) => {
-      this.hashTags = res;
-      console.log(this.hashTags);
-      console.log('Incoming Hashtags: ');
-      console.log(this.hashTags);
-    }, error => {
-    this.serverNotConnected();
-    });
- }
+  public getHashtags(): void {
+    this.http.get('assets/testTwitter.txt', { responseType: 'text'})
+      .subscribe(data => {
+        this.hashTags = data;
+        console.log("This is everything at once!")
+        console.log(this.hashTags);
+      });
+  }
+  logError(fileName: String, error: any): void {
+    throw new Error("Method not implemented.");
+  }
+  log(fileName: String, data: ArrayBuffer): void {
+    throw new Error("Method not implemented.");
+  }
+
+//   public getHashtags() { // The twitter api is currently designed to post to the localhost port 3001
+//     this.http.get(this.testHashTags).subscribe(res => {
+//       this.hashTags = res;
+//       console.log(this.getHashtags);
+//       console.log('Incoming Hashtags: ');
+//       console.log(this.hashTags);
+//     }, error => {
+//     this.serverNotConnected();
+//     });
+//  }
 
   // Begin user account methods
   public getAccount() { // Makes HTTP get request to snag account data from API
