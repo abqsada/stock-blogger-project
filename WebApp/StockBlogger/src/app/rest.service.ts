@@ -35,6 +35,7 @@ export class RestService implements OnInit {
     volume: number;
     stockNameLong: String;
     timezone: String;
+    lastTrade: any;
   };
   // Declare the twitter object with variables to be used in displaying twitter data
   public twitterObject: {
@@ -128,7 +129,7 @@ export class RestService implements OnInit {
 
   // Begin user account methods
   public getAccount() { // Makes HTTP get request to snag account data from API
-    console.log("Getting Account!");
+    console.log('Getting Account!');
     this.http.get(this.userUrl).subscribe(response => {
       this.incomingAccount = response;
       console.log(this.incomingAccount);
