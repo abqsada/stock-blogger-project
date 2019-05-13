@@ -8,24 +8,13 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 .fa-anchor,.fa-coffee {font-size:200px}
 </style>
 
-<!-- <form (submit)="onSubmit()" align="center">
-    <p>Enter the hashtag you would like data for (without #)</p>
-    <p>
-        <input type = "twitter" [(ngModel)]="hashTagName" name="hashtag" id = "twitterBox">
-            button (click)="getHashtag()" class="mr-sm-2 w3-hover-white" style="position: absolute;" id="twitter">Submit</button>
-    </p>
-    <div align=center *ngIf="selectedHashtag">
-        <a class ="w3-margin" style="color:cornflowerblue">{{selectedHashtag}}</a><p></p>
-        <iframe src="https://giphy.com/embed/xUPGcEOEllmvFAvako" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p>
-    </div>
-</form> -->
-
+<!-- This handles when the requested string is sent. Decides which data is displayed and how -->
 <form (submit)="onSubmit()" align="center">
-    <p class="w3-margin">Enter the hashtag you would like data for (without #)</p>
-    <p class="w3-margin">*Twitter data is only available for AAPL, MSFT, TSLA, NFLX, TEVA, and TSLA hashtags*</p>
+    <p class="w3-margin w3-jumbo">Enter the hashtag you would like data for (without #)</p>
+    <p class="w3-margin">*Twitter data is only available for AAPL, MSFT, TSLA, NFLX, and TEVA*</p>
     <p class="w3-margin">*Please note that the data is designed to only show top hashtags in the past 24 hours*</p>
     <input [(ngModel)]="hashTagName" class="form-control mr-sm-2 ng-pristine ng-valid ng-touched" name="hashtag" style="position: relative; left: -46px; top: 0px;" type="twitter" ng-reflect-name="hashtag">
-    <button (click)="getHashtags()" class="mr-sm-2 w3-hover-white" id="twitter" style="position: absolute; left: 1006px; top: 756px;" data-selected="true" data-label-id="0">Submit</button>
+    <button (clicl)="getHashtags()" class="mr-sm-2 w3-hover-white" id="twitter" style="position: absolute; left: 1007px; top: 926px;">Submit</button>
     <div *ngIf="hashTagName != 'AAPL' || 'MSFT' || 'TSLA' || 'NFLX' || 'TEVA' || 'TSLA'">
         <a class="w3-margin" style="color:red">{{errorMessage}}</a>
     </div> 
