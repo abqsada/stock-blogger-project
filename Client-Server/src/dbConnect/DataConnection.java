@@ -3,7 +3,7 @@
  * These methods will be called within the appropriate Class ie. User/Comment/Post to implement various
  * functionality. 
  */
-
+package dbConnect;
 
 
 import java.sql.CallableStatement;
