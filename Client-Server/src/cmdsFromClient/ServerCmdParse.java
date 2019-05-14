@@ -206,7 +206,7 @@ public class ServerCmdParse {
             	String postDate = commandData.get("postDate").toString().replace("\"", "");
     			int newPostId = DataConnection.addPost(userId, title, body, Date.valueOf(postDate));
                 returnData.addProperty("postId",  newPostId);
-    			System.out.println(("User object added to database with userID= :\n"+returnData));
+    			System.out.println(("Post object added to database with postId= :\n"+returnData));
             	errorCode=800;//error code denoting successful addition of post
             } else {   
             	errorCode=8;//error code denoting incorrect data to add post
