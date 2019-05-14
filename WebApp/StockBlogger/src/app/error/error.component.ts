@@ -10,6 +10,7 @@ export class ErrorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    console.log('This page does not exist!!!!');
   }
 
 }

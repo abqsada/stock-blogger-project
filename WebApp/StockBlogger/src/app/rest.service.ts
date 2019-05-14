@@ -1,12 +1,12 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; // Import the HTTPClient for GET/POST requests
 
-
 @Injectable({
   providedIn: 'root'
 })
+// Implements OnInit Class
 export class RestService implements OnInit {
-// Objects
+  // Objects
   // Declare the account object with variables to be used in account methods
   private accountObject: {
     userId: number;
@@ -45,7 +45,7 @@ export class RestService implements OnInit {
   };
   // baseURL's for each API back end functions
   readonly tickerUrl: any = 'http://localhost:3000';
-  readonly twitterUrl: any =  'http://localhost:3001';
+  readonly twitterUrl: any = 'http://localhost:3001';
   readonly userUrl: any = 'http://localhost:8888?command=getuser&userName=Silly&password=oldBear';
   readonly addUserUrl: any = 'http://localhost:8888?command=adduser&userName=Same&password=oldThing&dateJoined=2019-01-30';
   readonly postUrl: any = 'http://localhost:8888?command=addpost&userId=1&title=TheseWords&body=ShouldSplit&postDate=2019-02-07';
@@ -56,12 +56,14 @@ export class RestService implements OnInit {
   values: any; // Handles ALL incoming Raw JSON data
   tickers: any; // Handles the tickers array
   ticker: any; // Handles individual ticker objects
+  // For Testing:
+  // Handles each individual ticker or hashtag object
   first: any;
   tFirst: any;
   second: any;
   tSecond: any;
   third: any;
-  tThird:any;
+  tThird: any;
   fourth: any;
   tFourth: any;
   fifth: any;
@@ -69,9 +71,10 @@ export class RestService implements OnInit {
   console: any;
 
   // Inject the Http Client into the constructor
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    console.log('Entered rest.service.ts');
   }
   public getTickerObject(): any {
     return this.tickerObject;
@@ -82,7 +85,7 @@ export class RestService implements OnInit {
     // 'Subscribe' to the response we get back from the backend. Subscribing opens a data stream to our values variable
     // This allows us to not only use the incoming data, but store it and share it with other classes.
     // Currently getting test data!
-    this.http.get(/*this.tickerUrl*/ this.testTickers ).subscribe(response => {
+    this.http.get(/*this.tickerUrl*/ this.testTickers).subscribe(response => {
       this.values = response; // Example: {symbols_requested: 3, symbols_returned: 2, data: Array(2)}
       this.tickers = response['data']; // Get tickers object
       this.first = response['data'][0]; // Get the first ticker object
@@ -101,42 +104,42 @@ export class RestService implements OnInit {
       console.log(this.fourth);
       console.log(this.fifth);
 
-  }, error => { // Handles any thrown errors by the HTTP Client
-    this.serverNotConnected(); // Log the error to the console
+    }, error => { // Handles any thrown errors by the HTTP Client
+      this.serverNotConnected(); // Log the error to the console
     });
   }
 
   //  Http Get request for the generated twitter data from the twitter API
   public getHashtags(): void {
     this.http.get(this.testHashTags).subscribe(data => {
-        this.hashTags = data;
-        this.tFirst =  data [0];
-        this.tSecond = data [1];
-        this.tThird = data [2];
-        this.tFourth =data [3];
-        this.tFifth = data [4];
-        console.log("This is everything at once!")
-        console.log(this.hashTags);
-        console.log("Testing twitter data for four specified searches")
-        console.log(this.tFirst);
-        console.log(this.tSecond);
-        console.log(this.tThird);
-        console.log(this.tFourth);
-      });
+      this.hashTags = data;
+      this.tFirst = data[0];
+      this.tSecond = data[1];
+      this.tThird = data[2];
+      this.tFourth = data[3];
+      this.tFifth = data[4];
+      console.log('This is everything at once!')
+      console.log(this.hashTags);
+      console.log('Testing twitter data for four specified searches')
+      console.log(this.tFirst);
+      console.log(this.tSecond);
+      console.log(this.tThird);
+      console.log(this.tFourth);
+    });
   }
 
   // Begin user account methods
-  public getAccount() { // Makes HTTP get request to snag account data from API
+  public getAccount(): void { // Makes HTTP get request to snag account data from API
     console.log('Getting Account!');
     this.http.get(this.userUrl).subscribe(response => {
       this.incomingAccount = response;
       console.log(this.incomingAccount);
-  }, error => {
-    this.serverNotConnected();
+    }, error => {
+      this.serverNotConnected();
     });
   }
 
-  public User(userId: number, userName: String, dateJoined: Date, password: String) {
+  public User(userId: number, userName: String, dateJoined: Date, password: String): void {
     this.accountObject.userId = userId;
     this.accountObject.userName = userName;
     this.accountObject.password = password;
@@ -148,7 +151,7 @@ export class RestService implements OnInit {
     return this.accountObject.userName;
   }
 
-  public setUserName(userName: String){
+  public setUserName(userName: String) {
     this.accountObject.userName = userName;
   }
 
@@ -175,12 +178,12 @@ export class RestService implements OnInit {
     return this.accountObject.dateJoined;
   }
 
-  public setdateJoined(dateJoined: Date) {
+  public setdateJoined(dateJoined: Date): void {
     this.accountObject.dateJoined = dateJoined;
   }
 
   // Begin blog post methods
-  public Post(userId: number, title: String, body: String, postDate: Date) {
+  public Post(userId: number, title: String, body: String, postDate: Date): void {
     this.accountObject.userId = userId;
     this.blogObject.title = title;
     this.blogObject.body = body;
@@ -219,16 +222,16 @@ export class RestService implements OnInit {
     return this.blogObject.postId;
   }
 
-  public setPostId(postId: number){
+  public setPostId(postId: number): void {
     this.blogObject.postId = postId;
   }
   // Begin ticker methods
-  public assignTicker(symbol: String, name: String, currency: String, price: number) {
+  public assignTicker(symbol: String, name: String, currency: String, price: number): void {
     this.ticker['symbol'] = symbol;
     this.tickerObject.name = name;
     this.tickerObject.currency = currency;
     this.tickerObject.price = price;
-  } 
+  }
 
   public getSymbol(): String {
     console.log(this.tickerObject.symbol);
@@ -267,12 +270,12 @@ export class RestService implements OnInit {
   }
 
   //Begin twitter methods
-  public Twitter(twitterUser: String, hashTag: String, volume: number) {
+  public Twitter(twitterUser: String, hashTag: String, volume: number): void {
     this.twitterObject.twitterUser = twitterUser;
     this.twitterObject.hashTag = hashTag;
     this.twitterObject.volume = volume;
   }
-  
+
   public getTwitterUser(): String {
     console.log(this.twitterObject.twitterUser);
     return this.twitterObject.twitterUser;
@@ -300,7 +303,7 @@ export class RestService implements OnInit {
     this.twitterObject.volume = volume;
   }
 
-  public serverNotConnected() {
+  public serverNotConnected(): void {
     console.log('* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *');
     console.log('* * * * * * Please make sure all necessary servers are up and running properly! * * * * * *');
     console.log('* * * * * * * * * * * * * Refresh Page To Retry Server Connection * * * * * * * * * * * * *');

@@ -7,7 +7,7 @@ import { RestService } from '../rest.service';
   templateUrl: './ticker-search.component.html',
   styleUrls: ['./ticker-search.component.css']
 })
-
+// Implements the OnInit class
 export class TickerSearchComponent implements OnInit {
   // Handles the ticker the user searches for
   tickerSymbol: string;
@@ -31,7 +31,7 @@ private tickerObject: {
   lastTrade: any;
 };  // Request options for HTTP POST request for sending ticker
   // to backend for specific ticker data
-  readonly httpOptions = {
+  private readonly httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
     })
@@ -41,7 +41,7 @@ private tickerObject: {
   constructor(private http: HttpClient,
               private rest: RestService) { }
   // Runs on Initialization
-  ngOnInit() {
+  ngOnInit(): void {
     console.log('Entered ticker-search.component.ts');
 
     console.log('#####################################');
@@ -55,15 +55,15 @@ private tickerObject: {
       console.log('**********************************************************');
     });
   }
-
-  getTickers() {
+  // Utilize the rest service to make an HTTP Get request 
+  public getTickers(): void {
     this.rest.getTickers(); // Gets all available tickers from rest.service
     this.tickerObject = this.rest.tickerObject;
     // this.sortTickers(this.values);
   }
 
   // Sorts Ticker data against users searched ticker
-  sortTickers(values: any) {
+  sortTickers(values: any): void {
     // TODO: Use either REGEX or some sorting algorithm to find data
     // Only relevant to the ticker a user has entered
     console.log('Ticker Sorting not yet implemented');
@@ -75,7 +75,7 @@ private tickerObject: {
   }
 
   // Handles when a user enters a ticker symbol
-  onSubmit() {
+  onSubmit(): any {
     // Acceptable characters for input
     const letters = /^[A-Za-z]+$/;
 

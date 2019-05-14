@@ -7,7 +7,7 @@
         <p class="w3-margin w3-jumbo">Enter a ticker symbol here! (Example: AAPL/MSFT)</p>
         <!-- <p class="w3-margin">*Available Ticker Data Available For: {{rest.first.name}}, {{rest.second.name}}, {{rest.third.name}}, {{rest.fourth.name}}, and {{rest.fifth.name}}*</p> -->
         <p class="w3-margin">*Available Ticker Data Available For: Apple Inc., Microsoft Corporation, Netflix, Inc., Teva Pharmaceutical Industries Limited, and Tesla, Inc.*</p>
-        <p class="w3-margin">*You might have to give our servers a nudge and click submit a few times*</p>
+        <p class="w3-margin" style="color: red">*You might have to give our servers a nudge and click submit a few times*</p>
         <input [(ngModel)]="tickerSymbol" name="ticker" class="form-control mr-sm-2" style="position: relative;"
                 type="ticker">
         <button (click)="getTickers()" class="mr-sm-2 w3-hover-white" id="ticker">Submit</button>

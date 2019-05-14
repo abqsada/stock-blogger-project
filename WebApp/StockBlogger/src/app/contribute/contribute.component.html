@@ -30,6 +30,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
 </div>
 </body>
 
+<header align='center' class="w3-margin w3-jumbo">Create your blog post below!</header>
 <!-- This is the text editor with all built in functionality to create the user post-->
 <ckeditor [editor]="Editor" data="
         <p>Type here to get the party started!</p>
@@ -51,12 +52,11 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <div class="w3-content">
       <div class="w3-third w3-center">
       </div>
-  
+      <button (click)="createPost()" align="center" class="mr-sm-2 w3-hover-white" id="create" style="position: relative; left: -203px; top: 0px; transition: none 0s ease 0s; cursor: move;" data-selected="true" data-label-id="0">Create Post</button>
       <div class="w3-twothird">
         <h1></h1>
         <h5 class="w3-padding-32"></h5>
-  
-        <p class="w3-text-grey"></p>
+       <p class="w3-text-grey"></p>
       </div>
     </div>
   </div>

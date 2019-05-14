@@ -6,27 +6,28 @@ import { Router } from '@angular/router';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.css']
 })
+// Implements OnInit
 export class AboutComponent implements OnInit {
 
   constructor(private router: Router) { }
 
 // Handles navigation to the next page
-nextHandler() {
+nextHandler(): void {
   this.router.navigate(['contact']);
 }
 // Handles navigation to the previous page
-prevHandler() {
+prevHandler(): void {
   this.router.navigate(['account']);
 }
 
-promptHandler() {
+promptHandler(): void {
   const confirm = prompt('NONE SHALL PASS!');
 
   if(confirm === 'fleshwound' || 'password' || '1234567890') {
     this.router.navigate(['admin']);
   }
 }
-  ngOnInit() {
+  ngOnInit(): void {
     console.log('Entered about.component.ts ngOnInit method!')
   }
 }

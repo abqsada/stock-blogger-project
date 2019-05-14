@@ -6,25 +6,27 @@ import { Router } from '@angular/router';
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
+// Implements OnInit
 export class AdminComponent implements OnInit {
-
+  // Inject the Router
   constructor(private router: Router) { }
 
 // Handles Clicking Admin Button
-clickHandler() {
+clickHandler(): void {
   this.router.navigate(['/']);
 }
 
 // Handles navigation to the next page
-nextHandler() {
+nextHandler(): void {
   this.router.navigate(['/']);
   }
 // Handles navigation to the previous page
-prevHandler() {
+prevHandler(): void {
   this.router.navigate(['details']);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    console.log('Entered admin.component.ts');
   }
-
 }
+

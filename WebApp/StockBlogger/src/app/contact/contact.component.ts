@@ -6,12 +6,13 @@ import { Router } from '@angular/router';
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.css']
 })
+// Implement OnInit
 export class ContactComponent implements OnInit {
-
+  // Inject the Router
   constructor(private router: Router) { }
 
 // Handles navigation to the next page
-nextHandler() {
+nextHandler(): void {
   const confirm = prompt('What is your favorite color?');
     // Checks user input
   switch (confirm) {
@@ -32,11 +33,11 @@ nextHandler() {
     }
 }
 // Handles navigation to the previous page
-prevHandler() {
+prevHandler(): void {
   this.router.navigate(['account']);
 }
 
-promptHandler() {
+promptHandler(): void {
   const confirm = prompt('NONE SHALL PASS!');
 
   if (confirm === 'fleshwound' || 'password' || '1234567890') {
@@ -44,7 +45,7 @@ promptHandler() {
   }
 }
 
-  ngOnInit() {
+  ngOnInit(): void {
     console.log('Entered contact.component.ts ngOnInit method!');
   }
 }

@@ -25,7 +25,7 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
   <form #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
   <input class="form-control mr-sm-2" style="position: relative; top: -80px;" type="text" name="username" placeholder="Username" required [(ngModel)]="model.username">
   <input class="form-control mr-sm-2" style="position: relative; top: -80px;" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
-  <button [disabled]="!loginForm.valid" type="submit" class="w3-button w3-white w3-hover-black w3-padding-large" style="position: relative; top: -82px;">Login</button>
+  <button (click)="login()" [disabled]="!loginForm.valid" type="submit" class="w3-button w3-white w3-hover-black w3-padding-large" style="position: relative; top: -82px;">Login</button>
   <a routerLink="/registerpage" type="register" class="w3-button w3-white w3-hover-black w3-padding-large" style="position: relative; top: -82px;">Register</a>
   </form>
 </div>

@@ -7,6 +7,7 @@ import { RestService } from '../rest.service';
   templateUrl: './registerpage.component.html',
   styleUrls: ['./registerpage.component.css']
 })
+// Implements OnInit
 export class RegisterpageComponent implements OnInit {
 
   // Object created to handle the created user
@@ -14,27 +15,28 @@ export class RegisterpageComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private rest: RestService) { }
+    // Instantiate new HTTP Header options
+  readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })
+  };
 
-readonly httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json'
-   })
-}; 
+  sendNewUsername(userName: any) {
+    return this.http.post(this.rest.addUserUrl, userName, this.httpOptions);
+  }
+  sendNewPassword(password: any) {
+    return this.http.post(this.rest.addUserUrl, password, this.httpOptions);
+  }
 
-sendNewUsername(userName: any) {
-  return this.http.post(this.rest.addUserUrl, userName, this.httpOptions);
-}
-sendNewPassword(password: any) {
-  return this.http.post(this.rest.addUserUrl, password, this.httpOptions);
-}
-
-registerUser(){
-  console.log(this.new);
-  this.new.sendNewUsername();
-  this.new.sendNewPassword();
-}
+  registerUser(): void {
+    console.log(this.new);
+    this.new.sendNewUsername();
+    this.new.sendNewPassword();
+  }
 
   ngOnInit() {
+    console.log('Entered registerpage.component.ts');
   }
 
 }

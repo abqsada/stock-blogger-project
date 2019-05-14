@@ -26,10 +26,12 @@ export class AccountComponent implements OnInit {
     })
   };           
 
-  // Handles Logging a user in
+  // Handles Logging a user in and sends the corresponsing POST requests
   login() {
     console.log(this.model); // For Testing
     this.rest.getAccount();
+    this.model.postUser();
+    this.model.postPassword();
   }
 
   // POST: Pass the username for the user currently trying to login

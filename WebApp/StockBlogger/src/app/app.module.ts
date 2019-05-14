@@ -30,7 +30,7 @@ import { DownloaderComponent } from './downloader/downloader.component';
 // Basically the 'meeting place' for all components (classes)
 @NgModule({ // Root App Module
   declarations: [ // Components added here via Angular CLI
-    AppComponent,
+    AppComponent, // WebApp Starting Point
     HomeComponent,
     RegisterComponent,
     LoginComponent,
