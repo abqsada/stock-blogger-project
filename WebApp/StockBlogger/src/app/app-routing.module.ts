@@ -20,47 +20,47 @@ import { ContributeComponent } from './contribute/contribute.component';
 const routes: Routes = [
   { path: '', component: HomeComponent} ,
   {
-    path: 'about',
+    path: 'about', // localhost:4200/about
     component: AboutComponent,
   },
   {
-    path: 'feed',
+    path: 'feed', // localhost:4200/feed
     component: FeedComponent
   },
   {
-    path: 'contribute',
+    path: 'contribute', // localhost:4200/contribute
     component: ContributeComponent
   },
   {
-    path: 'contact',
+    path: 'contact', // localhost:4200/contact
     component: ContactComponent
   },
   {
-    path: 'account',
+    path: 'account', // localhost:4200/account
     component: AccountComponent
   },
   {
-    path: 'login',
+    path: 'login', // localhost:4200/login
     component: LoginComponent
   },
   {
-    path: 'registerpage',
+    path: 'registerpage', // localhost:4200/registerpage
     component: RegisterpageComponent
   },
   {
-    path: 'register',
+    path: 'register', // localhost:4200/register
     component: RegisterComponent
   },
   {
-    path: 'reset',
+    path: 'reset', // localhost:4200/reset
     component: ResetpasswordComponent
   },
   {
-    path: 'secret',
+    path: 'secret', // localhost:4200/secret
     component: SecretComponent
   },
   {
-    path: 'adminsonly',
+    path: 'adminsonly', // localhost:4200/adminsonly
     component: AdminComponent,
     canActivate: [AdminGuard]
   },

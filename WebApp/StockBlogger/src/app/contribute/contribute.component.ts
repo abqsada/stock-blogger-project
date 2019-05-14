@@ -10,6 +10,7 @@ import { RestService } from '../rest.service';
   templateUrl: './contribute.component.html',
   styleUrls: ['./contribute.component.css']
 })
+// Implements OnInit
 export class ContributeComponent implements OnInit {
 
   // Import the RTE for creating posts
@@ -31,25 +32,26 @@ export class ContributeComponent implements OnInit {
   };
 
   // Method to handle when a post is created
-  createPost(){
+  createPost(): void {
     console.log(this.created);
     this.created.sendPost();
   }
-  
+
   // Create the POST to send the blog post to the back end url
-  sendPost(body: any): any{
+  sendPost(body: any): any {
     return this.http.post(this.rest.postUrl, body, this.httpOptions);
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    console.log('Entered contribute.component.ts');
   }
 
   // Handles navigation to the next page
-  nextHandler() {
+  nextHandler(): void {
     this.router.navigate(['account']);
   }
   // Handles navigation to the previous page
-  prevHandler() {
+  prevHandler(): void {
     this.router.navigate(['feed']);
   }
 

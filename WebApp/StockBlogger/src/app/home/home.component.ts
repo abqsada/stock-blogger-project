@@ -8,9 +8,10 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+// Implements OnInit Class
 export class HomeComponent implements OnInit {
-  count = 0; // For onClick
-  clicked = false; // For onClick
+  private count = 0; // For onClick
+  private clicked = false; // For onClick
   // create private Router variable 'router' to use the Router in this component
   constructor(private router: Router) { }
 
@@ -19,7 +20,7 @@ export class HomeComponent implements OnInit {
     console.log('Entered home.component.ts ngOnInit method!');
   }
   // Handles Clicking Admin Button
-  clickHandler() {
+  clickHandler(): void {
     const confirm = prompt('What is your favorite color?');
     // Checks user input
     switch (confirm) {
@@ -40,12 +41,12 @@ export class HomeComponent implements OnInit {
     }
   }
   // Handles the next button
-  nextHandler() {
+  nextHandler(): void {
     // Navigates to the right
     this.router.navigate(['feed']);
   }
   // Handles the previous button
-  prevHandler() {
+  prevHandler(): void {
     // Navigates to the left
     const confirm = prompt('What is your favorite color?');
     switch (confirm) {
@@ -66,7 +67,7 @@ export class HomeComponent implements OnInit {
     }
   }
   // Handles the Click Me button
-  onClick() {
+  onClick(): void {
     // Increment 'count' each click
     this.count++;
     console.log(this.count);

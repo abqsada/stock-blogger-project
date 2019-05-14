@@ -8,20 +8,20 @@ import { RestService } from '../rest.service';
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
-
+// Implement OnInit
 export class FeedComponent implements OnInit {
   // Inject the Angular Router
   constructor(private router: Router) { }
 
   // Runs on init
-  ngOnInit() {
+  ngOnInit(): void {
     console.log('Entered testroutes.component.ts ngOnInit method!');
     console.log('vvvv IGNORE THIS ERROR vvvv');
     console.log('Testing!');
   }
 
   // Handles Clicking Admin Button
-  clickHandler() {
+  clickHandler(): void {
     const confirm = prompt('What is your favorite color?');
     // Checks user input
     switch (confirm) {
@@ -43,12 +43,12 @@ export class FeedComponent implements OnInit {
   }
 
   // Handles navigation to the next page
-  nextHandler() {
+  nextHandler(): void {
     this.router.navigate(['contribute']);
   }
 
   // Handles navigation to the previous page
-  prevHandler() {
+  prevHandler(): void {
     this.router.navigate(['']);
   }
 

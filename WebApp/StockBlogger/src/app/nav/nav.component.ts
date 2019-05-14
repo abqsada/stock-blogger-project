@@ -8,17 +8,18 @@ import { Router } from '@angular/router';
 })
 // Handles the navbar at the top of the application
 // Persistent: Stays at the top regardless of scroll position or page navigation
+// Implements OnInit
 export class NavComponent implements OnInit {
 
   constructor(private router: Router) { }
-  account = ['DEV', 'GUEST', 'USER']; // DEV ACCOUNT FOR TESTING
-  route; // Stores current URL Route
+  private account = ['DEV', 'GUEST', 'USER']; // DEV ACCOUNT FOR TESTING
+  private route; // Stores current URL Route
 
-  ngOnInit() {
+  ngOnInit(): void {
     console.log('Entering nav.component.ts ngOnInit method!');
   }
   // Keeps user on same page if incorrect answer is made
-  handleRoute() {
+  handleRoute(): void {
     this.route = this.router.url;
     console.log(this.route);
     if (this.route === '/') {
@@ -26,15 +27,15 @@ export class NavComponent implements OnInit {
     }
   }
   // Assigns route var to current route
-  setCurrentRoute() {
+  setCurrentRoute(): void {
     this.route = this.router.url;
   }
   // Gets current route
-  getRoute() {
+  getRoute(): any {
     return this.route;
   }
   // Handles clicking admin nav buttons
-  adminClick() {
+  adminClick(): void {
     const confirm = prompt('What is your favorite color?');
     // Checks user input
     switch (confirm) {
