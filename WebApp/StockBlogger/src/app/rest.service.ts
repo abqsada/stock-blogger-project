@@ -56,6 +56,8 @@ export class RestService implements OnInit {
   values: any; // Handles ALL incoming Raw JSON data
   tickers: any; // Handles the tickers array
   ticker: any; // Handles individual ticker objects
+  // For Testing:
+  // Handles each individual ticker or hashtag object
   first: any;
   tFirst: any;
   second: any;
