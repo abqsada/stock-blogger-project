@@ -1,4 +1,6 @@
 
+package dbConnect;
+
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -33,6 +35,8 @@ public class test {
 		User user1 = DataConnection.getUserById(1);
 		
 		System.out.println(user1.getDateJoined());
+
+
 		
 	}
 

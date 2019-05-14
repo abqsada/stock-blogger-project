@@ -55,7 +55,7 @@ public class Post {
 		return rs ;
 	}
 	
-	// getters and setters for User object.
+	// getters and setters for Post object.
 	// setters update the database as well
 	public String getTitle() {
 		return title;
